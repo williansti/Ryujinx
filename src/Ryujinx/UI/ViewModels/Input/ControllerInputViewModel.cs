@@ -31,7 +31,7 @@ namespace Ryujinx.Ava.UI.ViewModels.Input
         private (float, float) _uiStickRight;
 
         internal CancellationTokenSource _pollTokenSource = new();
-        private CancellationToken _pollToken;
+        private readonly CancellationToken _pollToken;
 
         private bool _isLeft;
         public bool IsLeft
@@ -148,7 +148,7 @@ namespace Ryujinx.Ava.UI.ViewModels.Input
                     UiStickRight = _selectedGamepad.GetStick(StickInputId.Right);
                 }
 
-                await Task.Delay(StickUiPollMs);
+                await Task.Delay(StickUiPollMs, token);
             }
 
             _pollTokenSource.Dispose();
