@@ -7,6 +7,7 @@ using Ryujinx.Ava.Input;
 using Ryujinx.Ava.UI.Models.Input;
 using Ryujinx.Ava.UI.Views.Input;
 using Ryujinx.Input;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,8 +18,8 @@ namespace Ryujinx.Ava.UI.ViewModels.Input
         [ObservableProperty] private GamepadInputConfig _config;
         
         private const int StickUiPollMs = 50; // Milliseconds per poll.
-        private const float CanvasCenterOffset = 75f/2f;
-        private const int StickScaleFactor = 30;
+        private const float CanvasCenterOffset = 47.5f;
+        private const int StickScaleFactor = 45;
 
         private IGamepad _selectedGamepad;
         
@@ -69,6 +70,7 @@ namespace Ryujinx.Ava.UI.ViewModels.Input
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(UiStickRightX));
                 OnPropertyChanged(nameof(UiStickRightY));
+                OnPropertyChanged(nameof(UiDeadzoneRight));
             }
         }
         
@@ -82,6 +84,7 @@ namespace Ryujinx.Ava.UI.ViewModels.Input
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(UiStickLeftX));
                 OnPropertyChanged(nameof(UiStickLeftY));
+                OnPropertyChanged(nameof(UiDeadzoneLeft));
             }
         }
 
@@ -91,7 +94,10 @@ namespace Ryujinx.Ava.UI.ViewModels.Input
         public float UiStickLeftY => UiStickLeft.Item2 + CanvasCenterOffset;
         public float UiStickRightX => UiStickRight.Item1 + CanvasCenterOffset;
         public float UiStickRightY => UiStickRight.Item2 + CanvasCenterOffset;
-
+        
+        public float UiDeadzoneLeft => Config.DeadzoneLeft * 95;
+        public float UiDeadzoneRight => Config.DeadzoneRight * 95;
+        
         public ControllerInputViewModel(InputViewModel model, GamepadInputConfig config)
         {
             ParentModel = model;
