@@ -884,7 +884,7 @@ namespace Ryujinx.Ava.UI.ViewModels.Input
             _mainWindow.InputManager.GamepadDriver.OnGamepadConnected -= HandleOnGamepadConnected;
             _mainWindow.InputManager.GamepadDriver.OnGamepadDisconnected -= HandleOnGamepadDisconnected;
 
-            (ConfigViewModel as ControllerInputViewModel)._pollTokenSource?.Cancel();
+            (ConfigViewModel as ControllerInputViewModel)?._pollTokenSource.Cancel();
 
             _mainWindow.ViewModel.AppHost?.NpadManager.UnblockInputUpdates();
 
