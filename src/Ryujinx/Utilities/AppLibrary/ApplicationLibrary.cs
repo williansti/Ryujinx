@@ -1480,7 +1480,8 @@ namespace Ryujinx.Ava.Utilities.AppLibrary
                             if (!selectedUpdate.HasValue || selectedUpdate.Value.Item1.Version < update.Version)
                             {
                                 shouldSelect = true;
-                                _titleUpdates.AddOrUpdate((selectedUpdate.Value.Update, false));
+                                if (selectedUpdate.HasValue)
+                                    _titleUpdates.AddOrUpdate((selectedUpdate.Value.Update, false));
                                 selectedUpdate = (update, true);
                             }
 
