@@ -35,8 +35,9 @@ namespace Ryujinx.Ava.Utilities.Compat
             IssueNumber = row[header.IndexOf("issue_number")].Parse<int>();
 
             var titleIdRow = row[header.IndexOf("extracted_game_id")].ToString();
-            if (!string.IsNullOrEmpty(titleIdRow))
-                TitleId = titleIdRow;
+            TitleId = !string.IsNullOrEmpty(titleIdRow) 
+                ? titleIdRow 
+                : default(Optional<string>);
 
             var issueTitleRow = row[header.IndexOf("issue_title")].ToString();
             if (TitleId.HasValue)
