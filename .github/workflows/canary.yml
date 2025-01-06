@@ -165,7 +165,7 @@ jobs:
             exit 1
           fi
 
-          export UFLAG="gh-releases-zsync|${{ github.repository_owner }}|${{ github.event.repository.name }}|latest|*-$ARCH_NAME.AppImage.zsync"
+          export UFLAG="gh-releases-zsync|${{ github.repository_owner }}|Canary-Releases|latest|*-$ARCH_NAME.AppImage.zsync"
           BUILDDIR=publish OUTDIR=publish_appimage distribution/linux/appimage/build-appimage.sh
 
           pushd publish_appimage
