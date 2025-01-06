@@ -8,6 +8,7 @@ using Ryujinx.Ava.UI.Helpers;
 using Ryujinx.Ava.UI.ViewModels;
 using Ryujinx.Ava.UI.Windows;
 using Ryujinx.Ava.Utilities;
+using Ryujinx.Ava.Utilities.Compat;
 using Ryujinx.Ava.Utilities.Configuration;
 using Ryujinx.Common;
 using Ryujinx.Common.Helper;
@@ -225,5 +226,7 @@ namespace Ryujinx.Ava.UI.Views.Main
         public async void OpenAboutWindow(object sender, RoutedEventArgs e) => await AboutWindow.Show();
 
         public void CloseWindow(object sender, RoutedEventArgs e) => Window.Close();
+
+        private async void OpenCompatibilityList(object sender, RoutedEventArgs e) => await CompatibilityList.Show();
     }
 }

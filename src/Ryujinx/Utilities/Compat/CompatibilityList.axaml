@@ -1,0 +1,59 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:Ryujinx.Ava.Utilities.Compat"
+             xmlns:helpers="using:Ryujinx.Ava.UI.Helpers"
+             xmlns:ext="using:Ryujinx.Ava.Common.Markup"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Ryujinx.Ava.Utilities.Compat.CompatibilityList"
+             x:DataType="local:CompatibilityViewModel">
+    <UserControl.DataContext>
+        <local:CompatibilityViewModel />
+    </UserControl.DataContext>
+    <StackPanel Orientation="Vertical">
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <TextBox Watermark="{ext:Locale CompatibilityListSearchBoxWatermark}" TextChanged="TextBox_OnTextChanged" />
+            <CheckBox Margin="7, 0, 0, 0" IsChecked="{Binding OnlyShowOwnedGames}" />
+            <TextBlock Margin="-3, 0, 0, 0" Text="{ext:Locale CompatibilityListOnlyShowOwnedGames}" />
+        </StackPanel>
+        <ScrollViewer>
+                <ListBox Margin="5"
+                         Padding="10"
+                         Background="Transparent"
+                         ItemsSource="{Binding CurrentEntries}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type local:CompatibilityEntry}">
+                            <Grid HorizontalAlignment="Center" Width="500" ColumnDefinitions="Auto,Auto,Auto,*"
+                                  Margin="5">
+                                <TextBlock Grid.Column="0"
+                                           FontFamily="{StaticResource JetBrainsMono}"
+                                           Text="{Binding GameName}"
+                                           Width="140"
+                                           TextWrapping="Wrap" />
+                                <TextBlock Grid.Column="1"
+                                           Width="135"
+                                           Padding="7, 0, 0, 0"
+                                           FontFamily="{StaticResource JetBrainsMono}"
+                                           Text="{Binding FormattedTitleId}"
+                                           TextWrapping="Wrap" />
+                                <TextBlock Grid.Column="2"
+                                           Padding="7, 0"
+                                           VerticalAlignment="Center"
+                                           FontFamily="{StaticResource JetBrainsMono}"
+                                           Text="{Binding LocalizedStatus}"
+                                           Width="85"
+                                           Foreground="{Binding Status, Converter={x:Static helpers:PlayabilityStatusConverter.Shared}}"
+                                           TextWrapping="NoWrap" />
+                                <TextBlock Grid.Column="3"
+                                           VerticalAlignment="Center"
+                                           FontFamily="{StaticResource JetBrainsMono}"
+                                           Text="{Binding FormattedIssueLabels}"
+                                           TextWrapping="WrapWithOverflow" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+        </ScrollViewer>
+    </StackPanel>
+</UserControl>

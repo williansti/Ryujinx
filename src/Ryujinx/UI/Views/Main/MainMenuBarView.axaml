@@ -304,6 +304,10 @@
                     Header="{ext:Locale MenuBarHelpCheckForUpdates}"
                     Icon="{ext:Icon mdi-update}"
                     ToolTip.Tip="{ext:Locale CheckUpdatesTooltip}" />
+                <MenuItem
+                    Click="OpenCompatibilityList"
+                    Header="{ext:Locale CompatibilityListOpen}"
+                    Icon="{ext:Icon mdi-gamepad}"/>
                 <Separator />
                 <MenuItem VerticalAlignment="Center" Header="{ext:Locale MenuBarHelpFaqAndGuides}" Icon="{ext:Icon fa-solid fa-question}" >
                     <MenuItem

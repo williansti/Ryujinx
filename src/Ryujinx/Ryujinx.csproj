@@ -61,6 +61,7 @@
     <PackageReference Include="Ryujinx.Graphics.Nvdec.Dependencies" />
     <PackageReference Include="Ryujinx.Graphics.Vulkan.Dependencies.MoltenVK" Condition="'$(RuntimeIdentifier)' != 'linux-x64' AND '$(RuntimeIdentifier)' != 'linux-arm64' AND '$(RuntimeIdentifier)' != 'win-x64'" />
     <PackageReference Include="securifybv.ShellLink" />
+    <PackageReference Include="Sep" />
     <PackageReference Include="Silk.NET.Vulkan" />
     <PackageReference Include="Silk.NET.Vulkan.Extensions.EXT" />
     <PackageReference Include="Silk.NET.Vulkan.Extensions.KHR" />
@@ -113,6 +114,10 @@
     <AvaloniaResource Include="UI\**\*.xaml">
       <SubType>Designer</SubType>
     </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Mono\JetBrainsMonoNL-Bold.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Mono\JetBrainsMonoNL-BoldItalic.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Mono\JetBrainsMonoNL-Italic.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Mono\JetBrainsMonoNL-Regular.ttf" />
     <AvaloniaResource Include="Assets\Fonts\SegoeFluentIcons.ttf" />
     <AvaloniaResource Include="Assets\Styles\Themes.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -162,5 +167,14 @@
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="Assets\locales.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Utilities\Compat\CompatibilityList.axaml.cs">
+      <DependentUpon>CompatibilityList.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Fonts\Mono\" />
   </ItemGroup>
 </Project>
