@@ -9,7 +9,7 @@ namespace Ryujinx.Ava.Utilities.Compat
 {
     public partial class CompatibilityViewModel : ObservableObject
     {
-        [ObservableProperty] private bool _onlyShowOwnedGames;
+        [ObservableProperty] private bool _onlyShowOwnedGames = true;
 
         private IEnumerable<CompatibilityEntry> _currentEntries = CompatibilityCsv.Shared.Entries;
         private readonly string[] _ownedGameTitleIds = [];
