@@ -169,8 +169,8 @@ jobs:
           BUILDDIR=publish OUTDIR=publish_appimage distribution/linux/appimage/build-appimage.sh
 
           pushd publish_appimage
-          mv Ryujinx.AppImage ../release_output/ryujinx-$BUILD_VERSION-$ARCH_NAME.AppImage
-          mv Ryujinx.AppImage.zsync ../release_output/ryujinx-$BUILD_VERSION-$ARCH_NAME.AppImage.zsync
+          mv Ryujinx.AppImage ../release_output/ryujinx-canary-$BUILD_VERSION-$ARCH_NAME.AppImage
+          mv Ryujinx.AppImage.zsync ../release_output/ryujinx-canary-$BUILD_VERSION-$ARCH_NAME.AppImage.zsync
           popd          
         shell: bash 
 
