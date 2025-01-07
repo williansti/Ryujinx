@@ -1,6 +1,8 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Styling;
+using FluentAvalonia.UI.Controls;
 using nietras.SeparatedValues;
+using Ryujinx.Ava.Common.Locale;
 using Ryujinx.Ava.UI.Helpers;
 using System.IO;
 using System.Reflection;
@@ -19,11 +21,17 @@ namespace Ryujinx.Ava.Utilities.Compat
                 csvStream.Position = 0;
 
                 CompatibilityCsv.Shared = new CompatibilityCsv(Sep.Reader().From(csvStream));
-            } 
+            }
             
-            CompatibilityContentDialog contentDialog = new()
+            ContentDialog contentDialog = new()
             {
-                Content = new CompatibilityList { DataContext = new CompatibilityViewModel(RyujinxApp.MainWindow.ViewModel.ApplicationLibrary) }
+                PrimaryButtonText = string.Empty,
+                SecondaryButtonText = string.Empty,
+                CloseButtonText = LocaleManager.Instance[LocaleKeys.SettingsButtonClose],
+                Content = new CompatibilityList
+                {
+                    DataContext = new CompatibilityViewModel(RyujinxApp.MainWindow.ViewModel.ApplicationLibrary)
+                }
             };
 
             Style closeButton = new(x => x.Name("CloseButton"));

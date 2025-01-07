@@ -172,12 +172,6 @@
     <AdditionalFiles Include="Assets\locales.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Utilities\Compat\CompatibilityContentDialog.axaml.cs">
-      <DependentUpon>CompatibilityContentDialog.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Assets\Fonts\Mono\" />
   </ItemGroup>
 </Project>
