@@ -4,6 +4,7 @@
              xmlns:local="using:Ryujinx.Ava.Utilities.Compat"
              xmlns:helpers="using:Ryujinx.Ava.UI.Helpers"
              xmlns:ext="using:Ryujinx.Ava.Common.Markup"
+             xmlns:ui="using:FluentAvalonia.UI.Controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Ryujinx.Ava.Utilities.Compat.CompatibilityList"
@@ -11,13 +12,33 @@
     <UserControl.DataContext>
         <local:CompatibilityViewModel />
     </UserControl.DataContext>
-    <Grid RowDefinitions="Auto,*">
-        <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto">
+    <Grid RowDefinitions="*,Auto,*">
+        <Grid 
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            ColumnDefinitions="Auto,*"
+            Margin="0 0 0 10">
+            <ui:FontIcon
+                Grid.Column="0"
+                Margin="0"
+                HorizontalAlignment="Stretch"
+                FontFamily="avares://FluentAvalonia/Fonts#Symbols"
+                Glyph="{helpers:GlyphValueConverter Important}" />
+            <!-- NOTE: aligning to bottom for better visual alignment with glyph -->
+            <TextBlock
+                Grid.Column="1"
+                Margin="5, 0, 0, 0"
+                FontStyle="Italic"
+                VerticalAlignment="Center"
+                TextWrapping="Wrap"
+                Text="{ext:Locale CompatibilityListWarning}" />
+        </Grid>
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto">
             <TextBox Grid.Column="0" HorizontalAlignment="Stretch" Watermark="{ext:Locale CompatibilityListSearchBoxWatermark}" TextChanged="TextBox_OnTextChanged" />
             <CheckBox Grid.Column="1" Margin="7, 0, 0, 0" IsChecked="{Binding OnlyShowOwnedGames}" />
             <TextBlock Grid.Column="2" Margin="-10, 0, 0, 0" Text="{ext:Locale CompatibilityListOnlyShowOwnedGames}" />
         </Grid>
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="2">
                 <ListBox Margin="0,5, 0, 0"
                          Background="Transparent"
                          ItemsSource="{Binding CurrentEntries}">
