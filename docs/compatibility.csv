@@ -464,7 +464,7 @@ issue_number,issue_title,extracted_game_id,issue_labels,extracted_status,last_ev
 533,Wandersong  - 0100F8A00853C000,0100F8A00853C000,nvdec;status-playable,playable,2021-06-04 15:33:34,6
 535,Untitled Goose Game,,status-playable,playable,2020-09-26 13:18:06,2
 536,Unbox: Newbie's Adventure - 0100592005164000,0100592005164000,status-playable;UE4,playable,2022-08-29 13:12:56,4
-537,Trine 4: The Nightmare Prince - 010055E00CA68000,010055E00CA68000,gpu;status-ingame;ldn-untested,ingame,2023-10-23 2:40:46,8
+537,Trine 4: The Nightmare Prince - 010055E00CA68000,010055E00CA68000,gpu;status-nothing,nothing,2025-01-07 5:47:46,9
 538,Travis Strikes Again: No More Heroes - 010011600C946000,010011600C946000,status-playable;nvdec;UE4,playable,2022-08-25 12:36:38,6
 539,Bubble Bobble 4 Friends - 010010900F7B4000,010010900F7B4000,nvdec;status-playable,playable,2021-06-04 15:27:55,7
 540,Bloodstained: Curse of the Moon,,status-playable,playable,2020-09-04 10:42:17,2
@@ -4306,3 +4306,4 @@ issue_number,issue_title,extracted_game_id,issue_labels,extracted_status,last_ev
 100003,Dragon Quest III HD-2D Remake - 01003E601E324000,01003E601E324000,status-ingame;vulkan-backend-bug;UE4;audout;mac-bug,ingame,2025-01-07 4:10:27,1
 100004,SONIC X SHADOW GENERATIONS - 01005EA01C0FC000,01005EA01C0FC000,status-ingame;crash,ingame,2025-01-07 4:20:45,1
 100005,LEGO Horizon Adventures - 010073C01AF34000,010073C01AF34000,status-ingame;vulkan-backend-bug;opengl-backend-bug;UE4,ingame,2025-01-07 4:24:56,1
+100006,Legacy of Kain™ Soul Reaver 1&2 Remastered - 010079901C898000,010079901C898000,status-playable,playable,2025-01-07 5:50:01,1
