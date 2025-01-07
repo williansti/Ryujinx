@@ -4244,7 +4244,7 @@ issue_number,issue_title,extracted_game_id,issue_labels,extracted_status,last_ev
 4967,Biomutant - 01004BA017CD6000,01004BA017CD6000,status-ingame;crash,ingame,2024-05-16 15:46:36,2
 4968,Vampire Survivors - 010089A0197E4000,010089A0197E4000,status-ingame,ingame,2024-06-17 9:57:38,2
 4969,Koumajou Remilia II Stranger’s Requiem,,Incomplete,,2024-05-22 20:59:04,3
-4972,Paper Mario: The Thousand-Year Door - 0100ECD018EBE000,0100ECD018EBE000,gpu;status-ingame;intel-vendor-bug,ingame,2024-08-06 1:02:25,79
+4972,Paper Mario: The Thousand-Year Door - 0100ECD018EBE000,0100ECD018EBE000,gpu;status-ingame;intel-vendor-bug;slow,ingame,2025-01-07 4:27:35,80
 4973,Stories From Sol: The Gun-dog Demo - 010092A01EC94000,010092A01EC94000,,,2024-05-22 19:55:35,1
 4977,Earth Defense Force: World Brothers 2 - 010083a01d456000,010083a01d456000,,,2024-06-01 18:34:34,1
 4985,锈色湖畔：内在昔日（Rusty Lake: The Past Within) - 01007010157EC000,01007010157EC000,,,2024-06-10 13:47:40,1
@@ -4301,7 +4301,8 @@ issue_number,issue_title,extracted_game_id,issue_labels,extracted_status,last_ev
 5077,Angel at Dusk Demo - 0100D96020ADC000,0100D96020ADC000,,,2024-09-29 17:21:13,1
 5078,Monster Jam™ Showdown - 0100CE101B698000,0100CE101B698000,,,2024-09-30 4:03:13,1
 5079,Legend of Heroes: Trails Through Daybreak - 010040C01D248000,010040C01D248000,,,2024-10-01 7:36:25,1
-100001,Mario & Luigi: Brothership - 01006D0017F7A000,01006D0017F7A000,status-ingame;crash;slow;UE4;mac-bug,ingame,2024-01-07 4:00:00,1
-100002,Stray - 010075101EF84000,010075101EF84000,status-ingame;crash,ingame,2024-01-07 4:03:00,1
-100003,Dragon Quest III HD-2D Remake - 01003E601E324000,01003E601E324000,status-ingame;vulkan-backend-bug;UE4;audout;mac-bug;ingame,2024-01-07 4:10:27,1
-100004,SONIC X SHADOW GENERATIONS - 01005EA01C0fC000,01005EA01C0fC000,status-ingame;crash;2024-01-07 4:20:45,1
+100001,Mario & Luigi: Brothership - 01006D0017F7A000,01006D0017F7A000,status-ingame;crash;slow;UE4;mac-bug,ingame,2025-01-07 4:00:00,1
+100002,Stray - 010075101EF84000,010075101EF84000,status-ingame;crash,ingame,2025-01-07 4:03:00,1
+100003,Dragon Quest III HD-2D Remake - 01003E601E324000,01003E601E324000,status-ingame;vulkan-backend-bug;UE4;audout;mac-bug;ingame,2025-01-07 4:10:27,1
+100004,SONIC X SHADOW GENERATIONS - 01005EA01C0fC000,01005EA01C0fC000,status-ingame;crash;2025-01-07 4:20:45,1
+100005,LEGO Horizon Adventures - 010073C01AF34000,010073C01AF34000,status-ingame;vulkan-backend-bug;opengl-backend-bug;UE4;2025-01-07 4:24:56,1
