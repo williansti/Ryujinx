@@ -4133,7 +4133,6 @@ issue_number,issue_title,extracted_game_id,issue_labels,extracted_status,last_ev
 4773,Sonic Superstars - 01008F701C074000,01008F701C074000,gpu;status-ingame;nvdec,ingame,2023-10-28 17:48:07,16
 4774,Sonic Superstars Digital Art Book with Mini Digital Soundtrack - 010088801C150000,010088801C150000,status-playable,playable,2024-08-20 13:26:56,2
 4776,Super Mario Bros. Wonder - 010015100B514000,010015100B514000,status-playable;amd-vendor-bug,playable,2024-09-06 13:21:21,36
-4781,Game Incompatibility - Super Marios Bros Wonder,,,,2023-10-21 19:09:02,2
 4786,Project Blue - 0100FCD0193A0000,0100FCD0193A0000,,,2023-10-24 15:55:09,2
 4787,Rear Sekai [ リアセカイ ] - 0100C3B01A5DD002,0100C3B01A5DD002,,,2023-10-24 1:55:18,1
 4788,Dementium: The Ward (Dementium Remastered) - 010038B01D2CA000,010038B01D2CA000,status-boots;crash,boots,2024-09-02 8:28:14,8
