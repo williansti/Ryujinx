@@ -145,6 +145,9 @@
     <EmbeddedResource Include="..\..\distribution\macos\shortcut-template.plist">
       <Link>Assets\ShortcutFiles\shortcut-template.plist</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\..\docs\compatibility.csv" LogicalName="RyujinxGameCompatibilityList">
+      <Link>Assets\RyujinxGameCompatibility.csv</Link>
+    </EmbeddedResource>
     <EmbeddedResource Include="Assets\locales.json" />
     <EmbeddedResource Include="Assets\Styles\Styles.xaml" />
     <EmbeddedResource Include="Assets\Icons\Controller_JoyConLeft.svg" />

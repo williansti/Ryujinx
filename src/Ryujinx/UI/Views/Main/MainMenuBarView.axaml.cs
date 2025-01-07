@@ -66,7 +66,7 @@ namespace Ryujinx.Ava.UI.Views.Main
                         WindowSize2160PMenuItem.Command = new RelayCommand<string>(ChangeWindowSize);
         }
 
-        private CheckBox[] GenerateToggleFileTypeItems() =>
+        private IEnumerable<CheckBox> GenerateToggleFileTypeItems() =>
             Enum.GetValues<FileTypes>()
                 .Select(it => (FileName: Enum.GetName(it)!, FileType: it))
                 .Select(it =>
@@ -76,15 +76,13 @@ namespace Ryujinx.Ava.UI.Views.Main
                         IsChecked = it.FileType.GetConfigValue(ConfigurationState.Instance.UI.ShownFileTypes),
                         Command = MiniCommand.Create(() => Window.ToggleFileType(it.FileName))
                     }
-                ).ToArray();
+                );
 
-        private static MenuItem[] GenerateLanguageMenuItems()
+        private static IEnumerable<MenuItem> GenerateLanguageMenuItems()
         {
-            List<MenuItem> menuItems = new();
+            const string LocalePath = "Ryujinx/Assets/locales.json";
 
-            string localePath = "Ryujinx/Assets/locales.json";
-
-            string languageJson = EmbeddedResources.ReadAllText(localePath);
+            string languageJson = EmbeddedResources.ReadAllText(LocalePath);
 
             LocalesJson locales = JsonHelper.Deserialize(languageJson, LocalesJsonContext.Default.LocalesJson);
 
@@ -99,7 +97,10 @@ namespace Ryujinx.Ava.UI.Views.Main
                 }
                 else
                 {
-                    languageName = locales.Locales[index].Translations[language] == "" ? language : locales.Locales[index].Translations[language];
+                    string tr = locales.Locales[index].Translations[language];
+                    languageName = string.IsNullOrEmpty(tr)
+                        ? language 
+                        : tr;
                 }
 
                 MenuItem menuItem = new()
@@ -111,10 +112,8 @@ namespace Ryujinx.Ava.UI.Views.Main
                     Command = MiniCommand.Create(() => MainWindowViewModel.ChangeLanguage(language))
                 };
 
-                menuItems.Add(menuItem);
+                yield return menuItem;
             }
-
-            return menuItems.ToArray();
         }
 
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)

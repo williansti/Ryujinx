@@ -1,6 +1,9 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Styling;
+using nietras.SeparatedValues;
 using Ryujinx.Ava.UI.Helpers;
+using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Ryujinx.Ava.Utilities.Compat
@@ -9,8 +12,15 @@ namespace Ryujinx.Ava.Utilities.Compat
     {
         public static async Task Show()
         {
-            await CompatibilityHelper.InitAsync();
+            if (CompatibilityCsv.Shared is null)
+            {
+                await using Stream csvStream = Assembly.GetExecutingAssembly()
+                    .GetManifestResourceStream("RyujinxGameCompatibilityList")!;
+                csvStream.Position = 0;
 
+                CompatibilityCsv.Shared = new CompatibilityCsv(Sep.Reader().From(csvStream));
+            } 
+            
             CompatibilityContentDialog contentDialog = new()
             {
                 Content = new CompatibilityList { DataContext = new CompatibilityViewModel(RyujinxApp.MainWindow.ViewModel.ApplicationLibrary) }
