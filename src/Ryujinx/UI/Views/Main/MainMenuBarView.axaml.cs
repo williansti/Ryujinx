@@ -1,6 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Interactivity;
+using Avalonia.Layout;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using Gommon;
@@ -42,7 +42,7 @@ namespace Ryujinx.Ava.UI.Views.Main
             OpenSettingsMenuItem.Command = new AsyncRelayCommand(OpenSettings);
             PauseEmulationMenuItem.Command = new RelayCommand(() => ViewModel.AppHost?.Pause());
             ResumeEmulationMenuItem.Command = new RelayCommand(() => ViewModel.AppHost?.Resume());
-            StopEmulationMenuItem.Command = new AsyncRelayCommand(() => ViewModel.AppHost?.ShowExitPrompt().OrCompleted()!);
+            StopEmulationMenuItem.Command = new AsyncRelayCommand(() => ViewModel.AppHost?.ShowExitPrompt().OrCompleted());
             CheatManagerMenuItem.Command = new AsyncRelayCommand(OpenCheatManagerForCurrentApp);
             InstallFileTypesMenuItem.Command = new AsyncRelayCommand(InstallFileTypes);
             UninstallFileTypesMenuItem.Command = new AsyncRelayCommand(UninstallFileTypes);
@@ -104,8 +104,10 @@ namespace Ryujinx.Ava.UI.Views.Main
 
                 MenuItem menuItem = new()
                 {
-                    Padding = new Thickness(10, 0, 0, 0),
-                    Header = " " + languageName,
+                    Padding = new Thickness(15, 0, 0, 0),
+                    Margin = new Thickness(3, 0, 3, 0),
+                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                    Header = languageName,
                     Command = MiniCommand.Create(() => MainWindowViewModel.ChangeLanguage(language))
                 };
 
