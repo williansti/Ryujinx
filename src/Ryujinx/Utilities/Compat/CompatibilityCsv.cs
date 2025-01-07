@@ -72,7 +72,8 @@ namespace Ryujinx.Ava.Utilities.Compat
         public int EventCount { get; }
 
         public string LocalizedStatus => LocaleManager.Instance[Status!.Value];
-        public string FormattedTitleId => TitleId.OrElse(new string(' ', 16));
+        public string FormattedTitleId => TitleId
+            .OrElse(new string(' ', 16));
 
         public string FormattedIssueLabels => IssueLabels
             .Where(it => !it.StartsWithIgnoreCase("status"))

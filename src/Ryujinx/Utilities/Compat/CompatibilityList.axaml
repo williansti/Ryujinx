@@ -47,9 +47,8 @@
                             <Grid Width="750" ColumnDefinitions="Auto,Auto,Auto,*"
                                   Margin="5">
                                 <TextBlock Grid.Column="0"
-                                           FontFamily="{StaticResource JetBrainsMono}"
                                            Text="{Binding GameName}"
-                                           Width="333"
+                                           Width="320"
                                            TextWrapping="Wrap" />
                                 <TextBlock Grid.Column="1"
                                            Width="135"
@@ -60,14 +59,12 @@
                                 <TextBlock Grid.Column="2"
                                            Padding="7, 0"
                                            VerticalAlignment="Center"
-                                           FontFamily="{StaticResource JetBrainsMono}"
                                            Text="{Binding LocalizedStatus}"
                                            Width="85"
                                            Foreground="{Binding Status, Converter={x:Static helpers:PlayabilityStatusConverter.Shared}}"
                                            TextWrapping="NoWrap" />
                                 <TextBlock Grid.Column="3"
                                            VerticalAlignment="Center"
-                                           FontFamily="{StaticResource JetBrainsMono}"
                                            Text="{Binding FormattedIssueLabels}"
                                            TextWrapping="WrapWithOverflow" />
                             </Grid>
