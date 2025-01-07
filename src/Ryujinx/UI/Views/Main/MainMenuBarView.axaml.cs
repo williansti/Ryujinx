@@ -227,6 +227,6 @@ namespace Ryujinx.Ava.UI.Views.Main
 
         public void CloseWindow(object sender, RoutedEventArgs e) => Window.Close();
 
-        private async void OpenCompatibilityList(object sender, RoutedEventArgs e) => await CompatibilityList.Show();
+        private async void OpenCompatibilityList(object sender, RoutedEventArgs e) => await CompatibilityContentDialog.Show();
     }
 }

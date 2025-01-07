@@ -169,8 +169,8 @@
     <AdditionalFiles Include="Assets\locales.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Utilities\Compat\CompatibilityList.axaml.cs">
-      <DependentUpon>CompatibilityList.axaml</DependentUpon>
+    <Compile Update="Utilities\Compat\CompatibilityContentDialog.axaml.cs">
+      <DependentUpon>CompatibilityContentDialog.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
