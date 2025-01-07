@@ -28,9 +28,9 @@ issue_number,issue_title,extracted_game_id,issue_labels,extracted_status,last_ev
 70,PriPara: All Idol Perfect Stage - 010007F00879E000,010007F00879E000,status-playable,playable,2022-11-22 16:35:52,4
 71,Shantae and the Pirate's Curse - 0100EFD00A4FA000,0100EFD00A4FA000,status-playable,playable,2024-04-29 17:21:57,11
 72,DARK SOULS™: REMASTERED - 01004AB00A260000,01004AB00A260000,gpu;status-ingame;nvdec;online-broken,ingame,2024-04-09 19:47:58,15
-73,The Liar Princess and the Blind Prince,,audio;slow;status-playable,playable,2020-06-08 21:23:28,3
+73,The Liar Princess and the Blind Prince - 010064B00B95C000,010064B00B95C000,audio;slow;status-playable,playable,2020-06-08 21:23:28,3
 74,Dead Cells - 0100646009FBE000,0100646009FBE000,status-playable,playable,2021-09-22 22:18:49,7
-75,Sonic Mania,,status-playable,playable,2020-06-08 17:30:57,6
+75,Sonic Mania - 01009AA000FAA000,01009AA000FAA000,status-playable,playable,2020-06-08 17:30:57,6
 76,The Mahjong,,Needs Update;crash;services;status-nothing,nothing,2021-04-01 22:06:22,6
 77,Angels of Death - 0100AE000AEBC000,0100AE000AEBC000,nvdec;status-playable,playable,2021-02-22 14:17:15,7
 78,Penny-Punching Princess - 0100C510049E0000,0100C510049E0000,status-playable,playable,2022-08-09 13:37:05,6
@@ -4286,14 +4286,14 @@ issue_number,issue_title,extracted_game_id,issue_labels,extracted_status,last_ev
 5056,Taisho x Alice ALL IN ONE - 大正×対称アリス ALL IN ONE - 010096000ca38000,010096000ca38000,,,2024-09-11 21:20:04,2
 5057,NBA 2K25 - 0100DFF01ED44000,0100DFF01ED44000,,,2024-09-10 17:34:54,1
 5059,逆转检察官1&2 御剑精选集 (Ace Attorney Investigations Collection) - 010005501E68C000,010005501E68C000,status-playable,playable,2024-09-19 16:38:05,4
-5062,Fabledom,,,,2024-09-28 12:12:55,2
+5062,Fabledom - 0100B6001E6D6000,0100B6001E6D6000,,,2024-09-28 12:12:55,2
 5064,BZZZT - 010091201A3F2000,010091201A3F2000,,,2024-09-22 21:29:58,1
 5065,EA SPORTS FC 25 - 010054E01D878000,010054E01D878000,status-ingame;crash,ingame,2024-09-25 21:07:50,13
 5067,Selfloss - 010036C01E244000,010036C01E244000,,,2024-09-23 23:12:13,1
 5068,Disney Epic Mickey: Rebrushed - 0100DA201EBF8000,0100DA201EBF8000,status-ingame;crash,ingame,2024-09-26 22:11:51,4
 5069,The Plucky Squire - 01006BD018B54000,01006BD018B54000,status-ingame;crash,ingame,2024-09-27 22:32:33,4
-5070,The Legend of Zelda Echoes of Wisdom - 01008CF01BAAC000,01008CF01BAAC000,status-playable;nvdec;ASTC,playable,2024-10-01 14:11:01,34
-5071,Bakeru ,,,,2024-09-25 18:05:22,1
+5070,The Legend of Zelda Echoes of Wisdom - 01008CF01BAAC000,01008CF01BAAC000,status-playable;nvdec;ASTC;intel-vendor-bug,playable,2024-10-01 14:11:01,34
+5071,Bakeru - 01007CD01FAE0000,01007CD01FAE0000,,,2024-09-25 18:05:22,1
 5072,トラブル・マギア ～訳アリ少女は未来を勝ち取るために異国の魔法学校へ留学します～(Trouble Magia ~Wakeari Shoujo wa Mirai o Kachitoru Tame ni Ikoku no Mahou Gakkou e Ryuugaku Shimasu~) - 01000BB01CB8A000,01000BB01CB8A000,status-nothing,nothing,2024-09-28 7:03:14,3
 5073,I am an Airtraffic Controller AIRPORT HERO HANEDA ALLSTARS - 01002EE01BAE0000,01002EE01BAE0000,,,2024-09-27 2:04:17,1
 5074,燃えよ！ 乙女道士 ～華遊恋語～ (Moeyo! Otome Doushi Kayu Koigatari) - 01001BA01EBFC000,01001BA01EBFC000,services-horizon;status-nothing,nothing,2024-09-28 12:22:55,5
