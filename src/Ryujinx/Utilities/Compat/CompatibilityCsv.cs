@@ -3,6 +3,7 @@ using nietras.SeparatedValues;
 using Ryujinx.Ava.Common.Locale;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -32,21 +33,22 @@ namespace Ryujinx.Ava.Utilities.Compat
     {
         public CompatibilityEntry(SepReaderHeader header, SepReader.Row row)
         {
-            IssueNumber = row[header.IndexOf("issue_number")].Parse<int>();
-
-            var titleIdRow = row[header.IndexOf("extracted_game_id")].ToString();
+            if (row.ColCount != header.ColNames.Count)
+                throw new InvalidDataException($"CSV row {row.RowIndex} ({row.ToString()}) has mismatched column count");
+            
+            var titleIdRow = ColStr(row[header.IndexOf("\"extracted_game_id\"")]);
             TitleId = !string.IsNullOrEmpty(titleIdRow) 
                 ? titleIdRow 
                 : default(Optional<string>);
 
-            var issueTitleRow = row[header.IndexOf("issue_title")].ToString();
+            var issueTitleRow = ColStr(row[header.IndexOf("\"issue_title\"")]);
             if (TitleId.HasValue)
                 issueTitleRow = issueTitleRow.ReplaceIgnoreCase($" - {TitleId}", string.Empty);
 
             GameName = issueTitleRow.Trim().Trim('"');
 
-            IssueLabels = row[header.IndexOf("issue_labels")].ToString().Split(';');
-            Status = row[header.IndexOf("extracted_status")].ToString().ToLower() switch
+            IssueLabels = ColStr(row[header.IndexOf("\"issue_labels\"")]).Split(';');
+            Status = ColStr(row[header.IndexOf("\"extracted_status\"")]).ToLower() switch
             {
                 "playable" => LocaleKeys.CompatibilityListPlayable,
                 "ingame" => LocaleKeys.CompatibilityListIngame,
@@ -56,20 +58,19 @@ namespace Ryujinx.Ava.Utilities.Compat
                 _ => null
             };
 
-            if (row[header.IndexOf("last_event_date")].TryParse<DateTime>(out var dt))
+            if (DateTime.TryParse(ColStr(row[header.IndexOf("\"last_event_date\"")]), out var dt))
                 LastEvent = dt;
 
-            if (row[header.IndexOf("events_count")].TryParse<int>(out var eventsCount))
-                EventCount = eventsCount;
+            return;
+            
+            string ColStr(SepReader.Col col) => col.ToString().Trim('"');
         }
-
-        public int IssueNumber { get; }
+        
         public string GameName { get; }
         public Optional<string> TitleId { get; }
         public string[] IssueLabels { get; }
         public LocaleKeys? Status { get; }
         public DateTime LastEvent { get; }
-        public int EventCount { get; }
 
         public string LocalizedStatus => LocaleManager.Instance[Status!.Value];
         public string FormattedTitleId => TitleId
@@ -83,13 +84,11 @@ namespace Ryujinx.Ava.Utilities.Compat
         public override string ToString()
         {
             var sb = new StringBuilder("CompatibilityEntry: {");
-            sb.Append($"{nameof(IssueNumber)}={IssueNumber}, ");
             sb.Append($"{nameof(GameName)}=\"{GameName}\", ");
             sb.Append($"{nameof(TitleId)}={TitleId}, ");
             sb.Append($"{nameof(IssueLabels)}=\"{IssueLabels}\", ");
             sb.Append($"{nameof(Status)}=\"{Status}\", ");
-            sb.Append($"{nameof(LastEvent)}=\"{LastEvent}\", ");
-            sb.Append($"{nameof(EventCount)}={EventCount}");
+            sb.Append($"{nameof(LastEvent)}=\"{LastEvent}\"");
             sb.Append('}');
 
             return sb.ToString();
