@@ -1,40 +1,40 @@
 "issue_title","extracted_game_id","issue_labels","extracted_status","last_event_date"
-"-KLAUS-",,nvdec;status-playable,playable,2020-06-27 13:27:30.000
+"-KLAUS-",010099F00EF3E000,nvdec;status-playable,playable,2020-06-27 13:27:30.000
 ".hack//G.U. Last Recode",0100BA9014A02000,deadlock;status-boots,boots,2022-03-12 19:15:47.000
-"#Funtime",,status-playable,playable,2020-12-10 16:54:35.000
-"#Halloween, Super Puzzles Dream",,nvdec;status-playable,playable,2020-12-10 20:43:58.000
-"#KillAllZombies",,slow;status-playable,playable,2020-12-16 01:50:25.000
-"#NoLimitFantasy, Super Puzzles Dream",,nvdec;status-playable,playable,2020-12-12 17:21:32.000
-"#RaceDieRun",,status-playable,playable,2020-07-04 20:23:16.000
-"#womenUp, Super Puzzles Dream",,status-playable,playable,2020-12-12 16:57:25.000
+"#Funtime",01001E500F7FC000,status-playable,playable,2020-12-10 16:54:35.000
+"#Halloween, Super Puzzles Dream",01000E50134A4000,nvdec;status-playable,playable,2020-12-10 20:43:58.000
+"#KillAllZombies",01004D100C510000,slow;status-playable,playable,2020-12-16 01:50:25.000
+"#NoLimitFantasy, Super Puzzles Dream",0100325012C12000,nvdec;status-playable,playable,2020-12-12 17:21:32.000
+"#RaceDieRun",01005D400E5C8000,status-playable,playable,2020-07-04 20:23:16.000
+"#womenUp, Super Puzzles Dream",01003DB011AE8000,status-playable,playable,2020-12-12 16:57:25.000
 "#womenUp, Super Puzzles Dream Demo",0100D87012A14000,nvdec;status-playable,playable,2021-02-09 00:03:31.000
 "1-2-Switch",01000320000CC000,services;status-playable,playable,2022-02-18 14:44:03.000
 "10 Second Run Returns",01004D1007926000,gpu;status-ingame,ingame,2022-07-17 13:06:18.000
 "10 Second Run RETURNS Demo",0100DC000A472000,gpu;status-ingame,ingame,2021-02-09 00:17:18.000
 "112 Operator",0100D82015774000,status-playable;nvdec,playable,2022-11-13 22:42:50.000
-"112th Seed",,status-playable,playable,2020-10-03 10:32:38.000
+"112th Seed",010051E012302000,status-playable,playable,2020-10-03 10:32:38.000
 "12 is Better Than 6",01007F600D1B8000,status-playable,playable,2021-02-22 16:10:12.000
 "12 Labours of Hercules II: The Cretan Bull",0100B1A010014000,cpu;status-nothing;32-bit;crash,nothing,2022-12-07 13:43:10.000
-"12 orbits",,status-playable,playable,2020-05-28 16:13:26.000
+"12 orbits",0100A840047C2000,status-playable,playable,2020-05-28 16:13:26.000
 "13 Sentinels Aegis Rim",01003FC01670C000,slow;status-ingame,ingame,2024-06-10 20:33:38.000
 "13 Sentinels Aegis Rim Demo",0100C54015002000,status-playable;demo,playable,2022-04-13 14:15:48.000
-"140",,status-playable,playable,2020-08-05 20:01:33.000
+"140",01007E600EEE6000,status-playable,playable,2020-08-05 20:01:33.000
 "16-Bit Soccer Demo",0100B94013D28000,status-playable,playable,2021-02-09 00:23:07.000
-"1917 - The Alien Invasion DX",,status-playable,playable,2021-01-08 22:11:16.000
+"1917 - The Alien Invasion DX",01005CA0099AA000,status-playable,playable,2021-01-08 22:11:16.000
 "1971 PROJECT HELIOS",0100829010F4A000,status-playable,playable,2021-04-14 13:50:19.000
 "1979 Revolution: Black Friday",0100D1000B18C000,nvdec;status-playable,playable,2021-02-21 21:03:43.000
-"198X",,status-playable,playable,2020-08-07 13:24:38.000
-"1993 Shenandoah",,status-playable,playable,2020-10-24 13:55:42.000
+"198X",01007BB00FC8A000,status-playable,playable,2020-08-07 13:24:38.000
+"1993 Shenandoah",010075601150A000,status-playable,playable,2020-10-24 13:55:42.000
 "1993 Shenandoah Demo",0100148012550000,status-playable,playable,2021-02-09 00:43:43.000
-"2048 Battles",,status-playable,playable,2020-12-12 14:21:25.000
-"2064: Read Only Memories",,deadlock;status-menus,menus,2020-05-28 16:53:58.000
+"2048 Battles",010096500EA94000,status-playable,playable,2020-12-12 14:21:25.000
+"2064: Read Only Memories INTEGRAL",010024C0067C4000,deadlock;status-menus,menus,2020-05-28 16:53:58.000
 "20XX",0100749009844000,gpu;status-ingame,ingame,2023-08-14 09:41:44.000
 "2urvive",01007550131EE000,status-playable,playable,2022-11-17 13:49:37.000
 "2weistein – The Curse of the Red Dragon",0100E20012886000,status-playable;nvdec;UE4,playable,2022-11-18 14:47:07.000
 "30 in 1 game collection vol. 2",0100DAC013D0A000,status-playable;online-broken,playable,2022-10-15 17:22:27.000
 "30-in-1 Game Collection",010056D00E234000,status-playable;online-broken,playable,2022-10-15 17:47:09.000
 "3000th Duel",0100FB5010D2E000,status-playable,playable,2022-09-21 17:12:08.000
-"36 Fragments of Midnight",,status-playable,playable,2020-05-28 15:12:59.000
+"36 Fragments of Midnight",01003670066DE000,status-playable,playable,2020-05-28 15:12:59.000
 "39 Days to Mars",0100AF400C4CE000,status-playable,playable,2021-02-21 22:12:46.000
 "3D Arcade Fishing",010010C013F2A000,status-playable,playable,2022-10-25 21:50:51.000
 "3D MiniGolf",,status-playable,playable,2021-01-06 09:22:11.000
