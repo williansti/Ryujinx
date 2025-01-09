@@ -428,7 +428,6 @@
 010010A00DA48000,"Baldur's Gate and Baldur's Gate II: Enhanced Editions",32-bit;status-playable,playable,2022-09-12 23:52:15.000
 0100BC400FB64000,"Balthazar's Dream",status-playable,playable,2022-09-13 00:13:22.000
 01008D30128E0000,"Bamerang",status-playable,playable,2022-10-26 00:29:39.000
-,"Bang Dream Girls Band Party for Nintendo Switch",status-playable,playable,2021-09-19 03:06:58.000
 010013C010C5C000,"Banner of the Maid",status-playable,playable,2021-06-14 15:23:37.000
 0100388008758000,"Banner Saga 2",crash;status-boots,boots,2021-01-13 08:56:09.000
 010071E00875A000,"Banner Saga 3",slow;status-boots,boots,2021-01-11 16:53:57.000
@@ -1245,7 +1244,7 @@
 01000EC00AF98000,"Furi",status-playable,playable,2022-07-27 12:21:20.000
 0100A6B00D4EC000,"Furwind",status-playable,playable,2021-02-19 19:44:08.000
 0100ECE00C0C4000,"Fury Unleashed",crash;services;status-ingame,ingame,2020-10-18 11:52:40.000
-,"Fury Unleashed Demo",status-playable,playable,2020-10-08 20:09:21.000
+010070000ED9E000,"Fury Unleashed Demo",status-playable,playable,2020-10-08 20:09:21.000
 0100E1F013674000,"FUSER™",status-playable;nvdec;UE4,playable,2022-10-17 20:58:32.000
 ,"Fushigi no Gensokyo Lotus Labyrinth",Needs Update;audio;gpu;nvdec;status-ingame,ingame,2021-01-20 15:30:02.000
 01003C300B274000,"Futari de! Nyanko Daisensou",status-playable,playable,2024-01-05 22:26:52.000
@@ -1978,7 +1977,7 @@
 01005F000B784000,"Nelly Cootalot: The Fowl Fleet",status-playable,playable,2020-06-11 20:55:42.000
 01001AB0141A8000,"Neo : The World Ends with You (DEMO)- 新すばらしきこのせかい (体験版)",crash;status-ingame,ingame,2021-07-18 07:29:18.000
 0100EBB00D2F4000,"Neo Cab",status-playable,playable,2021-04-24 00:27:58.000
-,"Neo Cab Demo",crash;status-boots,boots,2020-06-16 00:14:00.000
+010040000DB98000,"Neo Cab Demo",crash;status-boots,boots,2020-06-16 00:14:00.000
 010006D0128B4000,"NEOGEO POCKET COLOR SELECTION Vol.1",status-playable,playable,2023-07-08 20:55:36.000
 0100BAB01113A000,"Neon Abyss",status-playable,playable,2022-10-05 15:59:44.000
 010075E0047F8000,"Neon Chrome",status-playable,playable,2022-08-06 18:38:34.000
@@ -2632,8 +2631,7 @@
 0100EA400BF44000,"SkyScrappers",status-playable,playable,2020-05-28 22:11:25.000
 0100F3C00C400000,"SkyTime",slow;status-ingame,ingame,2020-05-30 09:24:51.000
 01003AD00DEAE000,"SlabWell: The Quest For Kaktun's Alpaca",status-playable,playable,2021-02-22 17:02:51.000
-,"Slain",status-playable,playable,2020-05-29 14:26:16.000
-0100BB100AF4C000,"Slain Back from Hell",status-playable,playable,2022-08-12 23:36:19.000
+0100224004004000,"Slain: Back from Hell",status-playable,playable,2022-08-12 23:36:19.000
 010026300BA4A000,"Slay the Spire",status-playable,playable,2023-01-20 15:09:26.000
 0100501006494000,"Slayaway Camp: Butcher's Cut",status-playable;opengl-backend-bug,playable,2022-08-12 23:44:05.000
 01004E900EDDA000,"Slayin 2",gpu;status-ingame,ingame,2024-04-19 16:15:26.000
