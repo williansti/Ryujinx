@@ -39,8 +39,8 @@ namespace Ryujinx.Ava.Utilities.Compat
         
         public static void LoadFromStream(Stream stream)
         {
-            var reader = Sep.Reader().From(stream);
-            var columnIndices = new ColumnIndices(reader.Header); 
+            using SepReader reader = Sep.Reader().From(stream);
+            ColumnIndices columnIndices = new(reader.Header);
 
             Entries = reader
                 .Enumerate(row => new CompatibilityEntry(ref columnIndices, row))
@@ -57,7 +57,7 @@ namespace Ryujinx.Ava.Utilities.Compat
     {
         public CompatibilityEntry(ref ColumnIndices indices, SepReader.Row row)
         {
-            var titleIdRow = ColStr(row[indices.TitleId]);
+            string titleIdRow = ColStr(row[indices.TitleId]);
             TitleId = !string.IsNullOrEmpty(titleIdRow) 
                 ? titleIdRow 
                 : default(Optional<string>);
@@ -100,7 +100,7 @@ namespace Ryujinx.Ava.Utilities.Compat
 
         public override string ToString()
         {
-            var sb = new StringBuilder("CompatibilityEntry: {");
+            StringBuilder sb = new("CompatibilityEntry: {");
             sb.Append($"{nameof(GameName)}=\"{GameName}\", ");
             sb.Append($"{nameof(TitleId)}={TitleId}, ");
             sb.Append($"{nameof(Labels)}=\"{Labels}\", ");
@@ -161,8 +161,8 @@ namespace Ryujinx.Ava.Utilities.Compat
             if (value == string.Empty)
                 return string.Empty;
         
-            var firstChar = value[0];
-            var rest = value[1..];
+            char firstChar = value[0];
+            string rest = value[1..];
 
             return $"{char.ToUpper(firstChar)}{rest}";
         }
