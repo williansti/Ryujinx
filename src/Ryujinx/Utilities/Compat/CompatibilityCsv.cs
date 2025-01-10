@@ -42,7 +42,7 @@ namespace Ryujinx.Ava.Utilities.Compat
                 .OrderBy(it => it.GameName)
                 .ToArray();
             
-            Logger.Debug?.Print(LogClass.UI, "Compatibility CSV loaded.");
+            Logger.Debug?.Print(LogClass.UI, "Compatibility CSV loaded.", "LoadCompatCsv");
         }
 
         public static CompatibilityEntry[] Entries { get; private set; }
