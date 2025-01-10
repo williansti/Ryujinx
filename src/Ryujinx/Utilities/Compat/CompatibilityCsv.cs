@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Ryujinx.Ava.Utilities.Compat
 {
-    public struct ColumnIndices(SepReaderHeader header)
+    public struct ColumnIndices(Func<string, int> getIndex)
     {
         public const string TitleIdCol = "\"title_id\"";
         public const string GameNameCol = "\"game_name\"";
@@ -19,11 +19,11 @@ namespace Ryujinx.Ava.Utilities.Compat
         public const string StatusCol = "\"status\"";
         public const string LastUpdatedCol = "\"last_updated\"";
         
-        public readonly int TitleId = header.IndexOf(TitleIdCol);
-        public readonly int GameName = header.IndexOf(GameNameCol);
-        public readonly int Labels = header.IndexOf(LabelsCol);
-        public readonly int Status = header.IndexOf(StatusCol);
-        public readonly int LastUpdated = header.IndexOf(LastUpdatedCol);
+        public readonly int TitleId = getIndex(TitleIdCol);
+        public readonly int GameName = getIndex(GameNameCol);
+        public readonly int Labels = getIndex(LabelsCol);
+        public readonly int Status = getIndex(StatusCol);
+        public readonly int LastUpdated = getIndex(LastUpdatedCol);
     }
     
     public class CompatibilityCsv
@@ -34,13 +34,8 @@ namespace Ryujinx.Ava.Utilities.Compat
                 .GetManifestResourceStream("RyujinxGameCompatibilityList")!;
             csvStream.Position = 0;
 
-            LoadFromStream(csvStream);
-        }
-        
-        public static void LoadFromStream(Stream stream)
-        {
-            using SepReader reader = Sep.Reader().From(stream);
-            ColumnIndices columnIndices = new(reader.Header);
+            using SepReader reader = Sep.Reader().From(csvStream);
+            ColumnIndices columnIndices = new(reader.Header.IndexOf);
 
             Entries = reader
                 .Enumerate(row => new CompatibilityEntry(ref columnIndices, row))
