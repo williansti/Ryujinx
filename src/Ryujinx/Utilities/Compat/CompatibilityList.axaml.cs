@@ -14,15 +14,6 @@ namespace Ryujinx.Ava.Utilities.Compat
     {
         public static async Task Show()
         {
-            if (CompatibilityCsv.Shared is null)
-            {
-                await using Stream csvStream = Assembly.GetExecutingAssembly()
-                    .GetManifestResourceStream("RyujinxGameCompatibilityList")!;
-                csvStream.Position = 0;
-
-                CompatibilityCsv.Shared = new CompatibilityCsv(Sep.Reader().From(csvStream));
-            }
-            
             ContentDialog contentDialog = new()
             {
                 PrimaryButtonText = string.Empty,

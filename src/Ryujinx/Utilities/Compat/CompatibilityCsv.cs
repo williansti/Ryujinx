@@ -1,50 +1,71 @@
 ﻿using Gommon;
 using nietras.SeparatedValues;
 using Ryujinx.Ava.Common.Locale;
+using Ryujinx.Common.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Ryujinx.Ava.Utilities.Compat
 {
+    public struct ColumnIndices(SepReaderHeader header)
+    {
+        public const string TitleIdCol = "\"title_id\"";
+        public const string GameNameCol = "\"game_name\"";
+        public const string LabelsCol = "\"labels\"";
+        public const string StatusCol = "\"status\"";
+        public const string LastUpdatedCol = "\"last_updated\"";
+        
+        public readonly int TitleId = header.IndexOf(TitleIdCol);
+        public readonly int GameName = header.IndexOf(GameNameCol);
+        public readonly int Labels = header.IndexOf(LabelsCol);
+        public readonly int Status = header.IndexOf(StatusCol);
+        public readonly int LastUpdated = header.IndexOf(LastUpdatedCol);
+    }
+    
     public class CompatibilityCsv
     {
-        public static CompatibilityCsv Shared { get; set; }
-        
-        public CompatibilityCsv(SepReader reader)
+        static CompatibilityCsv()
         {
-            var entries = new List<CompatibilityEntry>();
+            using Stream csvStream = Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream("RyujinxGameCompatibilityList")!;
+            csvStream.Position = 0;
 
-            foreach (var row in reader)
-            {
-                entries.Add(new CompatibilityEntry(reader.Header, row));
-            }
+            LoadFromStream(csvStream);
+        }
+        
+        public static void LoadFromStream(Stream stream)
+        {
+            var reader = Sep.Reader().From(stream);
+            var columnIndices = new ColumnIndices(reader.Header); 
 
-            Entries = entries.Where(x => x.Status != null)
-                .OrderBy(it => it.GameName).ToArray();
+            Entries = reader
+                .Enumerate(row => new CompatibilityEntry(ref columnIndices, row))
+                .OrderBy(it => it.GameName)
+                .ToArray();
+            
+            Logger.Debug?.Print(LogClass.UI, "Compatibility CSV loaded.");
         }
 
-        public CompatibilityEntry[] Entries { get; }
+        public static CompatibilityEntry[] Entries { get; private set; }
     }
 
     public class CompatibilityEntry
     {
-        public CompatibilityEntry(SepReaderHeader header, SepReader.Row row)
+        public CompatibilityEntry(ref ColumnIndices indices, SepReader.Row row)
         {
-            if (row.ColCount != header.ColNames.Count)
-                throw new InvalidDataException($"CSV row {row.RowIndex} ({row.ToString()}) has mismatched column count");
-            
-            var titleIdRow = ColStr(row[header.IndexOf("\"title_id\"")]);
+            var titleIdRow = ColStr(row[indices.TitleId]);
             TitleId = !string.IsNullOrEmpty(titleIdRow) 
                 ? titleIdRow 
                 : default(Optional<string>);
             
-            GameName = ColStr(row[header.IndexOf("\"game_name\"")]).Trim().Trim('"');
+            GameName = ColStr(row[indices.GameName]).Trim().Trim('"');
 
-            IssueLabels = ColStr(row[header.IndexOf("\"labels\"")]).Split(';');
-            Status = ColStr(row[header.IndexOf("\"status\"")]).ToLower() switch
+            Labels = ColStr(row[indices.Labels]).Split(';');
+            Status = ColStr(row[indices.Status]).ToLower() switch
             {
                 "playable" => LocaleKeys.CompatibilityListPlayable,
                 "ingame" => LocaleKeys.CompatibilityListIngame,
@@ -54,8 +75,8 @@ namespace Ryujinx.Ava.Utilities.Compat
                 _ => null
             };
 
-            if (DateTime.TryParse(ColStr(row[header.IndexOf("\"last_updated\"")]), out var dt))
-                LastEvent = dt;
+            if (DateTime.TryParse(ColStr(row[indices.LastUpdated]), out var dt))
+                LastUpdated = dt;
 
             return;
             
@@ -64,15 +85,15 @@ namespace Ryujinx.Ava.Utilities.Compat
         
         public string GameName { get; }
         public Optional<string> TitleId { get; }
-        public string[] IssueLabels { get; }
+        public string[] Labels { get; }
         public LocaleKeys? Status { get; }
-        public DateTime LastEvent { get; }
+        public DateTime LastUpdated { get; }
 
         public string LocalizedStatus => LocaleManager.Instance[Status!.Value];
         public string FormattedTitleId => TitleId
             .OrElse(new string(' ', 16));
 
-        public string FormattedIssueLabels => IssueLabels
+        public string FormattedIssueLabels => Labels
             .Where(it => !it.StartsWithIgnoreCase("status"))
             .Select(FormatLabelName)
             .JoinToString(", ");
@@ -82,9 +103,9 @@ namespace Ryujinx.Ava.Utilities.Compat
             var sb = new StringBuilder("CompatibilityEntry: {");
             sb.Append($"{nameof(GameName)}=\"{GameName}\", ");
             sb.Append($"{nameof(TitleId)}={TitleId}, ");
-            sb.Append($"{nameof(IssueLabels)}=\"{IssueLabels}\", ");
+            sb.Append($"{nameof(Labels)}=\"{Labels}\", ");
             sb.Append($"{nameof(Status)}=\"{Status}\", ");
-            sb.Append($"{nameof(LastEvent)}=\"{LastEvent}\"");
+            sb.Append($"{nameof(LastUpdated)}=\"{LastUpdated}\"");
             sb.Append('}');
 
             return sb.ToString();
