@@ -1,4 +1,5 @@
 ﻿using Gommon;
+using Humanizer;
 using nietras.SeparatedValues;
 using Ryujinx.Ava.Common.Locale;
 using Ryujinx.Common.Logging;
@@ -83,6 +84,9 @@ namespace Ryujinx.Ava.Utilities.Compat
         public LocaleKeys? Status { get; }
         public DateTime LastUpdated { get; }
 
+        public string LocalizedLastUpdated =>
+            LocaleManager.FormatDynamicValue(LocaleKeys.CompatibilityListLastUpdated, LastUpdated.Humanize());
+
         public string LocalizedStatus => LocaleManager.Instance[Status!.Value];
         public string FormattedTitleId => TitleId
             .OrElse(new string(' ', 16));
@@ -97,7 +101,9 @@ namespace Ryujinx.Ava.Utilities.Compat
             StringBuilder sb = new("CompatibilityEntry: {");
             sb.Append($"{nameof(GameName)}=\"{GameName}\", ");
             sb.Append($"{nameof(TitleId)}={TitleId}, ");
-            sb.Append($"{nameof(Labels)}=\"{Labels}\", ");
+            sb.Append($"{nameof(Labels)}={
+                Labels.FormatCollection(it => $"\"{it}\"", separator: ", ", prefix: "[", suffix: "]")
+            }, ");
             sb.Append($"{nameof(Status)}=\"{Status}\", ");
             sb.Append($"{nameof(LastUpdated)}=\"{LastUpdated}\"");
             sb.Append('}');
