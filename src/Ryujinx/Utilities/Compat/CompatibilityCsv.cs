@@ -3,7 +3,6 @@ using nietras.SeparatedValues;
 using Ryujinx.Ava.Common.Locale;
 using Ryujinx.Common.Logging;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -11,7 +10,7 @@ using System.Text;
 
 namespace Ryujinx.Ava.Utilities.Compat
 {
-    public struct ColumnIndices(Func<string, int> getIndex)
+    public struct ColumnIndices(Func<ReadOnlySpan<char>, int> getIndex)
     {
         public const string TitleIdCol = "\"title_id\"";
         public const string GameNameCol = "\"game_name\"";

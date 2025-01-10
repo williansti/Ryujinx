@@ -42,7 +42,7 @@ namespace Ryujinx.Ava.Utilities.Compat
             InitializeComponent();
         }
 
-        private void TextBox_OnTextChanged(object? sender, TextChangedEventArgs e)
+        private void TextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             if (DataContext is not CompatibilityViewModel cvm)
                 return;
