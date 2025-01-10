@@ -743,7 +743,7 @@ namespace Ryujinx.Ava.UI.ViewModels
                 .Sort(GetComparer())
 #pragma warning disable MVVMTK0034
                 .Bind(out _appsObservableList)
-#pragma warning enable MVVMTK0034
+#pragma warning restore MVVMTK0034
                 .AsObservableList();
 
             OnPropertyChanged(nameof(AppsObservableList));
