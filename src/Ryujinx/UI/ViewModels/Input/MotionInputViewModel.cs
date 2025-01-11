@@ -16,7 +16,7 @@ namespace Ryujinx.Ava.UI.ViewModels.Input
 
         [ObservableProperty] private int _sensitivity;
 
-        [ObservableProperty] private double _gryoDeadzone;
+        [ObservableProperty] private double _gyroDeadzone;
 
         [ObservableProperty] private bool _enableCemuHookMotion;
     }
