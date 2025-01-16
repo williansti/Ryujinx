@@ -1,4 +1,5 @@
 using DiscordRPC;
+using Gommon;
 using Humanizer;
 using Humanizer.Localisation;
 using Ryujinx.Ava.Utilities.AppLibrary;
@@ -75,9 +76,21 @@ namespace Ryujinx.Ava
                     _discordClient = new DiscordRpcClient(ApplicationId);
 
                     _discordClient.Initialize();
-                    _discordClient.SetPresence(_discordPresenceMain);
+
+                    Use(TitleIDs.CurrentApplication);
                 }
             }
+        }
+
+        public static void Use(Optional<string> titleId)
+        {
+            if (titleId.TryGet(out string tid))
+                SwitchToPlayingState(
+                    ApplicationLibrary.LoadAndSaveMetaData(tid), 
+                    Switch.Shared.Processes.ActiveApplication
+                );
+            else 
+                SwitchToMainState();
         }
 
         private static void SwitchToPlayingState(ApplicationMetadata appMeta, ProcessResult procRes)
