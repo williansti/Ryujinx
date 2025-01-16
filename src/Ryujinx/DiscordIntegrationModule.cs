@@ -46,16 +46,7 @@ namespace Ryujinx.Ava
             };
 
             ConfigurationState.Instance.EnableDiscordIntegration.Event += Update;
-            TitleIDs.CurrentApplication.Event += (_, e) =>
-            {
-                if (e.NewValue)
-                    SwitchToPlayingState(
-                        ApplicationLibrary.LoadAndSaveMetaData(e.NewValue),
-                        Switch.Shared.Processes.ActiveApplication
-                    );
-                else 
-                    SwitchToMainState();
-            };
+            TitleIDs.CurrentApplication.Event += (_, e) => Use(e.NewValue);
         }
 
         private static void Update(object sender, ReactiveEventArgs<bool> evnt)
