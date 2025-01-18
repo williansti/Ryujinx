@@ -301,7 +301,10 @@ namespace Ryujinx.Headless
                 _userChannelPersistence.ShouldRestart = false;
             }
 
-            _inputManager.Dispose();
+            try
+            {
+                _inputManager.Dispose();
+            } catch {}
 
             return;
             
