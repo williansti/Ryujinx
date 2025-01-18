@@ -73,7 +73,7 @@ namespace Ryujinx.Headless
         protected SDL2MouseDriver MouseDriver;
         private readonly InputManager _inputManager;
         private readonly IKeyboard _keyboardInterface;
-        private readonly GraphicsDebugLevel _glLogLevel;
+        protected readonly GraphicsDebugLevel GlLogLevel;
         private readonly Stopwatch _chrono;
         private readonly long _ticksPerFrame;
         private readonly CancellationTokenSource _gpuCancellationTokenSource;
@@ -105,7 +105,7 @@ namespace Ryujinx.Headless
             NpadManager = _inputManager.CreateNpadManager();
             TouchScreenManager = _inputManager.CreateTouchScreenManager();
             _keyboardInterface = (IKeyboard)_inputManager.KeyboardDriver.GetGamepad("0");
-            _glLogLevel = glLogLevel;
+            GlLogLevel = glLogLevel;
             _chrono = new Stopwatch();
             _ticksPerFrame = Stopwatch.Frequency / TargetFps;
             _gpuCancellationTokenSource = new CancellationTokenSource();
@@ -269,7 +269,7 @@ namespace Ryujinx.Headless
         {
             InitializeWindowRenderer();
 
-            Device.Gpu.Renderer.Initialize(_glLogLevel);
+            Device.Gpu.Renderer.Initialize(GlLogLevel);
 
             InitializeRenderer();
 

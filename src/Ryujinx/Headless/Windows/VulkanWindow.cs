@@ -10,8 +10,6 @@ namespace Ryujinx.Headless
 {
     class VulkanWindow : WindowBase
     {
-        private readonly GraphicsDebugLevel _glLogLevel;
-
         public VulkanWindow(
             InputManager inputManager,
             GraphicsDebugLevel glLogLevel,
@@ -21,7 +19,6 @@ namespace Ryujinx.Headless
             bool ignoreControllerApplet)
             : base(inputManager, glLogLevel, aspectRatio, enableMouse, hideCursorMode, ignoreControllerApplet)
         {
-            _glLogLevel = glLogLevel;
         }
 
         public override SDL_WindowFlags WindowFlags => SDL_WindowFlags.SDL_WINDOW_VULKAN;
