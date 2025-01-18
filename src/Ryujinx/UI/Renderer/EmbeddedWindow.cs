@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Platform;
 using Ryujinx.Ava.Utilities.Configuration;
 using Ryujinx.Common.Configuration;
@@ -28,7 +27,7 @@ namespace Ryujinx.Ava.UI.Renderer
         protected nint WindowHandle { get; set; }
         protected nint X11Display { get; set; }
         protected nint NsView { get; set; }
-        protected nint MetalLayer { get; set; }
+        public nint MetalLayer { get; protected set; }
 
         public delegate void UpdateBoundsCallbackDelegate(Rect rect);
         private UpdateBoundsCallbackDelegate _updateBoundsCallback;
