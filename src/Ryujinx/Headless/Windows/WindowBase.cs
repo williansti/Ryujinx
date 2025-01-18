@@ -191,7 +191,7 @@ namespace Ryujinx.Headless
                 FullscreenFlag = SDL_WindowFlags.SDL_WINDOW_FULLSCREEN_DESKTOP;
             }
 
-            WindowHandle = SDL_CreateWindow($"Ryujinx {Program.Version}{titleNameSection}{titleVersionSection}{titleIdSection}{titleArchSection}", SDL_WINDOWPOS_CENTERED_DISPLAY(DisplayId), SDL_WINDOWPOS_CENTERED_DISPLAY(DisplayId), Width, Height, DefaultFlags | FullscreenFlag | GetWindowFlags());
+            WindowHandle = SDL_CreateWindow($"Ryujinx {Program.Version}{titleNameSection}{titleVersionSection}{titleIdSection}{titleArchSection}", SDL_WINDOWPOS_CENTERED_DISPLAY(DisplayId), SDL_WINDOWPOS_CENTERED_DISPLAY(DisplayId), Width, Height, DefaultFlags | FullscreenFlag | WindowFlags);
 
             if (WindowHandle == nint.Zero)
             {
@@ -246,7 +246,7 @@ namespace Ryujinx.Headless
 
         protected abstract void SwapBuffers();
 
-        public abstract SDL_WindowFlags GetWindowFlags();
+        public abstract SDL_WindowFlags WindowFlags { get; }
 
         private string GetGpuDriverName()
         {

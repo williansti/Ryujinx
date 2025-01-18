@@ -124,7 +124,7 @@ namespace Ryujinx.Headless
             _glLogLevel = glLogLevel;
         }
 
-        public override SDL_WindowFlags GetWindowFlags() => SDL_WindowFlags.SDL_WINDOW_OPENGL;
+        public override SDL_WindowFlags WindowFlags => SDL_WindowFlags.SDL_WINDOW_OPENGL;
 
         protected override void InitializeWindowRenderer()
         {
