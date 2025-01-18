@@ -897,7 +897,7 @@ namespace Ryujinx.Ava
             {
 #pragma warning disable CA1416 // This call site is reachable on all platforms
                 // SelectGraphicsBackend does a check for Mac, on top of checking if it's an ARM Mac. This isn't a problem.
-                GraphicsBackend.Metal => new MetalRenderer(() => new SharpMetal.QuartzCore.CAMetalLayer(((EmbeddedWindowMetal)RendererHost.EmbeddedWindow).MetalLayer)),
+                GraphicsBackend.Metal => new MetalRenderer((RendererHost.EmbeddedWindow as EmbeddedWindowMetal)!.CreateSurface),
 #pragma warning restore CA1416
                 GraphicsBackend.Vulkan => VulkanRenderer.Create(
                     ConfigurationState.Instance.Graphics.PreferredGpu,

@@ -12,6 +12,8 @@ using Ryujinx.Common.Logging;
 using Ryujinx.Common.Utilities;
 using Ryujinx.Graphics.GAL;
 using Ryujinx.Graphics.GAL.Multithreading;
+using Ryujinx.Graphics.Metal;
+using Ryujinx.Graphics.OpenGL;
 using Ryujinx.Graphics.Vulkan;
 using Ryujinx.HLE;
 using Ryujinx.Input;
@@ -310,10 +312,10 @@ namespace Ryujinx.Headless
 
             if (options.GraphicsBackend == GraphicsBackend.Metal && window is MetalWindow metalWindow && OperatingSystem.IsMacOS())
             {
-                return new Graphics.Metal.MetalRenderer(metalWindow.GetLayer);
+                return new MetalRenderer(metalWindow.GetLayer);
             }
 
-            return new Graphics.OpenGL.OpenGLRenderer();
+            return new OpenGLRenderer();
         }
 
         private static Switch InitializeEmulationContext(WindowBase window, IRenderer renderer, Options options)
