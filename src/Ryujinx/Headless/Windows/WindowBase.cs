@@ -1,13 +1,12 @@
 using Humanizer;
-using LibHac.Tools.Fs;
 using Ryujinx.Ava;
+using Ryujinx.Ava.UI.Models;
 using Ryujinx.Common;
 using Ryujinx.Common.Configuration;
 using Ryujinx.Common.Configuration.Hid;
 using Ryujinx.Common.Logging;
 using Ryujinx.Graphics.GAL;
 using Ryujinx.Graphics.GAL.Multithreading;
-using Ryujinx.Graphics.Gpu;
 using Ryujinx.Graphics.OpenGL;
 using Ryujinx.HLE.HOS.Applets;
 using Ryujinx.HLE.HOS.Services.Am.AppletOE.ApplicationProxyService.ApplicationProxy.Types;
@@ -53,8 +52,6 @@ namespace Ryujinx.Headless
         public TouchScreenManager TouchScreenManager { get; }
         public Switch Device { get; private set; }
         public IRenderer Renderer { get; private set; }
-
-        public event EventHandler<StatusUpdatedEventArgs> StatusUpdatedEvent;
 
         protected nint WindowHandle { get; set; }
 
@@ -163,6 +160,8 @@ namespace Ryujinx.Headless
                 }
             }
         }
+
+        private StatusUpdatedEventArgs _lastStatus;
 
         private void InitializeWindow()
         {
@@ -309,21 +308,6 @@ namespace Ryujinx.Headless
 
                     if (_ticks >= _ticksPerFrame)
                     {
-                        string dockedMode = Device.System.State.DockedMode ? "Docked" : "Handheld";
-                        float scale = GraphicsConfig.ResScale;
-                        if (scale != 1)
-                        {
-                            dockedMode += $" ({scale}x)";
-                        }
-
-                        StatusUpdatedEvent?.Invoke(this, new StatusUpdatedEventArgs(
-                            Device.VSyncMode.ToString(),
-                            dockedMode,
-                            Device.Configuration.AspectRatio.ToText(),
-                            $"{Device.Statistics.GetGameFrameRate():00.00} FPS ({Device.Statistics.GetGameFrameTime():00.00} ms)",
-                            $"FIFO: {Device.Statistics.GetFifoPercent():0.00} %",
-                            $"GPU: {_gpuDriverName}"));
-
                         _ticks = Math.Min(_ticks - _ticksPerFrame, _ticksPerFrame);
                     }
                 }
