@@ -1,6 +1,7 @@
 using Humanizer;
 using LibHac.Tools.Fs;
 using Ryujinx.Ava;
+using Ryujinx.Common;
 using Ryujinx.Common.Configuration;
 using Ryujinx.Common.Configuration.Hid;
 using Ryujinx.Common.Logging;
@@ -137,7 +138,7 @@ namespace Ryujinx.Headless
 
         private void SetWindowIcon()
         {
-            Stream iconStream = typeof(Program).Assembly.GetManifestResourceStream("HeadlessLogo");
+            Stream iconStream = EmbeddedResources.GetStream("Ryujinx/Assets/UIImages/Logo_Ryujinx.png");
             byte[] iconBytes = new byte[iconStream!.Length];
 
             if (iconStream.Read(iconBytes, 0, iconBytes.Length) != iconBytes.Length)
