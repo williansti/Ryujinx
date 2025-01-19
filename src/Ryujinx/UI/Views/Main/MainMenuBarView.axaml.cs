@@ -43,7 +43,13 @@ namespace Ryujinx.Ava.UI.Views.Main
             PauseEmulationMenuItem.Command = new RelayCommand(() => ViewModel.AppHost?.Pause());
             ResumeEmulationMenuItem.Command = new RelayCommand(() => ViewModel.AppHost?.Resume());
             StopEmulationMenuItem.Command = new AsyncRelayCommand(() => ViewModel.AppHost?.ShowExitPrompt().OrCompleted());
-            CheatManagerMenuItem.Command = new AsyncRelayCommand(OpenCheatManagerForCurrentApp);
+            CheatManagerMenuItem.Command = new AsyncRelayCommand(async () =>
+            {
+                try
+                {
+                    await OpenCheatManagerForCurrentApp();
+                } catch {}
+            });
             InstallFileTypesMenuItem.Command = new AsyncRelayCommand(InstallFileTypes);
             UninstallFileTypesMenuItem.Command = new AsyncRelayCommand(UninstallFileTypes);
             XciTrimmerMenuItem.Command = new AsyncRelayCommand(() => XCITrimmerWindow.Show(ViewModel));
