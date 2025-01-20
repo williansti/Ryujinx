@@ -3,14 +3,11 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 using FluentAvalonia.UI.Controls;
-using LibHac.Tools.FsSystem.NcaUtils;
-using Ryujinx.Ava.Common;
 using Ryujinx.Ava.Common.Locale;
 using Ryujinx.Ava.Common.Models;
 using Ryujinx.Ava.UI.Helpers;
 using Ryujinx.Ava.UI.ViewModels;
 using Ryujinx.Ava.Utilities.AppLibrary;
-using Ryujinx.Ava.Utilities.Compat;
 using System.Threading.Tasks;
 
 namespace Ryujinx.Ava.UI.Controls
@@ -22,9 +19,9 @@ namespace Ryujinx.Ava.UI.Controls
             InitializeComponent();
         }
 
-        #nullable enable
+#nullable enable
         public static async Task<DownloadableContentModel?> Show(ulong selectedTitleId, ApplicationLibrary appLibrary)
-        #nullable disable
+#nullable disable
         {
             DlcSelectViewModel viewModel = new(selectedTitleId, appLibrary);
 
@@ -52,4 +49,3 @@ namespace Ryujinx.Ava.UI.Controls
         }
     }
 }
-
