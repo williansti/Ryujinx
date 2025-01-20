@@ -296,13 +296,13 @@ namespace Ryujinx.Ava.Common
             extractorThread.Start();
         }
         
-        public static void ExtractAoc(string destination, NcaSectionType ncaSectionType, string updateFilePath, string updateName)
+        public static void ExtractAoc(string destination, string updateFilePath, string updateName)
         {
             var cancellationToken = new CancellationTokenSource();
 
             UpdateWaitWindow waitingDialog = new(
                 RyujinxApp.FormatTitle(LocaleKeys.DialogNcaExtractionTitle),
-                LocaleManager.Instance.UpdateAndGetDynamicValue(LocaleKeys.DialogNcaExtractionMessage, ncaSectionType, Path.GetFileName(updateFilePath)),
+                LocaleManager.Instance.UpdateAndGetDynamicValue(LocaleKeys.DialogNcaExtractionMessage, NcaSectionType.Data, Path.GetFileName(updateFilePath)),
                 cancellationToken);
 
             Thread extractorThread = new(() =>
@@ -352,7 +352,7 @@ namespace Ryujinx.Ava.Common
                     ? IntegrityCheckLevel.ErrorOnInvalid
                     : IntegrityCheckLevel.None;
 
-                int index = Nca.GetSectionIndexFromType(ncaSectionType, publicDataNca.Header.ContentType);
+                int index = Nca.GetSectionIndexFromType(NcaSectionType.Data, publicDataNca.Header.ContentType);
 
                 try
                 {
@@ -410,14 +410,13 @@ namespace Ryujinx.Ava.Common
                 }
             })
             {
-                Name = "GUI.NcaSectionExtractorThread",
+                Name = "GUI.AocExtractorThread",
                 IsBackground = true,
             };
             extractorThread.Start();
         }
 
-        public static async Task ExtractAoc(IStorageProvider storageProvider, NcaSectionType ncaSectionType,
-            string updateFilePath, string updateName)
+        public static async Task ExtractAoc(IStorageProvider storageProvider, string updateFilePath, string updateName)
         {
             var result = await storageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
             {
@@ -430,7 +429,7 @@ namespace Ryujinx.Ava.Common
                 return;
             }
 
-            ExtractAoc(result[0].Path.LocalPath, ncaSectionType, updateFilePath, updateName);
+            ExtractAoc(result[0].Path.LocalPath, updateFilePath, updateName);
         }
 
 
