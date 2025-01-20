@@ -2,6 +2,8 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Styling;
 using FluentAvalonia.UI.Controls;
+using LibHac.Tools.FsSystem.NcaUtils;
+using Ryujinx.Ava.Common;
 using Ryujinx.Ava.Common.Locale;
 using Ryujinx.Ava.Common.Models;
 using Ryujinx.Ava.UI.ViewModels;
@@ -92,6 +94,19 @@ namespace Ryujinx.Ava.UI.Windows
                     ViewModel.Disable(model);
                 }
             }
+        }
+        
+        private async void DlcItem_DumpRomfs(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Button { DataContext: DownloadableContentModel dlc }) return;
+            if (RyujinxApp.MainWindow.ViewModel is not { } viewModel)
+                return;
+            
+            await ApplicationHelper.ExtractAoc(
+                viewModel.StorageProvider,
+                NcaSectionType.Data,
+                dlc.ContainerPath,
+                dlc.FileName);
         }
     }
 }
