@@ -28,18 +28,27 @@ namespace Ryujinx.Common
         
         public static readonly string[] GreatMetalTitles =
         [
-            "01006f8002326000", // Animal Crossings: New Horizons
-            "01009bf0072d4000", // Captain Toad: Treasure Tracker
+            "010076f0049a2000", // Bayonetta
             "0100a5c00d162000", // Cuphead
             "010023800d64a000", // Deltarune
+            "01003a30012c0000", // LEGO City Undercover
             "010028600EBDA000", // Mario 3D World
             "0100152000022000", // Mario Kart 8 Deluxe
-            "01005CA01580E000", // Persona 5
-            "0100187003A36000", // Pokémon: Let's Go, Evoli!
+            "0100187003A36000", // Pokémon: Let's Go, Eevee!
             "010003f003a34000", // Pokémon: Let's Go, Pikachu!
             "01008C0016544000", // Sea of Stars
             "01006A800016E000", // Smash Ultimate
-            "0100000000010000", // Super Mario Odyessy
+            "01006bb00c6f0000", // The Legend of Zelda: Link's Awakening
+
+            //These ones have small issues, but those happen on Vulkan as well:
+            "01006f8002326000", // Animal Crossings: New Horizons
+            "01009bf0072d4000", // Captain Toad: Treasure Tracker
+            "01009510001ca000", // Fast RMX
+            "01005CA01580E000", // Persona 5 Royale
+            "0100000000010000", // Super Mario Odyssey
+
+            //Isaac claims it has a issue in level 2, but I am not able to replicate it on my M3. More testing would be appreciated:
+            "010015100b514000", // Super Mario Bros. Wonder
         ];
         
         public static string GetDiscordGameAsset(string titleId) 
