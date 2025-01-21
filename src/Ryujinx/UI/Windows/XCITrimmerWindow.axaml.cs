@@ -36,7 +36,7 @@ namespace Ryujinx.Ava.UI.Windows
                 SecondaryButtonText = string.Empty,
                 CloseButtonText = string.Empty,
                 Content = new XCITrimmerWindow(RyujinxApp.MainWindow.ViewModel),
-                Title = string.Format(LocaleManager.Instance[LocaleKeys.XCITrimmerWindowTitle]),
+                Title = LocaleManager.Instance[LocaleKeys.XCITrimmerWindowTitle]
             };
 
             Style bottomBorder = new(x => x.OfType<Grid>().Name("DialogSpace").Child().OfType<Border>());
