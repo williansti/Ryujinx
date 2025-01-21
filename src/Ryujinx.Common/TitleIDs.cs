@@ -14,6 +14,7 @@ namespace Ryujinx.Common
         {
             switch (currentBackend)
             {
+                case GraphicsBackend.Metal when !OperatingSystem.IsMacOS():
                 case GraphicsBackend.OpenGl when OperatingSystem.IsMacOS():
                     return GraphicsBackend.Vulkan;
                 case GraphicsBackend.Vulkan or GraphicsBackend.OpenGl or GraphicsBackend.Metal:
