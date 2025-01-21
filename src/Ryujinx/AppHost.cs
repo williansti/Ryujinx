@@ -1044,7 +1044,7 @@ namespace Ryujinx.Ava
                     _viewModel.WindowState = WindowState.FullScreen;
                 }
 
-                if (_viewModel.WindowState is WindowState.FullScreen)
+                if (_viewModel.WindowState is WindowState.FullScreen || _viewModel.StartGamesWithoutUI)
                 {
                     _viewModel.ShowMenuAndStatusBar = false;
                 }
