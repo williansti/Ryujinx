@@ -1662,10 +1662,7 @@ namespace Ryujinx.Ava.UI.ViewModels
 
         public async Task OpenAmiiboWindow()
         {
-            if (!IsAmiiboRequested)
-                return;
-
-            if (AppHost.Device.System.SearchingForAmiibo(out int deviceId))
+            if (AppHost.Device.System.SearchingForAmiibo(out int deviceId) && IsGameRunning)
             {
                 string titleId = AppHost.Device.Processes.ActiveApplication.ProgramIdText.ToUpper();
                 AmiiboWindow window = new(ShowAll, LastScannedAmiiboId, titleId);
@@ -1683,10 +1680,7 @@ namespace Ryujinx.Ava.UI.ViewModels
         }
         public async Task OpenBinFile()
         {
-            if (!IsAmiiboRequested)
-                return;
-
-            if (AppHost.Device.System.SearchingForAmiibo(out int deviceId))
+            if (AppHost.Device.System.SearchingForAmiibo(out _) && IsGameRunning)
             {
                 var result = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
                 {
