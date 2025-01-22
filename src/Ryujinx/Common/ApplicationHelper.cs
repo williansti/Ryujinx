@@ -1,6 +1,6 @@
-using Avalonia.Controls.Notifications;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
+using Gommon;
 using LibHac;
 using LibHac.Account;
 using LibHac.Common;
@@ -15,6 +15,7 @@ using LibHac.Tools.FsSystem.NcaUtils;
 using Ryujinx.Ava.Common.Locale;
 using Ryujinx.Ava.UI.Controls;
 using Ryujinx.Ava.UI.Helpers;
+using Ryujinx.Ava.Utilities;
 using Ryujinx.Ava.Utilities.Configuration;
 using Ryujinx.Common.Helper;
 using Ryujinx.Common.Logging;
@@ -418,35 +419,27 @@ namespace Ryujinx.Ava.Common
 
         public static async Task ExtractAoc(IStorageProvider storageProvider, string updateFilePath, string updateName)
         {
-            var result = await storageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
+            Optional<IStorageFolder> result = await storageProvider.OpenSingleFolderPickerAsync(new FolderPickerOpenOptions
             {
-                Title = LocaleManager.Instance[LocaleKeys.FolderDialogExtractTitle],
-                AllowMultiple = false,
+                Title = LocaleManager.Instance[LocaleKeys.FolderDialogExtractTitle]
             });
 
-            if (result.Count == 0)
-            {
-                return;
-            }
-
-            ExtractAoc(result[0].Path.LocalPath, updateFilePath, updateName);
+            if (!result.HasValue) return;
+            
+            ExtractAoc(result.Value.Path.LocalPath, updateFilePath, updateName);
         }
 
 
         public static async Task ExtractSection(IStorageProvider storageProvider, NcaSectionType ncaSectionType, string titleFilePath, string titleName, int programIndex = 0)
         {
-            var result = await storageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
+            Optional<IStorageFolder> result = await storageProvider.OpenSingleFolderPickerAsync(new FolderPickerOpenOptions
             {
-                Title = LocaleManager.Instance[LocaleKeys.FolderDialogExtractTitle],
-                AllowMultiple = false,
+                Title = LocaleManager.Instance[LocaleKeys.FolderDialogExtractTitle]
             });
 
-            if (result.Count == 0)
-            {
-                return;
-            }
+            if (!result.HasValue) return;
 
-            ExtractSection(result[0].Path.LocalPath, ncaSectionType, titleFilePath, titleName, programIndex);
+            ExtractSection(result.Value.Path.LocalPath, ncaSectionType, titleFilePath, titleName, programIndex);
         }
 
         public static (Result? result, bool canceled) CopyDirectory(FileSystemClient fs, string sourcePath, string destPath, CancellationToken token)
