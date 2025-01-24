@@ -1,6 +1,8 @@
 using Ryujinx.Common.Configuration.Hid;
 using Ryujinx.Common.Configuration.Hid.Controller;
 using Ryujinx.Common.Logging;
+using Ryujinx.Common.Utilities;
+using Ryujinx.HLE.HOS.Services.Hid;
 using SDL2;
 using System;
 using System.Collections.Generic;
@@ -86,7 +88,7 @@ namespace Ryujinx.Input.SDL2
             Id = driverId;
             Features = GetFeaturesFlag();
             _triggerThreshold = 0.0f;
-
+            
             // Enable motion tracking
             if (Features.HasFlag(GamepadFeaturesFlag.Motion))
             {
@@ -102,6 +104,18 @@ namespace Ryujinx.Input.SDL2
             }
         }
 
+        public void SetLed(uint packedRgb)
+        {
+            if (!Features.HasFlag(GamepadFeaturesFlag.Led)) return;
+
+            byte red = packedRgb > 0 ? (byte)(packedRgb >> 16) : (byte)0;
+            byte green = packedRgb > 0 ? (byte)(packedRgb >> 8) : (byte)0;
+            byte blue = packedRgb > 0 ? (byte)(packedRgb % 256) : (byte)0;
+            
+            if (SDL_GameControllerSetLED(_gamepadHandle, red, green, blue) != 0)
+                Logger.Error?.Print(LogClass.Hid, "LED is not supported on this game controller.");
+        }
+
         private GamepadFeaturesFlag GetFeaturesFlag()
         {
             GamepadFeaturesFlag result = GamepadFeaturesFlag.None;
@@ -112,9 +126,7 @@ namespace Ryujinx.Input.SDL2
                 result |= GamepadFeaturesFlag.Motion;
             }
 
-            int error = SDL_GameControllerRumble(_gamepadHandle, 0, 0, 100);
-
-            if (error == 0)
+            if (SDL_GameControllerHasRumble(_gamepadHandle) == SDL_bool.SDL_TRUE)
             {
                 result |= GamepadFeaturesFlag.Rumble;
             }
@@ -220,6 +232,17 @@ namespace Ryujinx.Input.SDL2
             {
                 _configuration = (StandardControllerInputConfig)configuration;
 
+                if (Features.HasFlag(GamepadFeaturesFlag.Led) && _configuration.Led.EnableLed)
+                {
+                    if (_configuration.Led.TurnOffLed)
+                        (this as IGamepad).ClearLed();
+                    else if (_configuration.Led.UseRainbow)
+                        Rainbow.RainbowColorUpdated += clr => SetLed((uint)clr);
+                    else
+                        SetLed(_configuration.Led.LedColor);
+                    
+                }
+                
                 _buttonsUserMapping.Clear();
 
                 // First update sticks
