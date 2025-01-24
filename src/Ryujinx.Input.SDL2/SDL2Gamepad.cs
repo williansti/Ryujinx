@@ -226,6 +226,13 @@ namespace Ryujinx.Input.SDL2
 
         private static Vector3 GsToMs2(Vector3 gs) => gs / SDL_STANDARD_GRAVITY;
 
+        private void RainbowColorChanged(int packedRgb)
+        {
+            if (!_configuration.Led.UseRainbow) return;
+            
+            SetLed((uint)packedRgb);
+        }
+        
         public void SetConfiguration(InputConfig configuration)
         {
             lock (_userMappingLock)
@@ -237,10 +244,12 @@ namespace Ryujinx.Input.SDL2
                     if (_configuration.Led.TurnOffLed)
                         (this as IGamepad).ClearLed();
                     else if (_configuration.Led.UseRainbow)
-                        Rainbow.RainbowColorUpdated += clr => SetLed((uint)clr);
+                        Rainbow.RainbowColorUpdated += RainbowColorChanged;
                     else
                         SetLed(_configuration.Led.LedColor);
                     
+                    if (!_configuration.Led.UseRainbow)
+                        Rainbow.RainbowColorUpdated -= RainbowColorChanged;
                 }
                 
                 _buttonsUserMapping.Clear();
