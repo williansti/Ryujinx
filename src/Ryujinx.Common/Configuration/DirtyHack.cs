@@ -24,7 +24,8 @@ namespace Ryujinx.Common.Configuration
         public static EnabledDirtyHack Unpack(ulong packedHack)
         {
             uint[] unpackedFields = packedHack.UnpackBitFields(PackedFormat);
-            if (unpackedFields is not [var hack, var value])
+            // ReSharper disable once PatternAlwaysMatches
+            if (unpackedFields is not [uint hack, uint value])
                 throw new Exception("The unpack operation on the integer resulted in an invalid unpacked result.");
             
             return new EnabledDirtyHack((DirtyHack)hack, (int)value);
