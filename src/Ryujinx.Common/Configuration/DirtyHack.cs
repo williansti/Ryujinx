@@ -23,7 +23,7 @@ namespace Ryujinx.Common.Configuration
 
         public static EnabledDirtyHack Unpack(ulong packedHack)
         {
-            var unpackedFields = packedHack.UnpackBitFields(PackedFormat);
+            uint[] unpackedFields = packedHack.UnpackBitFields(PackedFormat);
             if (unpackedFields is not [var hack, var value])
                 throw new Exception("The unpack operation on the integer resulted in an invalid unpacked result.");
             
@@ -53,7 +53,7 @@ namespace Ryujinx.Common.Configuration
         public static implicit operator DirtyHacks(EnabledDirtyHack[] hacks) => new(hacks);
         public static implicit operator DirtyHacks(ulong[] packedHacks) => new(packedHacks);
 
-        public new int this[DirtyHack hack] => TryGetValue(hack, out var value) ? value : -1;
+        public new int this[DirtyHack hack] => TryGetValue(hack, out int value) ? value : -1;
 
         public bool IsEnabled(DirtyHack hack) => ContainsKey(hack);
     }
