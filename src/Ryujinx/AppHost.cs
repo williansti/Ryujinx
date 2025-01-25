@@ -501,6 +501,8 @@ namespace Ryujinx.Ava
             _renderingThread.Start();
 
             _viewModel.Volume = ConfigurationState.Instance.System.AudioVolume.Value;
+            
+            Rainbow.Enable();
 
             MainLoop();
 
@@ -590,7 +592,11 @@ namespace Ryujinx.Ava
             foreach (IGamepad gamepad in RyujinxApp.MainWindow.InputManager.GamepadDriver.GetGamepads())
             {
                 gamepad?.ClearLed();
+                gamepad?.Dispose();
             }
+            
+            Rainbow.Disable();
+            Rainbow.Reset();
 
             _isStopped = true;
             Stop();

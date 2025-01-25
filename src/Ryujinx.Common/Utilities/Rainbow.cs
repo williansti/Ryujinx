@@ -1,40 +1,62 @@
-﻿using System;
+﻿using Gommon;
+using System;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace Ryujinx.Common.Utilities
 {
-    public class Rainbow
+    public static class Rainbow
     {
+        public static bool CyclingEnabled { get; set; }
+
+        public static void Enable()
+        {
+            if (!CyclingEnabled)
+            {
+                CyclingEnabled = true;
+                Executor.ExecuteBackgroundAsync(async () =>
+                {
+                    while (CyclingEnabled)
+                    {
+                        await Task.Delay(15);
+                        Tick();
+                    }
+                });
+            }
+        }
+
+        public static void Disable()
+        {
+            CyclingEnabled = false;
+        }
+        
+        
         public static float Speed { get; set; } = 1;
         
         public static Color Color { get; private set; } = Color.Blue;
 
-        private static float _lastHue;
-
         public static void Tick()
         {
-            float currentHue = Color.GetHue();
-            float nextHue = currentHue;
-
-            if (currentHue >= 360)
-                nextHue = 0;
-            else
-                nextHue += Speed;
+            Color = HsbToRgb((Color.GetHue() + Speed) / 360);
             
-            Color = HsbToRgb(
-                nextHue / 360,
-                1, 
-                1
-                );
-
-            _lastHue = currentHue;
-            
-            RainbowColorUpdated?.Invoke(Color.ToArgb());
+            UpdatedHandler.Call(Color.ToArgb());
         }
 
-        public static event Action<int> RainbowColorUpdated;
+        public static void Reset()
+        {
+            Color = Color.Blue;
+            UpdatedHandler.Clear();
+        }
 
-        private static Color HsbToRgb(float hue, float saturation, float brightness)
+        public static event Action<int> Updated
+        {
+            add => UpdatedHandler.Add(value);
+            remove => UpdatedHandler.Remove(value);
+        }
+
+        internal static Event<int> UpdatedHandler = new();
+
+        private static Color HsbToRgb(float hue, float saturation = 1, float brightness = 1)
         {
             int r = 0, g = 0, b = 0;
             if (saturation == 0)

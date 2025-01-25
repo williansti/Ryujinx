@@ -148,6 +148,8 @@ namespace Ryujinx.Input.SDL2
         {
             if (disposing && _gamepadHandle != nint.Zero)
             {
+                Rainbow.Updated -= RainbowColorChanged;
+                
                 SDL_GameControllerClose(_gamepadHandle);
 
                 _gamepadHandle = nint.Zero;
@@ -232,6 +234,8 @@ namespace Ryujinx.Input.SDL2
             
             SetLed((uint)packedRgb);
         }
+
+        private bool _rainbowColorEnabled;
         
         public void SetConfiguration(InputConfig configuration)
         {
@@ -243,13 +247,20 @@ namespace Ryujinx.Input.SDL2
                 {
                     if (_configuration.Led.TurnOffLed)
                         (this as IGamepad).ClearLed();
-                    else if (_configuration.Led.UseRainbow)
-                        Rainbow.RainbowColorUpdated += RainbowColorChanged;
-                    else
-                        SetLed(_configuration.Led.LedColor);
+                    else switch (_configuration.Led.UseRainbow)
+                    {
+                        case true when !_rainbowColorEnabled:
+                            Rainbow.Updated += RainbowColorChanged;
+                            _rainbowColorEnabled = true;
+                            break;
+                        case false when _rainbowColorEnabled:
+                            Rainbow.Updated -= RainbowColorChanged;
+                            _rainbowColorEnabled = false;
+                            break;
+                    }
                     
-                    if (!_configuration.Led.UseRainbow)
-                        Rainbow.RainbowColorUpdated -= RainbowColorChanged;
+                    if (!_configuration.Led.TurnOffLed && !_rainbowColorEnabled)
+                        SetLed(_configuration.Led.LedColor);
                 }
                 
                 _buttonsUserMapping.Clear();
