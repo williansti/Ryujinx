@@ -8,8 +8,8 @@ namespace Ryujinx.Graphics.Gpu.Engine.Threed.Blender
 {
     static class AdvancedBlendFunctions
     {
-        public static readonly AdvancedBlendUcode[] Table = new AdvancedBlendUcode[]
-        {
+        public static readonly AdvancedBlendUcode[] Table =
+        [
             new(AdvancedBlendOp.PlusClamped,      AdvancedBlendOverlap.Uncorrelated, true,  GenUncorrelatedPlusClampedPremul),
             new(AdvancedBlendOp.PlusClampedAlpha, AdvancedBlendOverlap.Uncorrelated, true,  GenUncorrelatedPlusClampedAlphaPremul),
             new(AdvancedBlendOp.PlusDarker,       AdvancedBlendOverlap.Uncorrelated, true,  GenUncorrelatedPlusDarkerPremul),
@@ -209,8 +209,8 @@ namespace Ryujinx.Graphics.Gpu.Engine.Threed.Blender
             new(AdvancedBlendOp.HslHue,           AdvancedBlendOverlap.Conjoint,     false, GenConjointHslHue),
             new(AdvancedBlendOp.HslSaturation,    AdvancedBlendOverlap.Conjoint,     false, GenConjointHslSaturation),
             new(AdvancedBlendOp.HslColor,         AdvancedBlendOverlap.Conjoint,     false, GenConjointHslColor),
-            new(AdvancedBlendOp.HslLuminosity,    AdvancedBlendOverlap.Conjoint,     false, GenConjointHslLuminosity),
-        };
+            new(AdvancedBlendOp.HslLuminosity,    AdvancedBlendOverlap.Conjoint,     false, GenConjointHslLuminosity)
+        ];
 
         public static string GenTable()
         {
