@@ -93,7 +93,7 @@ namespace Spv.Generator
 
         public Instruction AddExtInstImport(string import)
         {
-            DeterministicStringKey key = new DeterministicStringKey(import);
+            DeterministicStringKey key = new(import);
 
             if (_extInstImports.TryGetValue(key, out Instruction extInstImport))
             {
@@ -113,7 +113,7 @@ namespace Spv.Generator
 
         private void AddTypeDeclaration(Instruction instruction, bool forceIdAllocation)
         {
-            TypeDeclarationKey key = new TypeDeclarationKey(instruction);
+            TypeDeclarationKey key = new(instruction);
 
             if (!forceIdAllocation)
             {
@@ -214,7 +214,7 @@ namespace Spv.Generator
                          constant.Opcode == Op.OpConstantNull ||
                          constant.Opcode == Op.OpConstantComposite);
 
-            ConstantKey key = new ConstantKey(constant);
+            ConstantKey key = new(constant);
 
             if (_constants.TryGetValue(key, out Instruction global))
             {
