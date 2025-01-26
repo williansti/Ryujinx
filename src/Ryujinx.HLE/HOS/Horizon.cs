@@ -154,11 +154,11 @@ namespace Ryujinx.HLE.HOS
             timePageList.AddRange(timePa, TimeSize / KPageTableBase.PageSize);
             appletCaptureBufferPageList.AddRange(appletCaptureBufferPa, AppletCaptureBufferSize / KPageTableBase.PageSize);
 
-            SharedMemoryStorage hidStorage = new SharedMemoryStorage(KernelContext, hidPageList);
-            SharedMemoryStorage fontStorage = new SharedMemoryStorage(KernelContext, fontPageList);
-            SharedMemoryStorage iirsStorage = new SharedMemoryStorage(KernelContext, iirsPageList);
-            SharedMemoryStorage timeStorage = new SharedMemoryStorage(KernelContext, timePageList);
-            SharedMemoryStorage appletCaptureBufferStorage = new SharedMemoryStorage(KernelContext, appletCaptureBufferPageList);
+            SharedMemoryStorage hidStorage = new(KernelContext, hidPageList);
+            SharedMemoryStorage fontStorage = new(KernelContext, fontPageList);
+            SharedMemoryStorage iirsStorage = new(KernelContext, iirsPageList);
+            SharedMemoryStorage timeStorage = new(KernelContext, timePageList);
+            SharedMemoryStorage appletCaptureBufferStorage = new(KernelContext, appletCaptureBufferPageList);
 
             HidStorage = hidStorage;
 
@@ -304,7 +304,7 @@ namespace Ryujinx.HLE.HOS
 
         public bool LoadKip(string kipPath)
         {
-            using SharedRef<IStorage> kipFile = new SharedRef<IStorage>(new LocalStorage(kipPath, FileAccess.Read));
+            using SharedRef<IStorage> kipFile = new(new LocalStorage(kipPath, FileAccess.Read));
 
             return ProcessLoaderHelper.LoadKip(KernelContext, new KipExecutable(in kipFile));
         }

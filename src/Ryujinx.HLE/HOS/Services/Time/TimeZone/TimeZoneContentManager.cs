@@ -94,7 +94,7 @@ namespace Ryujinx.HLE.HOS.Services.Time.TimeZone
                 Nca nca = new(_virtualFileSystem.KeySet, ncaFileStream);
                 IFileSystem romfs = nca.OpenFileSystem(NcaSectionType.Data, _fsIntegrityCheckLevel);
 
-                using UniqueRef<IFile> binaryListFile = new UniqueRef<IFile>();
+                using UniqueRef<IFile> binaryListFile = new();
 
                 romfs.OpenFile(ref binaryListFile.Ref, "/binaryList.txt".ToU8Span(), OpenMode.Read).ThrowIfFailure();
 
@@ -139,7 +139,7 @@ namespace Ryujinx.HLE.HOS.Services.Time.TimeZone
                         continue;
                     }
 
-                    using UniqueRef<IFile> tzif = new UniqueRef<IFile>();
+                    using UniqueRef<IFile> tzif = new();
 
                     if (romfs.OpenFile(ref tzif.Ref, $"/zoneinfo/{locName}".ToU8Span(), OpenMode.Read).IsFailure())
                     {
@@ -269,7 +269,7 @@ namespace Ryujinx.HLE.HOS.Services.Time.TimeZone
             Nca nca = new(_virtualFileSystem.KeySet, ncaFile);
             IFileSystem romfs = nca.OpenFileSystem(NcaSectionType.Data, _fsIntegrityCheckLevel);
 
-            using UniqueRef<IFile> timeZoneBinaryFile = new UniqueRef<IFile>();
+            using UniqueRef<IFile> timeZoneBinaryFile = new();
 
             Result result = romfs.OpenFile(ref timeZoneBinaryFile.Ref, $"/zoneinfo/{locationName}".ToU8Span(), OpenMode.Read);
 

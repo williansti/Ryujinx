@@ -617,7 +617,7 @@ namespace Ryujinx.HLE.HOS.Kernel.Memory
                 return result;
             }
 
-            using OnScopeExit _ = new OnScopeExit(() => pageList.DecrementPagesReferenceCount(Context.MemoryManager));
+            using OnScopeExit _ = new(() => pageList.DecrementPagesReferenceCount(Context.MemoryManager));
 
             return MapPages(address, pageList, permission, MemoryMapFlags.Private);
         }
@@ -769,7 +769,7 @@ namespace Ryujinx.HLE.HOS.Kernel.Memory
 
                     Result result = region.AllocatePages(out KPageList pageList, pagesCount);
 
-                    using OnScopeExit _ = new OnScopeExit(() => pageList.DecrementPagesReferenceCount(Context.MemoryManager));
+                    using OnScopeExit _ = new(() => pageList.DecrementPagesReferenceCount(Context.MemoryManager));
 
                     void CleanUpForError()
                     {
@@ -1341,7 +1341,7 @@ namespace Ryujinx.HLE.HOS.Kernel.Memory
 
                 Result result = region.AllocatePages(out KPageList pageList, remainingPages);
 
-                using OnScopeExit _ = new OnScopeExit(() => pageList.DecrementPagesReferenceCount(Context.MemoryManager));
+                using OnScopeExit _ = new(() => pageList.DecrementPagesReferenceCount(Context.MemoryManager));
 
                 void CleanUpForError()
                 {
@@ -1867,7 +1867,7 @@ namespace Ryujinx.HLE.HOS.Kernel.Memory
             ulong dstLastPagePa = 0;
             ulong currentVa = va;
 
-            using OnScopeExit _ = new OnScopeExit(() =>
+            using OnScopeExit _ = new(() =>
             {
                 if (dstFirstPagePa != 0)
                 {

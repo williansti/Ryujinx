@@ -60,7 +60,7 @@ namespace Ryujinx.HLE.HOS.Services.Account.Acc
             }
         }
 
-        public void AddUser(string name, byte[] image, UserId userId = new UserId())
+        public void AddUser(string name, byte[] image, UserId userId = new())
         {
             if (userId.IsNull)
             {
@@ -194,7 +194,7 @@ namespace Ryujinx.HLE.HOS.Services.Account.Acc
             SaveDataFilter saveDataFilter = SaveDataFilter.Make(programId: default, saveType: default,
                 new LibHac.Fs.UserId((ulong)userId.High, (ulong)userId.Low), saveDataId: default, index: default);
 
-            using UniqueRef<SaveDataIterator> saveDataIterator = new UniqueRef<SaveDataIterator>();
+            using UniqueRef<SaveDataIterator> saveDataIterator = new();
 
             _horizonClient.Fs.OpenSaveDataIterator(ref saveDataIterator.Ref, SaveDataSpaceId.User, in saveDataFilter).ThrowIfFailure();
 
