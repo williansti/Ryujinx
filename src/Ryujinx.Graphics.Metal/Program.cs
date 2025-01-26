@@ -56,7 +56,7 @@ namespace Ryujinx.Graphics.Metal
             {
                 ShaderSource shader = _shaders[i];
 
-                using MTLCompileOptions compileOptions = new MTLCompileOptions
+                using MTLCompileOptions compileOptions = new()
                 {
                     PreserveInvariance = true,
                     LanguageVersion = MTLLanguageVersion.Version31,
