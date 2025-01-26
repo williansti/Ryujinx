@@ -32,7 +32,7 @@ namespace Ryujinx.Ava.UI.ViewModels
 
         public UserFirmwareAvatarSelectorViewModel()
         {
-            _images = new ObservableCollection<ProfileImageModel>();
+            _images = [];
 
             LoadImagesFromStore();
             PropertyChanged += (_, args) =>

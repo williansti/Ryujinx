@@ -190,7 +190,7 @@ namespace Ryujinx.Ava.Utilities.AppLibrary
         /// <exception cref="HorizonResultException">An error occured while reading PFS data.</exception>
         private List<ApplicationData> GetApplicationsFromPfs(IFileSystem pfs, string filePath)
         {
-            List<ApplicationData> applications = new();
+            List<ApplicationData> applications = [];
             string extension = Path.GetExtension(filePath).ToLower();
 
             foreach ((ulong titleId, ContentMetaData content) in pfs.GetContentData(ContentMetaType.Application, _virtualFileSystem, _checkLevel))
@@ -642,7 +642,7 @@ namespace Ryujinx.Ava.Utilities.AppLibrary
             _applications.Clear();
 
             // Builds the applications list with paths to found applications
-            List<string> applicationPaths = new();
+            List<string> applicationPaths = [];
 
             try
             {
@@ -833,7 +833,7 @@ namespace Ryujinx.Ava.Utilities.AppLibrary
         {
             _cancellationToken = new CancellationTokenSource();
 
-            List<string> dlcPaths = new();
+            List<string> dlcPaths = [];
             int newDlcLoaded = 0;
             numDlcRemoved = 0;
 
@@ -943,14 +943,14 @@ namespace Ryujinx.Ava.Utilities.AppLibrary
         {
             _cancellationToken = new CancellationTokenSource();
 
-            List<string> updatePaths = new();
+            List<string> updatePaths = [];
             int numUpdatesLoaded = 0;
             numUpdatesRemoved = 0;
 
             try
             {
-                HashSet<ulong> titleIdsToSave = new();
-                HashSet<ulong> titleIdsToRefresh = new();
+                HashSet<ulong> titleIdsToSave = [];
+                HashSet<ulong> titleIdsToRefresh = [];
 
                 // Remove any updates which can no longer be located on disk
                 List<(TitleUpdateModel TitleUpdate, bool IsSelected)> updatesToRemove = _titleUpdates.Items

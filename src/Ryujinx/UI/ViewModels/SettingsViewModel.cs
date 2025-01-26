@@ -51,7 +51,7 @@ namespace Ryujinx.Ava.UI.ViewModels
         [ObservableProperty] private bool _isVulkanAvailable = true;
         [ObservableProperty] private bool _gameDirectoryChanged;
         [ObservableProperty] private bool _autoloadDirectoryChanged;
-        private readonly List<string> _gpuIds = new();
+        private readonly List<string> _gpuIds = [];
         private int _graphicsBackendIndex;
         private int _scalingFilter;
         private int _scalingFilterLevel;

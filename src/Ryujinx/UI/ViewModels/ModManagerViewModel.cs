@@ -23,9 +23,9 @@ namespace Ryujinx.Ava.UI.ViewModels
     {
         private readonly string _modJsonPath;
 
-        private AvaloniaList<ModModel> _mods = new();
-        [ObservableProperty] private AvaloniaList<ModModel> _views = new();
-        [ObservableProperty] private AvaloniaList<ModModel> _selectedMods = new();
+        private AvaloniaList<ModModel> _mods = [];
+        [ObservableProperty] private AvaloniaList<ModModel> _views = [];
+        [ObservableProperty] private AvaloniaList<ModModel> _selectedMods = [];
 
         private string _search;
         private readonly ulong _applicationId;

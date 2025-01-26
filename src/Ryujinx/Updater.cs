@@ -372,7 +372,7 @@ namespace Ryujinx.Ava
 
             for (int i = 0; i < ConnectionCount; i++)
             {
-                list.Add(Array.Empty<byte>());
+                list.Add([]);
             }
 
             for (int i = 0; i < ConnectionCount; i++)
