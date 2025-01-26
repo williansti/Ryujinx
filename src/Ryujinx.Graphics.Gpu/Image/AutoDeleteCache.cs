@@ -277,7 +277,7 @@ namespace Ryujinx.Graphics.Gpu.Image
         /// <param name="descriptor">Last used texture descriptor</param>
         public void AddShortCache(Texture texture, ref TextureDescriptor descriptor)
         {
-            ShortTextureCacheEntry entry = new ShortTextureCacheEntry(descriptor, texture);
+            ShortTextureCacheEntry entry = new(descriptor, texture);
 
             _shortCacheBuilder.Add(entry);
             _shortCacheLookup.Add(entry.Descriptor, entry);
@@ -296,7 +296,7 @@ namespace Ryujinx.Graphics.Gpu.Image
         {
             if (texture.ShortCacheEntry != null)
             {
-                ShortTextureCacheEntry entry = new ShortTextureCacheEntry(texture);
+                ShortTextureCacheEntry entry = new(texture);
 
                 _shortCacheBuilder.Add(entry);
 

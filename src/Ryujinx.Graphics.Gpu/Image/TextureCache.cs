@@ -947,7 +947,7 @@ namespace Ryujinx.Graphics.Gpu.Image
                 bool hasLayerViews = false;
                 bool hasMipViews = false;
 
-                List<TextureIncompatibleOverlap> incompatibleOverlaps = new List<TextureIncompatibleOverlap>();
+                List<TextureIncompatibleOverlap> incompatibleOverlaps = new();
 
                 for (int index = 0; index < overlapsCount; index++)
                 {

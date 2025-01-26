@@ -431,7 +431,7 @@ namespace Ryujinx.Graphics.Gpu.Memory
 
                     BufferMigration oldMigration = ranges._source;
 
-                    BufferMigrationSpan span = new BufferMigrationSpan(ranges._parent, ranges._flushAction, oldMigration);
+                    BufferMigrationSpan span = new(ranges._parent, ranges._flushAction, oldMigration);
                     ranges._parent.IncrementReferenceCount();
 
                     if (_source == null)

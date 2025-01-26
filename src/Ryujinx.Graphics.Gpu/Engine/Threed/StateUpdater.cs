@@ -740,7 +740,7 @@ namespace Ryujinx.Graphics.Gpu.Engine.Threed
                     ref ScreenScissorState scissor = ref _state.State.ScreenScissorState;
 
                     float rScale = _channel.TextureManager.RenderTargetScale;
-                    Rectangle<float> scissorRect = new Rectangle<float>(0, 0, (scissor.X + scissor.Width) * rScale, (scissor.Y + scissor.Height) * rScale);
+                    Rectangle<float> scissorRect = new(0, 0, (scissor.X + scissor.Width) * rScale, (scissor.Y + scissor.Height) * rScale);
 
                     viewports[index] = new Viewport(scissorRect, ViewportSwizzle.PositiveX, ViewportSwizzle.PositiveY, ViewportSwizzle.PositiveZ, ViewportSwizzle.PositiveW, 0, 1);
                     continue;
@@ -1281,7 +1281,7 @@ namespace Ryujinx.Graphics.Gpu.Engine.Threed
                     bool enable = _state.State.BlendEnable[index];
                     BlendState blend = _state.State.BlendState[index];
 
-                    BlendDescriptor descriptor = new BlendDescriptor(
+                    BlendDescriptor descriptor = new(
                         enable,
                         blendConstant,
                         blend.ColorOp,
@@ -1309,7 +1309,7 @@ namespace Ryujinx.Graphics.Gpu.Engine.Threed
                 bool enable = _state.State.BlendEnable[0];
                 BlendStateCommon blend = _state.State.BlendStateCommon;
 
-                BlendDescriptor descriptor = new BlendDescriptor(
+                BlendDescriptor descriptor = new(
                     enable,
                     blendConstant,
                     blend.ColorOp,
