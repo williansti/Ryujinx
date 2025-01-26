@@ -26,9 +26,10 @@ namespace ARMeilleure.Translation.PTC
 
         private const uint InternalVersion = 5518; //! Not to be incremented manually for each change to the ARMeilleure project.
 
-        private static readonly uint[] _migrateInternalVersions = {
-            1866,
-        };
+        private static readonly uint[] _migrateInternalVersions =
+        [
+            1866
+        ];
 
         private const int SaveInterval = 30; // Seconds.
 

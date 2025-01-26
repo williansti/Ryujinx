@@ -260,7 +260,7 @@ namespace ARMeilleure.Translation
             Logger.EndPass(PassName.RegisterUsage);
 
             OperandType retType = OperandType.I64;
-            OperandType[] argTypes = new OperandType[] { OperandType.I64 };
+            OperandType[] argTypes = [OperandType.I64];
 
             CompilerOptions options = highCq ? CompilerOptions.HighCq : CompilerOptions.None;
 
@@ -478,7 +478,7 @@ namespace ARMeilleure.Translation
 
         public void InvalidateJitCacheRegion(ulong address, ulong size)
         {
-            ulong[] overlapAddresses = Array.Empty<ulong>();
+            ulong[] overlapAddresses = [];
 
             int overlapsCount = Functions.GetOverlaps(address, size, ref overlapAddresses);
 
