@@ -117,7 +117,7 @@ namespace Ryujinx.Graphics.OpenGL.Effects.Smaa
 
         private void Initialize()
         {
-            TextureCreateInfo areaInfo = new TextureCreateInfo(AreaWidth,
+            TextureCreateInfo areaInfo = new(AreaWidth,
                 AreaHeight,
                 1,
                 1,
@@ -133,7 +133,7 @@ namespace Ryujinx.Graphics.OpenGL.Effects.Smaa
                 SwizzleComponent.Blue,
                 SwizzleComponent.Alpha);
 
-            TextureCreateInfo searchInfo = new TextureCreateInfo(SearchWidth,
+            TextureCreateInfo searchInfo = new(SearchWidth,
                 SearchHeight,
                 1,
                 1,
@@ -194,7 +194,7 @@ namespace Ryujinx.Graphics.OpenGL.Effects.Smaa
             GL.ActiveTexture(TextureUnit.Texture2);
             int previousTextureBinding2 = GL.GetInteger(GetPName.TextureBinding2D);
 
-            Framebuffer framebuffer = new Framebuffer();
+            Framebuffer framebuffer = new();
             framebuffer.Bind();
             framebuffer.AttachColor(0, edgeOutput);
             GL.Clear(ClearBufferMask.ColorBufferBit);
