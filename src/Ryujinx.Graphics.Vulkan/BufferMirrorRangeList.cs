@@ -152,7 +152,7 @@ namespace Ryujinx.Graphics.Vulkan
             {
                 _ranges = new List<Range>
                 {
-                    new Range(offset, size)
+                    new(offset, size)
                 };
             }
         }

@@ -47,7 +47,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             AttachmentDescription[] attachmentDescs = null;
 
-            SubpassDescription subpass = new SubpassDescription
+            SubpassDescription subpass = new()
             {
                 PipelineBindPoint = PipelineBindPoint.Graphics,
             };
@@ -114,7 +114,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             fixed (AttachmentDescription* pAttachmentDescs = attachmentDescs)
             {
-                RenderPassCreateInfo renderPassCreateInfo = new RenderPassCreateInfo
+                RenderPassCreateInfo renderPassCreateInfo = new()
                 {
                     SType = StructureType.RenderPassCreateInfo,
                     PAttachments = pAttachmentDescs,
@@ -149,7 +149,7 @@ namespace Ryujinx.Graphics.Vulkan
 
         public Auto<DisposableFramebuffer> GetFramebuffer(VulkanRenderer gd, CommandBufferScoped cbs, FramebufferParams fb)
         {
-            FramebufferCacheKey key = new FramebufferCacheKey(fb.Width, fb.Height, fb.Layers);
+            FramebufferCacheKey key = new(fb.Width, fb.Height, fb.Layers);
 
             if (!_framebuffers.TryGetValue(ref key, out Auto<DisposableFramebuffer> result))
             {

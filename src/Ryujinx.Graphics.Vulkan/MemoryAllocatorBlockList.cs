@@ -44,7 +44,7 @@ namespace Ryujinx.Graphics.Vulkan
                 Size = size;
                 _freeRanges = new List<Range>
                 {
-                    new Range(0, size),
+                    new(0, size),
                 };
             }
 
@@ -88,7 +88,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             private void InsertFreeRange(ulong offset, ulong size)
             {
-                Range range = new Range(offset, size);
+                Range range = new(offset, size);
                 int index = _freeRanges.BinarySearch(range);
                 if (index < 0)
                 {
@@ -101,7 +101,7 @@ namespace Ryujinx.Graphics.Vulkan
             private void InsertFreeRangeComingled(ulong offset, ulong size)
             {
                 ulong endOffset = offset + size;
-                Range range = new Range(offset, size);
+                Range range = new(offset, size);
                 int index = _freeRanges.BinarySearch(range);
                 if (index < 0)
                 {
@@ -213,7 +213,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             ulong blockAlignedSize = BitUtils.AlignUp(size, (ulong)_blockAlignment);
 
-            MemoryAllocateInfo memoryAllocateInfo = new MemoryAllocateInfo
+            MemoryAllocateInfo memoryAllocateInfo = new()
             {
                 SType = StructureType.MemoryAllocateInfo,
                 AllocationSize = blockAlignedSize,
@@ -231,7 +231,7 @@ namespace Ryujinx.Graphics.Vulkan
                 hostPointer = (nint)pointer;
             }
 
-            Block newBlock = new Block(deviceMemory, hostPointer, blockAlignedSize);
+            Block newBlock = new(deviceMemory, hostPointer, blockAlignedSize);
 
             InsertBlock(newBlock);
 

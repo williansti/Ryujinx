@@ -98,7 +98,7 @@ namespace Ryujinx.Graphics.Vulkan.Effects
             {
                 TextureCreateInfo originalInfo = view.Info;
 
-                TextureCreateInfo info = new TextureCreateInfo(
+                TextureCreateInfo info = new(
                     width,
                     height,
                     originalInfo.Depth,

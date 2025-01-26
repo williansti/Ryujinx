@@ -240,7 +240,7 @@ namespace Ryujinx.Graphics.Vulkan
                 attachments[i] = _attachments[i].Get(cbs).Value;
             }
 
-            FramebufferCreateInfo framebufferCreateInfo = new FramebufferCreateInfo
+            FramebufferCreateInfo framebufferCreateInfo = new()
             {
                 SType = StructureType.FramebufferCreateInfo,
                 RenderPass = renderPass.Get(cbs).Value,

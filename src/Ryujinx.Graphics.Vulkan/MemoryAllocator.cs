@@ -65,7 +65,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             try
             {
-                MemoryAllocatorBlockList newBl = new MemoryAllocatorBlockList(_api, _device, memoryTypeIndex, _blockAlignment, isBuffer);
+                MemoryAllocatorBlockList newBl = new(_api, _device, memoryTypeIndex, _blockAlignment, isBuffer);
                 _blockLists.Add(newBl);
 
                 return newBl.Allocate(size, alignment, map);

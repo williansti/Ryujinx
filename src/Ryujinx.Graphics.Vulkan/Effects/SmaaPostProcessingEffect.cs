@@ -109,7 +109,7 @@ namespace Ryujinx.Graphics.Vulkan.Effects
                 QualityUltra = Quality == 3 ? 1 : 0,
             };
 
-            SpecDescription specInfo = new SpecDescription(
+            SpecDescription specInfo = new(
                 (0, SpecConstType.Int32),
                 (1, SpecConstType.Int32),
                 (2, SpecConstType.Int32),
@@ -143,7 +143,7 @@ namespace Ryujinx.Graphics.Vulkan.Effects
 
         private void Initialize()
         {
-            TextureCreateInfo areaInfo = new TextureCreateInfo(AreaWidth,
+            TextureCreateInfo areaInfo = new(AreaWidth,
                 AreaHeight,
                 1,
                 1,
@@ -159,7 +159,7 @@ namespace Ryujinx.Graphics.Vulkan.Effects
                 SwizzleComponent.Blue,
                 SwizzleComponent.Alpha);
 
-            TextureCreateInfo searchInfo = new TextureCreateInfo(SearchWidth,
+            TextureCreateInfo searchInfo = new(SearchWidth,
                 SearchHeight,
                 1,
                 1,

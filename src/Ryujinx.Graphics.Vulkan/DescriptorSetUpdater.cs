@@ -157,7 +157,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             _uniformSetPd = new int[Constants.MaxUniformBufferBindings];
 
-            DescriptorImageInfo initialImageInfo = new DescriptorImageInfo
+            DescriptorImageInfo initialImageInfo = new()
             {
                 ImageLayout = ImageLayout.General,
             };
@@ -441,7 +441,7 @@ namespace Ryujinx.Graphics.Vulkan
                     Range = (ulong)buffer.Size,
                 };
 
-                BufferRef newRef = new BufferRef(vkBuffer, ref buffer);
+                BufferRef newRef = new(vkBuffer, ref buffer);
 
                 ref DescriptorBufferInfo currentInfo = ref _storageBuffers[index];
 

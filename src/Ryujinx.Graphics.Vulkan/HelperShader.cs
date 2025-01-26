@@ -259,13 +259,13 @@ namespace Ryujinx.Graphics.Vulkan
 
             for (int l = 0; l < levels; l++)
             {
-                Extents2D mipSrcRegion = new Extents2D(
+                Extents2D mipSrcRegion = new(
                     srcRegion.X1 >> l,
                     srcRegion.Y1 >> l,
                     srcRegion.X2 >> l,
                     srcRegion.Y2 >> l);
 
-                Extents2D mipDstRegion = new Extents2D(
+                Extents2D mipDstRegion = new(
                     dstRegion.X1 >> l,
                     dstRegion.Y1 >> l,
                     dstRegion.X2 >> l,
@@ -335,7 +335,7 @@ namespace Ryujinx.Graphics.Vulkan
                 int dstWidth = Math.Max(1, dst.Width >> mipDstLevel);
                 int dstHeight = Math.Max(1, dst.Height >> mipDstLevel);
 
-                Extents2D extents = new Extents2D(
+                Extents2D extents = new(
                     0,
                     0,
                     Math.Min(srcWidth, dstWidth),
@@ -411,7 +411,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             Span<Viewport> viewports = stackalloc Viewport[1];
 
-            Rectangle<float> rect = new Rectangle<float>(
+            Rectangle<float> rect = new(
                 MathF.Min(dstRegion.X1, dstRegion.X2),
                 MathF.Min(dstRegion.Y1, dstRegion.Y2),
                 MathF.Abs(dstRegion.X2 - dstRegion.X1),
@@ -507,7 +507,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             Span<Viewport> viewports = stackalloc Viewport[1];
 
-            Rectangle<float> rect = new Rectangle<float>(
+            Rectangle<float> rect = new(
                 MathF.Min(dstRegion.X1, dstRegion.X2),
                 MathF.Min(dstRegion.Y1, dstRegion.Y2),
                 MathF.Abs(dstRegion.X2 - dstRegion.X1),
@@ -780,7 +780,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             Span<Viewport> viewports = stackalloc Viewport[1];
 
-            Rectangle<float> rect = new Rectangle<float>(
+            Rectangle<float> rect = new(
                 MathF.Min(dstRegion.X1, dstRegion.X2),
                 MathF.Min(dstRegion.Y1, dstRegion.Y2),
                 MathF.Abs(dstRegion.X2 - dstRegion.X1),
@@ -915,7 +915,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             gd.Api.CmdFillBuffer(cbs.CommandBuffer, dstBuffer, 0, Vk.WholeSize, 0);
 
-            List<BufferCopy> bufferCopy = new List<BufferCopy>();
+            List<BufferCopy> bufferCopy = new();
             int outputOffset = 0;
 
             // Try to merge copies of adjacent indices to reduce copy count.
@@ -1119,7 +1119,7 @@ namespace Ryujinx.Graphics.Vulkan
 
                 Span<Viewport> viewports = stackalloc Viewport[1];
 
-                Rectangle<float> rect = new Rectangle<float>(0, 0, dst.Width, dst.Height);
+                Rectangle<float> rect = new(0, 0, dst.Width, dst.Height);
 
                 viewports[0] = new Viewport(
                     rect,
@@ -1240,7 +1240,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             Span<Viewport> viewports = stackalloc Viewport[1];
 
-            Rectangle<float> rect = new Rectangle<float>(0, 0, dst.Width, dst.Height);
+            Rectangle<float> rect = new(0, 0, dst.Width, dst.Height);
 
             viewports[0] = new Viewport(
                 rect,
@@ -1429,7 +1429,7 @@ namespace Ryujinx.Graphics.Vulkan
                 _ => Target.Texture2D,
             };
 
-            TextureCreateInfo info = new TextureCreateInfo(
+            TextureCreateInfo info = new(
                 Math.Max(1, from.Info.Width >> level),
                 Math.Max(1, from.Info.Height >> level),
                 1,

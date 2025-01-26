@@ -55,7 +55,7 @@ namespace Ryujinx.Graphics.Vulkan
 
         internal static VulkanInstance CreateInstance(Vk api, GraphicsDebugLevel logLevel, string[] requiredExtensions)
         {
-            List<string> enabledLayers = new List<string>();
+            List<string> enabledLayers = new();
 
             IReadOnlySet<string> instanceExtensions = VulkanInstance.GetInstanceExtensions(api);
             IReadOnlySet<string> instanceLayers = VulkanInstance.GetInstanceLayers(api);
@@ -86,7 +86,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             IntPtr appName = Marshal.StringToHGlobalAnsi(AppName);
 
-            ApplicationInfo applicationInfo = new ApplicationInfo
+            ApplicationInfo applicationInfo = new()
             {
                 PApplicationName = (byte*)appName,
                 ApplicationVersion = 1,
@@ -108,7 +108,7 @@ namespace Ryujinx.Graphics.Vulkan
                 ppEnabledLayers[i] = Marshal.StringToHGlobalAnsi(enabledLayers[i]);
             }
 
-            InstanceCreateInfo instanceCreateInfo = new InstanceCreateInfo
+            InstanceCreateInfo instanceCreateInfo = new()
             {
                 SType = StructureType.InstanceCreateInfo,
                 PApplicationInfo = &applicationInfo,
@@ -166,7 +166,7 @@ namespace Ryujinx.Graphics.Vulkan
         {
             IntPtr appName = Marshal.StringToHGlobalAnsi(AppName);
 
-            ApplicationInfo applicationInfo = new ApplicationInfo
+            ApplicationInfo applicationInfo = new()
             {
                 PApplicationName = (byte*)appName,
                 ApplicationVersion = 1,
@@ -175,7 +175,7 @@ namespace Ryujinx.Graphics.Vulkan
                 ApiVersion = _maximumVulkanVersion,
             };
 
-            InstanceCreateInfo instanceCreateInfo = new InstanceCreateInfo
+            InstanceCreateInfo instanceCreateInfo = new()
             {
                 SType = StructureType.InstanceCreateInfo,
                 PApplicationInfo = &applicationInfo,
@@ -246,7 +246,7 @@ namespace Ryujinx.Graphics.Vulkan
         {
             const QueueFlags RequiredFlags = QueueFlags.GraphicsBit | QueueFlags.ComputeBit;
 
-            KhrSurface khrSurface = new KhrSurface(api.Context);
+            KhrSurface khrSurface = new(api.Context);
 
             for (uint index = 0; index < physicalDevice.QueueFamilyProperties.Length; index++)
             {
@@ -281,7 +281,7 @@ namespace Ryujinx.Graphics.Vulkan
                 queuePriorities[i] = 1f;
             }
 
-            DeviceQueueCreateInfo queueCreateInfo = new DeviceQueueCreateInfo
+            DeviceQueueCreateInfo queueCreateInfo = new()
             {
                 SType = StructureType.DeviceQueueCreateInfo,
                 QueueFamilyIndex = queueFamilyIndex,
@@ -394,7 +394,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             PhysicalDeviceFeatures supportedFeatures = features2.Features;
 
-            PhysicalDeviceFeatures features = new PhysicalDeviceFeatures
+            PhysicalDeviceFeatures features = new()
             {
                 DepthBiasClamp = supportedFeatures.DepthBiasClamp,
                 DepthClamp = supportedFeatures.DepthClamp,
@@ -465,7 +465,7 @@ namespace Ryujinx.Graphics.Vulkan
                 pExtendedFeatures = &featuresRobustness2;
             }
 
-            PhysicalDeviceExtendedDynamicStateFeaturesEXT featuresExtendedDynamicState = new PhysicalDeviceExtendedDynamicStateFeaturesEXT
+            PhysicalDeviceExtendedDynamicStateFeaturesEXT featuresExtendedDynamicState = new()
             {
                 SType = StructureType.PhysicalDeviceExtendedDynamicStateFeaturesExt,
                 PNext = pExtendedFeatures,
@@ -474,7 +474,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             pExtendedFeatures = &featuresExtendedDynamicState;
 
-            PhysicalDeviceVulkan11Features featuresVk11 = new PhysicalDeviceVulkan11Features
+            PhysicalDeviceVulkan11Features featuresVk11 = new()
             {
                 SType = StructureType.PhysicalDeviceVulkan11Features,
                 PNext = pExtendedFeatures,
@@ -483,7 +483,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             pExtendedFeatures = &featuresVk11;
 
-            PhysicalDeviceVulkan12Features featuresVk12 = new PhysicalDeviceVulkan12Features
+            PhysicalDeviceVulkan12Features featuresVk12 = new()
             {
                 SType = StructureType.PhysicalDeviceVulkan12Features,
                 PNext = pExtendedFeatures,
@@ -595,7 +595,7 @@ namespace Ryujinx.Graphics.Vulkan
                 ppEnabledExtensions[i] = Marshal.StringToHGlobalAnsi(enabledExtensions[i]);
             }
 
-            DeviceCreateInfo deviceCreateInfo = new DeviceCreateInfo
+            DeviceCreateInfo deviceCreateInfo = new()
             {
                 SType = StructureType.DeviceCreateInfo,
                 PNext = pExtendedFeatures,

@@ -93,7 +93,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             for (int i = 0; i < shaders.Length; i++)
             {
-                Shader shader = new Shader(gd.Api, device, shaders[i]);
+                Shader shader = new(gd.Api, device, shaders[i]);
 
                 stages |= 1u << shader.StageFlags switch
                 {
