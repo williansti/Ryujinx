@@ -115,7 +115,7 @@ namespace ARMeilleure.CodeGen.RegisterAllocators
         {
             NumberLocals(cfg, regMasks.RegistersCount);
 
-            AllocationContext context = new AllocationContext(stackAlloc, regMasks, _intervals.Count);
+            AllocationContext context = new(stackAlloc, regMasks, _intervals.Count);
 
             BuildIntervals(cfg, context);
 
@@ -839,7 +839,7 @@ namespace ARMeilleure.CodeGen.RegisterAllocators
                         {
                             dest.NumberLocal(_intervals.Count);
 
-                            LiveInterval interval = new LiveInterval(dest);
+                            LiveInterval interval = new(dest);
                             _intervals.Add(interval);
 
                             SetVisited(dest);

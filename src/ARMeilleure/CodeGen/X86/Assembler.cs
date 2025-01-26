@@ -1412,7 +1412,7 @@ namespace ARMeilleure.CodeGen.X86
             _stream.Seek(0, SeekOrigin.Begin);
 
             using RecyclableMemoryStream codeStream = MemoryStreamManager.Shared.GetStream();
-            Assembler assembler = new Assembler(codeStream, HasRelocs);
+            Assembler assembler = new(codeStream, HasRelocs);
 
             bool hasRelocs = HasRelocs;
             int relocIndex = 0;
@@ -1471,7 +1471,7 @@ namespace ARMeilleure.CodeGen.X86
             _stream.CopyTo(codeStream);
 
             byte[] code = codeStream.ToArray();
-            RelocInfo relocInfo = new RelocInfo(relocEntries);
+            RelocInfo relocInfo = new(relocEntries);
 
             return (code, relocInfo);
         }

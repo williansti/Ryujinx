@@ -111,7 +111,7 @@ namespace ARMeilleure.Translation.PTC
 
         public ConcurrentQueue<(ulong address, FuncProfile funcProfile)> GetProfiledFuncsToTranslate(TranslatorCache<TranslatedFunction> funcs)
         {
-            ConcurrentQueue<(ulong address, FuncProfile funcProfile)> profiledFuncsToTranslate = new ConcurrentQueue<(ulong address, FuncProfile funcProfile)>();
+            ConcurrentQueue<(ulong address, FuncProfile funcProfile)> profiledFuncsToTranslate = new();
 
             foreach (KeyValuePair<ulong, FuncProfile> profiledFunc in ProfiledFuncs)
             {

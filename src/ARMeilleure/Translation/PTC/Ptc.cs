@@ -750,7 +750,7 @@ namespace ARMeilleure.Translation.PTC
             UnwindInfo unwindInfo,
             bool highCq)
         {
-            CompiledFunction cFunc = new CompiledFunction(code, unwindInfo, RelocInfo.Empty);
+            CompiledFunction cFunc = new(code, unwindInfo, RelocInfo.Empty);
             GuestFunction gFunc = cFunc.MapWithPointer<GuestFunction>(out nint gFuncPointer);
 
             return new TranslatedFunction(gFunc, gFuncPointer, callCounter, guestSize, highCq);
@@ -945,7 +945,7 @@ namespace ARMeilleure.Translation.PTC
                 WriteCode(code.AsSpan());
 
                 // WriteReloc.
-                using BinaryWriter relocInfoWriter = new BinaryWriter(_relocsStream, EncodingCache.UTF8NoBOM, true);
+                using BinaryWriter relocInfoWriter = new(_relocsStream, EncodingCache.UTF8NoBOM, true);
 
                 foreach (RelocEntry entry in relocInfo.Entries)
                 {
@@ -955,7 +955,7 @@ namespace ARMeilleure.Translation.PTC
                 }
 
                 // WriteUnwindInfo.
-                using BinaryWriter unwindInfoWriter = new BinaryWriter(_unwindInfosStream, EncodingCache.UTF8NoBOM, true);
+                using BinaryWriter unwindInfoWriter = new(_unwindInfosStream, EncodingCache.UTF8NoBOM, true);
 
                 unwindInfoWriter.Write(unwindInfo.PushEntries.Length);
 

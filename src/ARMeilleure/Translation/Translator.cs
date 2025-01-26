@@ -222,7 +222,7 @@ namespace ARMeilleure.Translation
 
         internal TranslatedFunction Translate(ulong address, ExecutionMode mode, bool highCq, bool singleStep = false)
         {
-            ArmEmitterContext context = new ArmEmitterContext(
+            ArmEmitterContext context = new(
                 Memory,
                 CountTable,
                 FunctionTable,

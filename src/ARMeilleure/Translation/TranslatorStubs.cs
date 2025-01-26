@@ -142,7 +142,7 @@ namespace ARMeilleure.Translation
         /// <returns>Generated <see cref="DispatchStub"/></returns>
         private nint GenerateDispatchStub()
         {
-            EmitterContext context = new EmitterContext();
+            EmitterContext context = new();
 
             Operand lblFallback = Label();
             Operand lblEnd = Label();
@@ -200,7 +200,7 @@ namespace ARMeilleure.Translation
         /// <returns>Generated <see cref="SlowDispatchStub"/></returns>
         private nint GenerateSlowDispatchStub()
         {
-            EmitterContext context = new EmitterContext();
+            EmitterContext context = new();
 
             // Load the target guest address from the native context.
             Operand nativeContext = context.LoadArgument(OperandType.I64, 0);
@@ -251,7 +251,7 @@ namespace ARMeilleure.Translation
         /// <returns><see cref="DispatchLoop"/> function</returns>
         private DispatcherFunction GenerateDispatchLoop()
         {
-            EmitterContext context = new EmitterContext();
+            EmitterContext context = new();
 
             Operand beginLbl = Label();
             Operand endLbl = Label();
@@ -292,7 +292,7 @@ namespace ARMeilleure.Translation
         /// <returns><see cref="ContextWrapper"/> function</returns>
         private WrapperFunction GenerateContextWrapper()
         {
-            EmitterContext context = new EmitterContext();
+            EmitterContext context = new();
 
             Operand nativeContext = context.LoadArgument(OperandType.I64, 0);
             Operand guestMethod = context.LoadArgument(OperandType.I64, 1);
