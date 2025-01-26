@@ -168,8 +168,6 @@ namespace Ryujinx.SDL2.Common
                         HandleSDLEvent(ref evnt);
                     }
                 });
-                
-                Rainbow.Tick();
 
                 waitHandle.Wait(WaitTimeMs);
             }
