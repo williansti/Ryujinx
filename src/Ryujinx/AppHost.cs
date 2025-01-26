@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using Avalonia.Threading;
+using DiscordRPC;
 using LibHac.Common;
 using LibHac.Ns;
 using LibHac.Tools.FsSystem;
@@ -594,6 +595,8 @@ namespace Ryujinx.Ava
                 gamepad?.ClearLed();
                 gamepad?.Dispose();
             }
+
+            DiscordIntegrationModule.GuestAppStartedAt = null;
             
             Rainbow.Disable();
             Rainbow.Reset();
@@ -685,6 +688,8 @@ namespace Ryujinx.Ava
 
         public async Task<bool> LoadGuestApplication(BlitStruct<ApplicationControlProperty>? customNacpData = null)
         {
+            DiscordIntegrationModule.GuestAppStartedAt = Timestamps.Now;
+            
             InitEmulatedSwitch();
             MainWindow.UpdateGraphicsConfig();
 
