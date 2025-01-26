@@ -443,7 +443,7 @@ namespace Ryujinx.Cpu.Jit
                 return null;
             }
 
-            List<HostMemoryRange> regions = new();
+            List<HostMemoryRange> regions = [];
             ulong endVa = va + size;
 
             try
