@@ -230,7 +230,7 @@ namespace Ryujinx.Horizon.Sdk.Sf.Cmif
                     return null;
                 }
 
-                Domain domain = new Domain(this);
+                Domain domain = new(this);
                 _domains.Add(domain);
                 return domain;
             }
