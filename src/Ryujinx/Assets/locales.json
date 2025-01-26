@@ -7623,7 +7623,7 @@
       }
     },
     {
-      "ID": "ControllerSettingsLedColor",
+      "ID": "ControllerSettingsLed",
       "Translations": {
         "ar_SA": "",
         "de_DE": "",
@@ -7694,6 +7694,31 @@
         "tr_TR": "",
         "uk_UA": "",
         "zh_CN": "彩虹",
+        "zh_TW": ""
+      }
+    },
+    {
+      "ID": "ControllerSettingsLedColor",
+      "Translations": {
+        "ar_SA": "",
+        "de_DE": "",
+        "el_GR": "",
+        "en_US": "Color",
+        "es_ES": "",
+        "fr_FR": "",
+        "he_IL": "",
+        "it_IT": "",
+        "ja_JP": "",
+        "ko_KR": "",
+        "no_NO": "",
+        "pl_PL": "",
+        "pt_BR": "",
+        "ru_RU": "",
+        "sv_SE": "",
+        "th_TH": "",
+        "tr_TR": "",
+        "uk_UA": "",
+        "zh_CN": "",
         "zh_TW": ""
       }
     },
@@ -18895,6 +18920,31 @@
         "uk_UA": "Налаштування вібрації",
         "zh_CN": "震动设置",
         "zh_TW": "震動設定"
+      }
+    },
+    {
+      "ID": "ControllerLedTitle",
+      "Translations": {
+        "ar_SA": "",
+        "de_DE": "",
+        "el_GR": "",
+        "en_US": "LED Settings",
+        "es_ES": "",
+        "fr_FR": "",
+        "he_IL": "",
+        "it_IT": "",
+        "ja_JP": "",
+        "ko_KR": "",
+        "no_NO": "",
+        "pl_PL": "",
+        "pt_BR": "",
+        "ru_RU": "",
+        "sv_SE": "",
+        "th_TH": "",
+        "tr_TR": "",
+        "uk_UA": "",
+        "zh_CN": "",
+        "zh_TW": ""
       }
     },
     {
