@@ -144,7 +144,7 @@ namespace Ryujinx.Ava.Common
 
         public static void ExtractSection(string destination, NcaSectionType ncaSectionType, string titleFilePath, string titleName, int programIndex = 0)
         {
-            CancellationTokenSource cancellationToken = new CancellationTokenSource();
+            CancellationTokenSource cancellationToken = new();
 
             UpdateWaitWindow waitingDialog = new(
                 RyujinxApp.FormatTitle(LocaleKeys.DialogNcaExtractionTitle),
@@ -171,14 +171,14 @@ namespace Ryujinx.Ava.Common
                     }
                     else
                     {
-                        PartitionFileSystem pfsTemp = new PartitionFileSystem();
+                        PartitionFileSystem pfsTemp = new();
                         pfsTemp.Initialize(file.AsStorage()).ThrowIfFailure();
                         pfs = pfsTemp;
                     }
 
                     foreach (DirectoryEntryEx fileEntry in pfs.EnumerateEntries("/", "*.nca"))
                     {
-                        using UniqueRef<IFile> ncaFile = new UniqueRef<IFile>();
+                        using UniqueRef<IFile> ncaFile = new();
 
                         pfs.OpenFile(ref ncaFile.Ref, fileEntry.FullPath.ToU8Span(), OpenMode.Read).ThrowIfFailure();
 
@@ -244,8 +244,8 @@ namespace Ryujinx.Ava.Common
                     string source = DateTime.Now.ToFileTime().ToString()[10..];
                     string output = DateTime.Now.ToFileTime().ToString()[10..];
 
-                    using UniqueRef<IFileSystem> uniqueSourceFs = new UniqueRef<IFileSystem>(ncaFileSystem);
-                    using UniqueRef<IFileSystem> uniqueOutputFs = new UniqueRef<IFileSystem>(new LocalFileSystem(destination));
+                    using UniqueRef<IFileSystem> uniqueSourceFs = new(ncaFileSystem);
+                    using UniqueRef<IFileSystem> uniqueOutputFs = new(new LocalFileSystem(destination));
 
                     fsClient.Register(source.ToU8Span(), ref uniqueSourceFs.Ref);
                     fsClient.Register(output.ToU8Span(), ref uniqueOutputFs.Ref);
@@ -299,7 +299,7 @@ namespace Ryujinx.Ava.Common
         
         public static void ExtractAoc(string destination, string updateFilePath, string updateName)
         {
-            CancellationTokenSource cancellationToken = new CancellationTokenSource();
+            CancellationTokenSource cancellationToken = new();
 
             UpdateWaitWindow waitingDialog = new(
                 RyujinxApp.FormatTitle(LocaleKeys.DialogNcaExtractionTitle),
@@ -317,13 +317,13 @@ namespace Ryujinx.Ava.Common
                 string extension = Path.GetExtension(updateFilePath).ToLower();
                 if (extension is ".nsp")
                 {
-                    PartitionFileSystem pfsTemp = new PartitionFileSystem();
+                    PartitionFileSystem pfsTemp = new();
                     pfsTemp.Initialize(file.AsStorage()).ThrowIfFailure();
                     IFileSystem pfs = pfsTemp;
 
                     foreach (DirectoryEntryEx fileEntry in pfs.EnumerateEntries("/", "*.nca"))
                     {
-                        using UniqueRef<IFile> ncaFile = new UniqueRef<IFile>();
+                        using UniqueRef<IFile> ncaFile = new();
 
                         pfs.OpenFile(ref ncaFile.Ref, fileEntry.FullPath.ToU8Span(), OpenMode.Read).ThrowIfFailure();
 
@@ -364,8 +364,8 @@ namespace Ryujinx.Ava.Common
                     string source = DateTime.Now.ToFileTime().ToString()[10..];
                     string output = DateTime.Now.ToFileTime().ToString()[10..];
 
-                    using UniqueRef<IFileSystem> uniqueSourceFs = new UniqueRef<IFileSystem>(ncaFileSystem);
-                    using UniqueRef<IFileSystem> uniqueOutputFs = new UniqueRef<IFileSystem>(new LocalFileSystem(destination));
+                    using UniqueRef<IFileSystem> uniqueSourceFs = new(ncaFileSystem);
+                    using UniqueRef<IFileSystem> uniqueOutputFs = new(new LocalFileSystem(destination));
 
                     fsClient.Register(source.ToU8Span(), ref uniqueSourceFs.Ref);
                     fsClient.Register(output.ToU8Span(), ref uniqueOutputFs.Ref);

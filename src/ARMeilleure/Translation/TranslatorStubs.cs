@@ -142,7 +142,7 @@ namespace ARMeilleure.Translation
         /// <returns>Generated <see cref="DispatchStub"/></returns>
         private nint GenerateDispatchStub()
         {
-            EmitterContext context = new EmitterContext();
+            EmitterContext context = new();
 
             Operand lblFallback = Label();
             Operand lblEnd = Label();
@@ -187,7 +187,7 @@ namespace ARMeilleure.Translation
 
             ControlFlowGraph cfg = context.GetControlFlowGraph();
             OperandType retType = OperandType.I64;
-            OperandType[] argTypes = new[] { OperandType.I64 };
+            OperandType[] argTypes = [OperandType.I64];
 
             GuestFunction func = Compiler.Compile(cfg, argTypes, retType, CompilerOptions.HighCq, RuntimeInformation.ProcessArchitecture).Map<GuestFunction>();
 
@@ -200,7 +200,7 @@ namespace ARMeilleure.Translation
         /// <returns>Generated <see cref="SlowDispatchStub"/></returns>
         private nint GenerateSlowDispatchStub()
         {
-            EmitterContext context = new EmitterContext();
+            EmitterContext context = new();
 
             // Load the target guest address from the native context.
             Operand nativeContext = context.LoadArgument(OperandType.I64, 0);
@@ -212,7 +212,7 @@ namespace ARMeilleure.Translation
 
             ControlFlowGraph cfg = context.GetControlFlowGraph();
             OperandType retType = OperandType.I64;
-            OperandType[] argTypes = new[] { OperandType.I64 };
+            OperandType[] argTypes = [OperandType.I64];
 
             GuestFunction func = Compiler.Compile(cfg, argTypes, retType, CompilerOptions.HighCq, RuntimeInformation.ProcessArchitecture).Map<GuestFunction>();
 
@@ -251,7 +251,7 @@ namespace ARMeilleure.Translation
         /// <returns><see cref="DispatchLoop"/> function</returns>
         private DispatcherFunction GenerateDispatchLoop()
         {
-            EmitterContext context = new EmitterContext();
+            EmitterContext context = new();
 
             Operand beginLbl = Label();
             Operand endLbl = Label();
@@ -281,7 +281,7 @@ namespace ARMeilleure.Translation
 
             ControlFlowGraph cfg = context.GetControlFlowGraph();
             OperandType retType = OperandType.None;
-            OperandType[] argTypes = new[] { OperandType.I64, OperandType.I64 };
+            OperandType[] argTypes = [OperandType.I64, OperandType.I64];
 
             return Compiler.Compile(cfg, argTypes, retType, CompilerOptions.HighCq, RuntimeInformation.ProcessArchitecture).Map<DispatcherFunction>();
         }
@@ -292,7 +292,7 @@ namespace ARMeilleure.Translation
         /// <returns><see cref="ContextWrapper"/> function</returns>
         private WrapperFunction GenerateContextWrapper()
         {
-            EmitterContext context = new EmitterContext();
+            EmitterContext context = new();
 
             Operand nativeContext = context.LoadArgument(OperandType.I64, 0);
             Operand guestMethod = context.LoadArgument(OperandType.I64, 1);
@@ -305,7 +305,7 @@ namespace ARMeilleure.Translation
 
             ControlFlowGraph cfg = context.GetControlFlowGraph();
             OperandType retType = OperandType.I64;
-            OperandType[] argTypes = new[] { OperandType.I64, OperandType.I64 };
+            OperandType[] argTypes = [OperandType.I64, OperandType.I64];
 
             return Compiler.Compile(cfg, argTypes, retType, CompilerOptions.HighCq, RuntimeInformation.ProcessArchitecture).Map<WrapperFunction>();
         }

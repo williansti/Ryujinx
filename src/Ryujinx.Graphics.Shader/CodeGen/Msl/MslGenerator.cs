@@ -176,7 +176,7 @@ namespace Ryujinx.Graphics.Shader.CodeGen.Msl
             }
 
             string funcPrefix = $"{funcKeyword} {returnType} {funcName ?? function.Name}(";
-            string indent = new string(' ', funcPrefix.Length);
+            string indent = new(' ', funcPrefix.Length);
 
             return $"{funcPrefix}{string.Join($", \n{indent}", args)})";
         }
