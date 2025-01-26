@@ -82,13 +82,13 @@ namespace Ryujinx.Ava.UI.ViewModels
             foreach (string path in modsBasePaths)
             {
                 bool inSd = path == ModLoader.GetSdModsBasePath();
-                ModLoader.ModCache modCache = new ModLoader.ModCache();
+                ModLoader.ModCache modCache = new();
 
                 ModLoader.QueryContentsDir(modCache, new DirectoryInfo(Path.Combine(path, "contents")), applicationId);
 
                 foreach (ModLoader.Mod<DirectoryInfo> mod in modCache.RomfsDirs)
                 {
-                    ModModel modModel = new ModModel(mod.Path.Parent.FullName, mod.Name, mod.Enabled, inSd);
+                    ModModel modModel = new(mod.Path.Parent.FullName, mod.Name, mod.Enabled, inSd);
                     if (Mods.All(x => x.Path != mod.Path.Parent.FullName))
                     {
                         Mods.Add(modModel);
@@ -102,7 +102,7 @@ namespace Ryujinx.Ava.UI.ViewModels
 
                 foreach (ModLoader.Mod<DirectoryInfo> mod in modCache.ExefsDirs)
                 {
-                    ModModel modModel = new ModModel(mod.Path.Parent.FullName, mod.Name, mod.Enabled, inSd);
+                    ModModel modModel = new(mod.Path.Parent.FullName, mod.Name, mod.Enabled, inSd);
                     if (Mods.All(x => x.Path != mod.Path.Parent.FullName))
                     {
                         Mods.Add(modModel);

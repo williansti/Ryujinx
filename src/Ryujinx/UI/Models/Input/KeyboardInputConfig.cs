@@ -367,7 +367,7 @@ namespace Ryujinx.Ava.UI.Models.Input
 
         public InputConfig GetConfig()
         {
-            StandardKeyboardInputConfig config = new StandardKeyboardInputConfig
+            StandardKeyboardInputConfig config = new()
             {
                 Id = Id,
                 Backend = InputBackendType.WindowKeyboard,

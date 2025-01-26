@@ -975,7 +975,7 @@ namespace Ryujinx.Ava
 
         private static IHardwareDeviceDriver InitializeAudio()
         {
-            List<AudioBackend> availableBackends = new List<AudioBackend>
+            List<AudioBackend> availableBackends = new()
             {
                 AudioBackend.SDL2,
                 AudioBackend.SoundIo,

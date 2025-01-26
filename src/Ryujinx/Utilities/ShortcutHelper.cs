@@ -124,7 +124,7 @@ namespace Ryujinx.Ava.Utilities
         private static string GetArgsString(string appFilePath, string applicationId)
         {
             // args are first defined as a list, for easier adjustments in the future
-            List<string> argsList = new List<string>();
+            List<string> argsList = new();
 
             if (!string.IsNullOrEmpty(CommandLineState.BaseDirPathArg))
             {

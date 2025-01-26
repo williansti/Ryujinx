@@ -183,7 +183,7 @@ namespace Ryujinx.Ava.UI.ViewModels
                         if (cancellationToken.IsCancellationRequested)
                             break;
 
-                        XCIFileTrimmer trimmer = new XCIFileTrimmer(xciApp.Path, _logger);
+                        XCIFileTrimmer trimmer = new(xciApp.Path, _logger);
 
                         Dispatcher.UIThread.Post(() =>
                         {

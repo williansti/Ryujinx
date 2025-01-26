@@ -108,7 +108,7 @@ namespace Ryujinx.Ava.UI.Controls
 
             SaveDataFilter saveDataFilter = SaveDataFilter.Make(programId: default, saveType: SaveDataType.Account, default, saveDataId: default, index: default);
 
-            using UniqueRef<SaveDataIterator> saveDataIterator = new UniqueRef<SaveDataIterator>();
+            using UniqueRef<SaveDataIterator> saveDataIterator = new();
 
             HorizonClient.Fs.OpenSaveDataIterator(ref saveDataIterator.Ref, SaveDataSpaceId.User, in saveDataFilter).ThrowIfFailure();
 
@@ -128,7 +128,7 @@ namespace Ryujinx.Ava.UI.Controls
                 for (int i = 0; i < readCount; i++)
                 {
                     SaveDataInfo save = saveDataInfo[i];
-                    UserId id = new UserId((long)save.UserId.Id.Low, (long)save.UserId.Id.High);
+                    UserId id = new((long)save.UserId.Id.Low, (long)save.UserId.Id.High);
                     if (ViewModel.Profiles.Cast<UserProfile>().FirstOrDefault(x => x.UserId == id) == null)
                     {
                         lostAccounts.Add(id);

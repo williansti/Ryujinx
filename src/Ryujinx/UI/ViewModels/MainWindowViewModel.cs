@@ -1802,7 +1802,7 @@ namespace Ryujinx.Ava.UI.ViewModels
                 return;
             }
 
-            XCIFileTrimmer trimmer = new XCIFileTrimmer(filename, new XCITrimmerLog.MainWindow(this));
+            XCIFileTrimmer trimmer = new(filename, new XCITrimmerLog.MainWindow(this));
 
             if (trimmer.CanBeTrimmed)
             {

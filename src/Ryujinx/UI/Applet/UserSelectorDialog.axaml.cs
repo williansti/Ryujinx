@@ -64,7 +64,7 @@ namespace Ryujinx.Ava.UI.Applet
                         {
                             if (item is UserProfile originalItem)
                             {
-                                UserProfileSft profile = new UserProfileSft(originalItem.UserId, originalItem.Name, originalItem.Image);
+                                UserProfileSft profile = new(originalItem.UserId, originalItem.Name, originalItem.Image);
                                 
                                 if (profile.UserId == ViewModel.SelectedUserId)
                                 {
