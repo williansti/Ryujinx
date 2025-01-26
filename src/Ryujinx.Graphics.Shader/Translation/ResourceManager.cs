@@ -103,7 +103,7 @@ namespace Ryujinx.Graphics.Shader.Translation
                     size = DefaultLocalMemorySize;
                 }
 
-                MemoryDefinition lmem = new MemoryDefinition("local_memory", AggregateType.Array | AggregateType.U32, BitUtils.DivRoundUp(size, sizeof(uint)));
+                MemoryDefinition lmem = new("local_memory", AggregateType.Array | AggregateType.U32, BitUtils.DivRoundUp(size, sizeof(uint)));
 
                 LocalMemoryId = Properties.AddLocalMemory(lmem);
             }
@@ -122,7 +122,7 @@ namespace Ryujinx.Graphics.Shader.Translation
                     size = DefaultSharedMemorySize;
                 }
 
-                MemoryDefinition smem = new MemoryDefinition("shared_memory", AggregateType.Array | AggregateType.U32, BitUtils.DivRoundUp(size, sizeof(uint)));
+                MemoryDefinition smem = new("shared_memory", AggregateType.Array | AggregateType.U32, BitUtils.DivRoundUp(size, sizeof(uint)));
 
                 SharedMemoryId = Properties.AddSharedMemory(smem);
             }
@@ -315,8 +315,8 @@ namespace Ryujinx.Graphics.Shader.Translation
             // For array textures, we also want to use type as key,
             // since we may have texture handles stores in the same buffer, but for textures with different types.
             SamplerType keyType = arrayLength > 1 ? type : SamplerType.None;
-            TextureInfo info = new TextureInfo(cbufSlot, handle, arrayLength, separate, keyType, format);
-            TextureMeta meta = new TextureMeta()
+            TextureInfo info = new(cbufSlot, handle, arrayLength, separate, keyType, format);
+            TextureMeta meta = new()
             {
                 AccurateType = accurateType,
                 Type = type,
@@ -383,7 +383,7 @@ namespace Ryujinx.Graphics.Shader.Translation
                 nameSuffix = cbufSlot < 0 ? $"{prefix}_tcb_{handle:X}" : $"{prefix}_cb{cbufSlot}_{handle:X}";
             }
 
-            TextureDefinition definition = new TextureDefinition(
+            TextureDefinition definition = new(
                 setIndex,
                 binding,
                 arrayLength,

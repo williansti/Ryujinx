@@ -157,7 +157,7 @@ namespace Ryujinx.Graphics.Shader.CodeGen.Msl.Instructions
 
             bool isArray = (texOp.Type & SamplerType.Array) != 0;
 
-            StringBuilder texCallBuilder = new StringBuilder();
+            StringBuilder texCallBuilder = new();
 
             int srcIndex = 0;
 
@@ -194,7 +194,7 @@ namespace Ryujinx.Graphics.Shader.CodeGen.Msl.Instructions
 
             texCallBuilder.Append('(');
 
-            StringBuilder coordsBuilder = new StringBuilder();
+            StringBuilder coordsBuilder = new();
 
             int coordsCount = texOp.Type.GetDimensions();
 
@@ -352,7 +352,7 @@ namespace Ryujinx.Graphics.Shader.CodeGen.Msl.Instructions
             bool isArray = (texOp.Type & SamplerType.Array) != 0;
             bool isShadow = (texOp.Type & SamplerType.Shadow) != 0;
 
-            StringBuilder texCallBuilder = new StringBuilder();
+            StringBuilder texCallBuilder = new();
 
             bool colorIsVector = isGather || !isShadow;
 
@@ -589,7 +589,7 @@ namespace Ryujinx.Graphics.Shader.CodeGen.Msl.Instructions
         {
             AstTextureOperation texOp = (AstTextureOperation)operation;
 
-            StringBuilder texCallBuilder = new StringBuilder();
+            StringBuilder texCallBuilder = new();
 
             int srcIndex = 0;
 

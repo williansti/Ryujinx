@@ -342,7 +342,7 @@ namespace Ryujinx.Graphics.Shader.Translation
                 _ => 1
             };
 
-            ShaderProgramInfo info = new ShaderProgramInfo(
+            ShaderProgramInfo info = new(
                 resourceManager.GetConstantBufferDescriptors(),
                 resourceManager.GetStorageBufferDescriptors(),
                 resourceManager.GetTextureDescriptors(),
@@ -358,7 +358,7 @@ namespace Ryujinx.Graphics.Shader.Translation
                 clipDistancesWritten,
                 originalDefinitions.OmapTargets);
 
-            HostCapabilities hostCapabilities = new HostCapabilities(
+            HostCapabilities hostCapabilities = new(
                 GpuAccessor.QueryHostReducedPrecision(),
                 GpuAccessor.QueryHostSupportsFragmentShaderInterlock(),
                 GpuAccessor.QueryHostSupportsFragmentShaderOrderingIntel(),
@@ -369,7 +369,7 @@ namespace Ryujinx.Graphics.Shader.Translation
                 GpuAccessor.QueryHostSupportsTextureShadowLod(),
                 GpuAccessor.QueryHostSupportsViewportMask());
 
-            CodeGenParameters parameters = new CodeGenParameters(attributeUsage, definitions, resourceManager.Properties, hostCapabilities, GpuAccessor, Options.TargetApi);
+            CodeGenParameters parameters = new(attributeUsage, definitions, resourceManager.Properties, hostCapabilities, GpuAccessor, Options.TargetApi);
 
             return Options.TargetLanguage switch
             {
@@ -388,7 +388,7 @@ namespace Ryujinx.Graphics.Shader.Translation
             {
                 StructureType tfeDataStruct = new(new StructureField[]
                 {
-                    new StructureField(AggregateType.Array | AggregateType.U32, "data", 0)
+                    new(AggregateType.Array | AggregateType.U32, "data", 0)
                 });
 
                 for (int i = 0; i < ResourceReservations.TfeBuffersCount; i++)
@@ -407,7 +407,7 @@ namespace Ryujinx.Graphics.Shader.Translation
 
                 StructureType vertexOutputStruct = new(new StructureField[]
                 {
-                    new StructureField(AggregateType.Array | AggregateType.FP32, "data", 0)
+                    new(AggregateType.Array | AggregateType.FP32, "data", 0)
                 });
 
                 int vertexOutputSbBinding = resourceManager.Reservations.VertexOutputStorageBufferBinding;
@@ -444,7 +444,7 @@ namespace Ryujinx.Graphics.Shader.Translation
 
                     StructureType geometryIbOutputStruct = new(new StructureField[]
                     {
-                        new StructureField(AggregateType.Array | AggregateType.U32, "data", 0)
+                        new(AggregateType.Array | AggregateType.U32, "data", 0)
                     });
 
                     int geometryIbOutputSbBinding = resourceManager.Reservations.GeometryIndexOutputStorageBufferBinding;
@@ -494,8 +494,8 @@ namespace Ryujinx.Graphics.Shader.Translation
 
         public (ShaderProgram, ShaderProgramInfo) GenerateVertexPassthroughForCompute()
         {
-            AttributeUsage attributeUsage = new AttributeUsage(GpuAccessor);
-            ResourceManager resourceManager = new ResourceManager(ShaderStage.Vertex, GpuAccessor);
+            AttributeUsage attributeUsage = new(GpuAccessor);
+            ResourceManager resourceManager = new(ShaderStage.Vertex, GpuAccessor);
 
             ResourceReservations reservations = GetResourceReservations();
 
@@ -509,14 +509,14 @@ namespace Ryujinx.Graphics.Shader.Translation
 
             StructureType vertexInputStruct = new(new StructureField[]
             {
-                new StructureField(AggregateType.Array | AggregateType.FP32, "data", 0)
+                new(AggregateType.Array | AggregateType.FP32, "data", 0)
             });
 
             int vertexDataSbBinding = reservations.VertexOutputStorageBufferBinding;
             BufferDefinition vertexOutputBuffer = new(BufferLayout.Std430, 1, vertexDataSbBinding, "vb_input", vertexInputStruct);
             resourceManager.AddVertexAsComputeStorageBuffer(vertexOutputBuffer);
 
-            EmitterContext context = new EmitterContext();
+            EmitterContext context = new();
 
             Operand vertexIndex = Options.TargetApi == TargetApi.OpenGL
                 ? context.Load(StorageKind.Input, IoVariable.VertexId)
@@ -563,11 +563,11 @@ namespace Ryujinx.Graphics.Shader.Translation
 
             Operation[] operations = context.GetOperations();
             ControlFlowGraph cfg = ControlFlowGraph.Create(operations);
-            Function function = new Function(cfg.Blocks, "main", false, 0, 0);
+            Function function = new(cfg.Blocks, "main", false, 0, 0);
 
             TransformFeedbackOutput[] transformFeedbackOutputs = GetTransformFeedbackOutputs(GpuAccessor, out ulong transformFeedbackVecMap);
 
-            ShaderDefinitions definitions = new ShaderDefinitions(ShaderStage.Vertex, transformFeedbackVecMap, transformFeedbackOutputs)
+            ShaderDefinitions definitions = new(ShaderStage.Vertex, transformFeedbackVecMap, transformFeedbackOutputs)
             {
                 LastInVertexPipeline = true
             };
@@ -612,10 +612,10 @@ namespace Ryujinx.Graphics.Shader.Translation
                     break;
             }
 
-            AttributeUsage attributeUsage = new AttributeUsage(GpuAccessor);
-            ResourceManager resourceManager = new ResourceManager(ShaderStage.Geometry, GpuAccessor);
+            AttributeUsage attributeUsage = new(GpuAccessor);
+            ResourceManager resourceManager = new(ShaderStage.Geometry, GpuAccessor);
 
-            EmitterContext context = new EmitterContext();
+            EmitterContext context = new();
 
             for (int v = 0; v < maxOutputVertices; v++)
             {
@@ -658,9 +658,9 @@ namespace Ryujinx.Graphics.Shader.Translation
 
             Operation[] operations = context.GetOperations();
             ControlFlowGraph cfg = ControlFlowGraph.Create(operations);
-            Function function = new Function(cfg.Blocks, "main", false, 0, 0);
+            Function function = new(cfg.Blocks, "main", false, 0, 0);
 
-            ShaderDefinitions definitions = new ShaderDefinitions(
+            ShaderDefinitions definitions = new(
                 ShaderStage.Geometry,
                 GpuAccessor.QueryGraphicsState(),
                 false,

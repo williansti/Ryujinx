@@ -147,7 +147,7 @@ namespace Ryujinx.Graphics.Shader.CodeGen.Spirv
 
         public Instruction[] GetMainInterface()
         {
-            List<Instruction> mainInterface = new List<Instruction>();
+            List<Instruction> mainInterface = new();
 
             mainInterface.AddRange(Inputs.Values);
             mainInterface.AddRange(Outputs.Values);
