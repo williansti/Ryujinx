@@ -184,7 +184,7 @@ namespace Ryujinx.HLE.HOS.Applets.Error
             string messageText = Encoding.ASCII.GetString(messageTextBuffer.TakeWhile(b => !b.Equals(0)).ToArray());
             string detailsText = Encoding.ASCII.GetString(detailsTextBuffer.TakeWhile(b => !b.Equals(0)).ToArray());
 
-            List<string> buttons = new();
+            List<string> buttons = [];
 
             // TODO: Handle the LanguageCode to return the translated "OK" and "Details".
 

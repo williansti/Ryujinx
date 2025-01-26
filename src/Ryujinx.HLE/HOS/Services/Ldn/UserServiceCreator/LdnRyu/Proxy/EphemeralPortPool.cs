@@ -7,7 +7,7 @@ namespace Ryujinx.HLE.HOS.Services.Ldn.UserServiceCreator.LdnRyu.Proxy
     {
         private const ushort EphemeralBase = 49152;
 
-        private readonly List<ushort> _ephemeralPorts = new();
+        private readonly List<ushort> _ephemeralPorts = [];
 
         private readonly Lock _lock = new();
 

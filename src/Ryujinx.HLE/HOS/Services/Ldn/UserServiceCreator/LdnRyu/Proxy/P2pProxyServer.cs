@@ -41,9 +41,9 @@ namespace Ryujinx.HLE.HOS.Services.Ldn.UserServiceCreator.LdnRyu.Proxy
         private NatDevice _natDevice;
         private Mapping _portMapping;
 
-        private readonly List<P2pProxySession> _players = new();
+        private readonly List<P2pProxySession> _players = [];
 
-        private readonly List<ExternalProxyToken> _waitingTokens = new();
+        private readonly List<ExternalProxyToken> _waitingTokens = [];
         private readonly AutoResetEvent _tokenEvent = new(false);
 
         private uint _broadcastAddress;
