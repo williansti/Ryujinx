@@ -21,7 +21,8 @@ namespace Ryujinx.Graphics.Vulkan
         private const string AppName = "Ryujinx.Graphics.Vulkan";
         private const int QueuesCount = 2;
 
-        private static readonly string[] _desirableExtensions = {
+        private static readonly string[] _desirableExtensions =
+        [
             ExtConditionalRendering.ExtensionName,
             ExtExtendedDynamicState.ExtensionName,
             ExtTransformFeedback.ExtensionName,
@@ -46,16 +47,17 @@ namespace Ryujinx.Graphics.Vulkan
             "VK_KHR_8bit_storage",
             "VK_KHR_maintenance2",
             "VK_EXT_attachment_feedback_loop_layout",
-            "VK_EXT_attachment_feedback_loop_dynamic_state",
-        };
+            "VK_EXT_attachment_feedback_loop_dynamic_state"
+        ];
 
-        private static readonly string[] _requiredExtensions = {
-            KhrSwapchain.ExtensionName,
-        };
+        private static readonly string[] _requiredExtensions =
+        [
+            KhrSwapchain.ExtensionName
+        ];
 
         internal static VulkanInstance CreateInstance(Vk api, GraphicsDebugLevel logLevel, string[] requiredExtensions)
         {
-            List<string> enabledLayers = new();
+            List<string> enabledLayers = [];
 
             IReadOnlySet<string> instanceExtensions = VulkanInstance.GetInstanceExtensions(api);
             IReadOnlySet<string> instanceLayers = VulkanInstance.GetInstanceLayers(api);
@@ -197,12 +199,12 @@ namespace Ryujinx.Graphics.Vulkan
             // TODO: Remove this once we relax our initialization codepaths.
             if (instance.InstanceVersion < _minimalInstanceVulkanVersion)
             {
-                return Array.Empty<DeviceInfo>();
+                return [];
             }
 
             instance.EnumeratePhysicalDevices(out VulkanPhysicalDevice[] physicalDevices).ThrowOnError();
 
-            List<DeviceInfo> deviceInfos = new();
+            List<DeviceInfo> deviceInfos = [];
 
             foreach (VulkanPhysicalDevice physicalDevice in physicalDevices)
             {

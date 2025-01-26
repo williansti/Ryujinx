@@ -142,11 +142,11 @@ namespace Ryujinx.Graphics.Vulkan
             _bufferTextureRefs = new TextureBuffer[Constants.MaxTextureBindings * 2];
             _bufferImageRefs = new TextureBuffer[Constants.MaxImageBindings * 2];
 
-            _textureArrayRefs = Array.Empty<ArrayRef<TextureArray>>();
-            _imageArrayRefs = Array.Empty<ArrayRef<ImageArray>>();
+            _textureArrayRefs = [];
+            _imageArrayRefs = [];
 
-            _textureArrayExtraRefs = Array.Empty<ArrayRef<TextureArray>>();
-            _imageArrayExtraRefs = Array.Empty<ArrayRef<ImageArray>>();
+            _textureArrayExtraRefs = [];
+            _imageArrayExtraRefs = [];
 
             _uniformBuffers = new DescriptorBufferInfo[Constants.MaxUniformBufferBindings];
             _storageBuffers = new DescriptorBufferInfo[Constants.MaxStorageBufferBindings];
@@ -218,7 +218,7 @@ namespace Ryujinx.Graphics.Vulkan
 
             if (isMainPipeline)
             {
-                FeedbackLoopHazards = new();
+                FeedbackLoopHazards = [];
             }
         }
 
