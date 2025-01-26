@@ -6,7 +6,7 @@ namespace Ryujinx.HLE.Generators
 {
     internal class ServiceSyntaxReceiver : ISyntaxReceiver
     {
-        public HashSet<ClassDeclarationSyntax> Types = new();
+        public HashSet<ClassDeclarationSyntax> Types = [];
 
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
         {

@@ -377,7 +377,7 @@ namespace Ryujinx.Tests.Memory
         public void NativeReaderWriterLock()
         {
             NativeReaderWriterLock rwLock = new();
-            List<Thread> threads = new();
+            List<Thread> threads = [];
 
             int value = 0;
 

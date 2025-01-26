@@ -27,9 +27,9 @@ namespace Ryujinx.Graphics.Metal
         private readonly IProgram _programColorBlitMsF;
         private readonly IProgram _programColorBlitMsI;
         private readonly IProgram _programColorBlitMsU;
-        private readonly List<IProgram> _programsColorClearF = new();
-        private readonly List<IProgram> _programsColorClearI = new();
-        private readonly List<IProgram> _programsColorClearU = new();
+        private readonly List<IProgram> _programsColorClearF = [];
+        private readonly List<IProgram> _programsColorClearI = [];
+        private readonly List<IProgram> _programsColorClearU = [];
         private readonly IProgram _programDepthStencilClear;
         private readonly IProgram _programStrideChange;
         private readonly IProgram _programConvertD32S8ToD24S8;

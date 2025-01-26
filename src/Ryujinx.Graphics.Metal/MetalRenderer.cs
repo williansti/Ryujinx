@@ -45,8 +45,8 @@ namespace Ryujinx.Graphics.Metal
         public MetalRenderer(Func<CAMetalLayer> metalLayer)
         {
             _device = MTLDevice.CreateSystemDefaultDevice();
-            Programs = new HashSet<Program>();
-            Samplers = new HashSet<SamplerHolder>();
+            Programs = [];
+            Samplers = [];
 
             if (_device.ArgumentBuffersSupport != MTLArgumentBuffersTier.Tier2)
             {
