@@ -145,7 +145,7 @@ namespace Ryujinx.Horizon.Kernel.Generators
             GenerateResultCheckHelper(generator);
             generator.AppendLine();
 
-            List<SyscallIdAndName> syscalls = new();
+            List<SyscallIdAndName> syscalls = [];
 
             foreach (MethodDeclarationSyntax method in syntaxReceiver.SvcImplementations)
             {
@@ -202,9 +202,9 @@ namespace Ryujinx.Horizon.Kernel.Generators
 
             RegisterAllocatorA32 regAlloc = new();
 
-            List<OutParameter> outParameters = new();
-            List<string> logInArgs = new();
-            List<string> logOutArgs = new();
+            List<OutParameter> outParameters = [];
+            List<string> logInArgs = [];
+            List<string> logOutArgs = [];
 
             foreach (ParameterSyntax methodParameter in method.ParameterList.Parameters)
             {
@@ -321,9 +321,9 @@ namespace Ryujinx.Horizon.Kernel.Generators
             int registerIndex = 0;
             int index = 0;
 
-            List<OutParameter> outParameters = new();
-            List<string> logInArgs = new();
-            List<string> logOutArgs = new();
+            List<OutParameter> outParameters = [];
+            List<string> logInArgs = [];
+            List<string> logOutArgs = [];
 
             foreach (ParameterSyntax methodParameter in method.ParameterList.Parameters)
             {
