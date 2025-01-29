@@ -679,7 +679,7 @@ namespace Ryujinx.HLE.HOS
             {
                 using (MD5 md5 = MD5.Create())
                 {
-                    modLoadResult.Hash += BitConverter.ToString(md5.ComputeHash(tempHash.ToBytes())).Replace("-", "").ToLowerInvariant();
+                    modLoadResult.Hash += BitConverter.ToString(md5.ComputeHash(tempHash.ToBytes())).Replace("-", string.Empty).ToLowerInvariant();
                 }
             }
 
