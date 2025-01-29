@@ -20,9 +20,6 @@
     <Design.DataContext>
         <viewModels:ControllerInputViewModel />
     </Design.DataContext>
-    <UserControl.Resources>
-        <helpers:KeyValueConverter x:Key="Key" />
-    </UserControl.Resources>
     <UserControl.Styles>
         <Style Selector="ToggleButton">
             <Setter Property="Width" Value="90" />
@@ -78,7 +75,7 @@
                                 TextAlignment="Center" />
                             <ToggleButton Name="ButtonZl">
                                 <TextBlock
-                                    Text="{Binding Config.ButtonZl, Converter={StaticResource Key}}"
+                                    Text="{Binding Config.ButtonZl, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                     TextAlignment="Center" />
                             </ToggleButton>
                         </StackPanel>
@@ -94,7 +91,7 @@
                                 TextAlignment="Center" />
                             <ToggleButton Name="ButtonL">
                                 <TextBlock
-                                    Text="{Binding Config.ButtonL, Converter={StaticResource Key}}"
+                                    Text="{Binding Config.ButtonL, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                     TextAlignment="Center" />
                             </ToggleButton>
                         </StackPanel>
@@ -110,7 +107,7 @@
                                 TextAlignment="Center" />
                             <ToggleButton Name="ButtonMinus">
                                 <TextBlock
-                                    Text="{Binding Config.ButtonMinus, Converter={StaticResource Key}}"
+                                    Text="{Binding Config.ButtonMinus, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                     TextAlignment="Center" />
                             </ToggleButton>
                         </StackPanel>
@@ -144,7 +141,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="LeftStickButton">
                                     <TextBlock
-                                        Text="{Binding Config.LeftStickButton, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.LeftStickButton, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -161,7 +158,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="LeftJoystick" Tag="stick">
                                     <TextBlock
-                                        Text="{Binding Config.LeftJoystick, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.LeftJoystick, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -254,7 +251,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="DpadUp">
                                     <TextBlock
-                                        Text="{Binding Config.DpadUp, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.DpadUp, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -271,7 +268,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="DpadDown">
                                     <TextBlock
-                                        Text="{Binding Config.DpadDown, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.DpadDown, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -288,7 +285,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="DpadLeft">
                                     <TextBlock
-                                        Text="{Binding Config.DpadLeft, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.DpadLeft, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -305,7 +302,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="DpadRight">
                                     <TextBlock
-                                        Text="{Binding Config.DpadRight, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.DpadRight, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -454,7 +451,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="LeftButtonSr">
                                     <TextBlock
-                                        Text="{Binding Config.LeftButtonSr, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.LeftButtonSr, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -472,7 +469,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="LeftButtonSl">
                                     <TextBlock
-                                        Text="{Binding Config.LeftButtonSl, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.LeftButtonSl, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -490,7 +487,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="RightButtonSr">
                                     <TextBlock
-                                        Text="{Binding Config.RightButtonSr, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.RightButtonSr, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -508,7 +505,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="RightButtonSl">
                                     <TextBlock
-                                        Text="{Binding Config.RightButtonSl, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.RightButtonSl, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -636,7 +633,7 @@
                                 TextAlignment="Center" />
                             <ToggleButton Name="ButtonZr">
                                 <TextBlock
-                                    Text="{Binding Config.ButtonZr, Converter={StaticResource Key}}"
+                                    Text="{Binding Config.ButtonZr, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                     TextAlignment="Center" />
                             </ToggleButton>
                         </StackPanel>
@@ -654,7 +651,7 @@
                                 TextAlignment="Center" />
                             <ToggleButton Name="ButtonR">
                                 <TextBlock
-                                    Text="{Binding Config.ButtonR, Converter={StaticResource Key}}"
+                                    Text="{Binding Config.ButtonR, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                     TextAlignment="Center" />
                             </ToggleButton>
                         </StackPanel>
@@ -672,7 +669,7 @@
                                 TextAlignment="Center" />
                             <ToggleButton Name="ButtonPlus">
                                 <TextBlock
-                                    Text="{Binding Config.ButtonPlus, Converter={StaticResource Key}}"
+                                    Text="{Binding Config.ButtonPlus, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                     TextAlignment="Center" />
                             </ToggleButton>
                         </StackPanel>
@@ -707,7 +704,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="ButtonA">
                                     <TextBlock
-                                        Text="{Binding Config.ButtonA, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.ButtonA, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -724,7 +721,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="ButtonB">
                                     <TextBlock
-                                        Text="{Binding Config.ButtonB, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.ButtonB, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -741,7 +738,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="ButtonX">
                                     <TextBlock
-                                        Text="{Binding Config.ButtonX, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.ButtonX, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -758,7 +755,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="ButtonY">
                                     <TextBlock
-                                        Text="{Binding Config.ButtonY, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.ButtonY, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -792,7 +789,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="RightStickButton">
                                     <TextBlock
-                                        Text="{Binding Config.RightStickButton, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.RightStickButton, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>
@@ -810,7 +807,7 @@
                                     TextAlignment="Center" />
                                 <ToggleButton Name="RightJoystick" Tag="stick">
                                     <TextBlock
-                                        Text="{Binding Config.RightJoystick, Converter={StaticResource Key}}"
+                                        Text="{Binding Config.RightJoystick, Converter={x:Static helpers:KeyValueConverter.Instance}}"
                                         TextAlignment="Center" />
                                 </ToggleButton>
                             </StackPanel>

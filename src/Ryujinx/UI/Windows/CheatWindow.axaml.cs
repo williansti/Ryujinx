@@ -34,6 +34,9 @@ namespace Ryujinx.Ava.UI.Windows
 
         public CheatWindow(VirtualFileSystem virtualFileSystem, string titleId, string titleName, string titlePath)
         {
+            MinWidth = 500;
+            MinHeight = 650;
+            
             LoadedCheats = [];
             IntegrityCheckLevel checkLevel = ConfigurationState.Instance.System.EnableFsIntegrityChecks
                 ? IntegrityCheckLevel.ErrorOnInvalid
