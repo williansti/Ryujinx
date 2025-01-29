@@ -110,12 +110,5 @@
             </ListBox>
         </Border>
         
-        <StackPanel
-            Grid.Row="1"
-            Margin="0 24 0 0"
-            HorizontalAlignment="Left"
-            Orientation="Horizontal"
-            Spacing="10">
-        </StackPanel>
     </Grid>
 </UserControl>
