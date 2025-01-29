@@ -128,7 +128,11 @@ namespace Ryujinx.Ava.UI.Controls
         public async void OpenModManager_Click(object sender, RoutedEventArgs args)
         {
             if (sender is MenuItem { DataContext: MainWindowViewModel { SelectedApplication: not null } viewModel })
-                await ModManagerWindow.Show(viewModel.SelectedApplication.Id, viewModel.SelectedApplication.Name);
+                await ModManagerWindow.Show(
+                    viewModel.SelectedApplication.Id, 
+                    viewModel.SelectedApplication.IdBase, 
+                    viewModel.ApplicationLibrary, 
+                    viewModel.SelectedApplication.Name);
         }
 
         public async void PurgePtcCache_Click(object sender, RoutedEventArgs args)
