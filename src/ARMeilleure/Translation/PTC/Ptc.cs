@@ -4,6 +4,7 @@ using ARMeilleure.CodeGen.Unwinding;
 using ARMeilleure.Common;
 using ARMeilleure.Memory;
 using ARMeilleure.State;
+using Humanizer;
 using Ryujinx.Common;
 using Ryujinx.Common.Configuration;
 using Ryujinx.Common.Logging;
@@ -923,15 +924,11 @@ namespace ARMeilleure.Translation.PTC
             sw.Stop();
 
             PtcStateChanged?.Invoke(PtcLoadingState.Loaded, _translateCount, _translateTotalCount);
-
-            if (_translateCount == _translateTotalCount)
-            {
-                Logger.Info?.Print(LogClass.Ptc, $"{_translateCount} of {_translateTotalCount} functions translated | Thread count: {degreeOfParallelism} in {sw.Elapsed.TotalSeconds} s");
-            }
-            else
-            {
-                Logger.Info?.Print(LogClass.Ptc, $"{_translateCount} of {_translateTotalCount} functions translated | {_translateTotalCount - _translateCount} function{(_translateTotalCount - _translateCount != 1 ? "s" : "")} blacklisted | Thread count: {degreeOfParallelism} in {sw.Elapsed.TotalSeconds} s");
-            }
+            
+            Logger.Info?.Print(LogClass.Ptc, 
+                $"{_translateCount} of {_translateTotalCount} functions translated in {sw.Elapsed.TotalSeconds} seconds " +
+                $"| {"function".ToQuantity(_translateTotalCount - _translateCount)} blacklisted " +
+                $"| Thread count: {degreeOfParallelism}");
 
             Thread preSaveThread = new(PreSave)
             {
