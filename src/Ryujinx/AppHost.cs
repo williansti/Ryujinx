@@ -325,21 +325,15 @@ namespace Ryujinx.Ava
             switch (oldVSyncMode)
             {
                 case VSyncMode.Switch:
-                    newVSyncMode = VSyncMode.Unbounded;
+                    newVSyncMode = customVSyncIntervalEnabled 
+                        ? VSyncMode.Custom 
+                        : VSyncMode.Unbounded;
                     break;
                 case VSyncMode.Unbounded:
-                    if (customVSyncIntervalEnabled)
-                    {
-                        newVSyncMode = VSyncMode.Custom;
-                    }
-                    else
-                    {
                         newVSyncMode = VSyncMode.Switch;
-                    }
-
                     break;
                 case VSyncMode.Custom:
-                    newVSyncMode = VSyncMode.Switch;
+                    newVSyncMode = VSyncMode.Unbounded;
                     break;
             }
 
