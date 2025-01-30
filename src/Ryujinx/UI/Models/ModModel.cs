@@ -1,5 +1,5 @@
 using Ryujinx.Ava.UI.ViewModels;
-using System.IO;
+using System.Globalization;
 
 namespace Ryujinx.Ava.UI.Models
 {
@@ -20,6 +20,11 @@ namespace Ryujinx.Ava.UI.Models
         public bool InSd { get; }
         public string Path { get; }
         public string Name { get; }
+
+        public string FormattedName => 
+            InSd && ulong.TryParse(Name, NumberStyles.HexNumber, null, out ulong applicationId)
+                ? $"Atmosphère: {System.IO.Path.GetFileNameWithoutExtension(RyujinxApp.MainWindow.ApplicationLibrary.GetNameForApplicationId(applicationId))}"
+                : Name;
 
         public ModModel(string path, string name, bool enabled, bool inSd)
         {
