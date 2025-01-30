@@ -111,6 +111,18 @@ namespace Ryujinx.Ava.Utilities.AppLibrary
             return data;
         }
 
+        /// <summary>
+        ///     Gets a name for an available content file based on the Application ID '<paramref name="id"/>'.
+        ///     <br/><br/>
+        ///     For Applications, this returns the localized name of the app found in the file.
+        ///     For DLCs, this returns the name of the file that contains the DLC, minus the file extension.
+        /// </summary>
+        /// <param name="id">The Application ID to search for.</param>
+        /// <remarks>
+        /// If the provided Application ID does not have a corresponding Application OR DLC file,
+        /// <paramref name="id"/> formatted as hexadecimal is returned.
+        /// </remarks>
+        /// <returns>A formatted Application name, or <paramref name="id"/> as hexadecimal if none is found.</returns>
         public string GetNameForApplicationId(ulong id)
         {
             DynamicData.Kernel.Optional<ApplicationData> appData = Applications.Lookup(id);
