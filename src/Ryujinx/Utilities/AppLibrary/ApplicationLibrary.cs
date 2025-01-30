@@ -128,10 +128,9 @@ namespace Ryujinx.Ava.Utilities.AppLibrary
             DynamicData.Kernel.Optional<ApplicationData> appData = Applications.Lookup(id);
             if (appData.HasValue)
                 return appData.Value.Name;
-
-            Gommon.Optional<DownloadableContentModel> dlcData = DownloadableContents.Keys.FindFirst(x => x.TitleId == id);
-            if (dlcData.HasValue)
-                return dlcData.Value.FileName;
+            
+            if (DownloadableContents.Keys.FindFirst(x => x.TitleId == id).TryGet(out DownloadableContentModel dlcData))
+                return dlcData.FileName;
 
             return id.ToString("X16");
         }
