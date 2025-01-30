@@ -34,7 +34,6 @@ namespace Ryujinx.Ava.UI.Windows
 #if DEBUG
             this.AttachDevTools(new KeyGesture(Key.F12, KeyModifiers.Alt));
 #endif
-            
         }
 
         public SettingsWindow()

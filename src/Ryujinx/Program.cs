@@ -112,7 +112,11 @@ namespace Ryujinx.Ava
             // Hook unhandled exception and process exit events.
             AppDomain.CurrentDomain.UnhandledException += (sender, e)
                 => ProcessUnhandledException(sender, e.ExceptionObject as Exception, e.IsTerminating);
+            TaskScheduler.UnobservedTaskException += (sender, e)
+                => ProcessUnhandledException(sender, e.Exception, false); 
             AppDomain.CurrentDomain.ProcessExit += (_, _) => Exit();
+
+
             
             // Setup base data directory.
             AppDataManager.Initialize(CommandLineState.BaseDirPathArg);
@@ -282,9 +286,7 @@ namespace Ryujinx.Ava
                     log.PrintMsg(LogClass.Application, message);
             }
             
-
-
-
+            
             if (isTerminating)
                 Exit();
         }
