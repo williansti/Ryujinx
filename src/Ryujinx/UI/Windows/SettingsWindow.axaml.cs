@@ -1,12 +1,9 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using FluentAvalonia.Core;
 using FluentAvalonia.UI.Controls;
 using Ryujinx.Ava.Common.Locale;
-using Ryujinx.Ava.UI.Models;
 using Ryujinx.Ava.UI.ViewModels;
-using Ryujinx.Ava.UI.ViewModels.Input;
 using Ryujinx.HLE.FileSystem;
 using Ryujinx.Input;
 using System;

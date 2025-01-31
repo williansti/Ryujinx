@@ -1,13 +1,10 @@
 ﻿using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Gommon;
 using Humanizer;
 using Ryujinx.Ava.UI.Helpers;
 using Ryujinx.Ava.Utilities.Configuration;
-using System;
 using System.Globalization;
-using System.Linq;
 
 namespace Ryujinx.Ava.UI.ViewModels.Input
 {

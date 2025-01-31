@@ -3,7 +3,6 @@ using Ryujinx.Common.Configuration;
 using Ryujinx.Common.Helper;
 using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace Ryujinx.Common
 {

@@ -2,9 +2,6 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
-using Avalonia.Threading;
-using FluentAvalonia.UI.Controls;
-using LibHac;
 using LibHac.Fs;
 using LibHac.Tools.FsSystem.NcaUtils;
 using Ryujinx.Ava.Common;
@@ -17,14 +14,11 @@ using Ryujinx.Ava.Utilities;
 using Ryujinx.Ava.Utilities.AppLibrary;
 using Ryujinx.Common.Configuration;
 using Ryujinx.Common.Helper;
-using Ryujinx.Common.Logging;
 using Ryujinx.HLE.HOS;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 using Path = System.IO.Path;
 
 namespace Ryujinx.Ava.UI.Controls
