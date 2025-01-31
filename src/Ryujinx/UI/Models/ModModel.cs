@@ -14,7 +14,7 @@ namespace Ryujinx.Ava.UI.Models
 
         public string FormattedName => 
             InSd && ulong.TryParse(Name, NumberStyles.HexNumber, null, out ulong applicationId)
-                ? $"Atmosphère: {System.IO.Path.GetFileNameWithoutExtension(RyujinxApp.MainWindow.ApplicationLibrary.GetNameForApplicationId(applicationId))}"
+                ? $"Atmosphère: {RyujinxApp.MainWindow.ApplicationLibrary.GetNameForApplicationId(applicationId)}"
                 : Name;
 
         public ModModel(string path, string name, bool enabled, bool inSd)

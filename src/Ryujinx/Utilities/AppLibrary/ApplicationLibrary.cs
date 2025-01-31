@@ -130,7 +130,7 @@ namespace Ryujinx.Ava.Utilities.AppLibrary
                 return appData.Value.Name;
             
             if (DownloadableContents.Keys.FindFirst(x => x.TitleId == id).TryGet(out DownloadableContentModel dlcData))
-                return dlcData.FileName;
+                return Path.GetFileNameWithoutExtension(dlcData.FileName);
 
             return id.ToString("X16");
         }
