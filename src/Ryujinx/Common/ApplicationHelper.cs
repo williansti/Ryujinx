@@ -349,10 +349,6 @@ namespace Ryujinx.Ava.Common
                     return;
                 }
 
-                IntegrityCheckLevel checkLevel = ConfigurationState.Instance.System.EnableFsIntegrityChecks
-                    ? IntegrityCheckLevel.ErrorOnInvalid
-                    : IntegrityCheckLevel.None;
-
                 int index = Nca.GetSectionIndexFromType(NcaSectionType.Data, publicDataNca.Header.ContentType);
 
                 try
