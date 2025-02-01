@@ -1,17 +1,9 @@
-using System.Text.RegularExpressions;
+using Ryujinx.Common.Helper;
 
 namespace Ryujinx.HLE.HOS.Applets.SoftwareKeyboard
 {
-    public static partial class NumericCharacterValidation
+    public static class NumericCharacterValidation
     {
-        public static bool IsNumeric(char value)
-        {
-            Regex regex = NumericRegex();
-
-            return regex.IsMatch(value.ToString());
-        }
-
-        [GeneratedRegex("[0-9]|.")]
-        private static partial Regex NumericRegex();
+        public static bool IsNumeric(char value) => Patterns.Numeric.IsMatch(value.ToString());
     }
 }
