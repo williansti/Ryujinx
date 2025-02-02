@@ -132,18 +132,18 @@ namespace Ryujinx.Ava
             if (_discordPresencePlaying is null) return;
             if (!playReport.IsDictionary) return;
 
-            _playReportValues
-                .FindFirst(x => x.Key.EqualsIgnoreCase(TitleIDs.CurrentApplication.Value))
-                .Convert(x => x.Value)
-                .IfPresent(x =>
-                {
-                    if (!playReport.AsDictionary().TryGetValue(x.ReportKey, out MessagePackObject valuePackObject))
-                        return;
+            foreach ((string titleId, (string reportKey, Func<object, string> formatter)) in _playReportValues)
+            {
+                if (!TitleIDs.CurrentApplication.Value.Value.EqualsIgnoreCase(titleId))
+                    continue;
+                
+                if (!playReport.AsDictionary().TryGetValue(reportKey, out MessagePackObject valuePackObject))
+                    return;
 
-                    _discordPresencePlaying.Details = x.Formatter(valuePackObject.ToObject());
-                    UpdatePlayingState();
-                    Logger.Info?.Print(LogClass.UI, "Updated Discord RPC based on a supported play report.");
-                });
+                _discordPresencePlaying.Details = formatter(valuePackObject.ToObject());
+                UpdatePlayingState();
+                Logger.Info?.Print(LogClass.UI, "Updated Discord RPC based on a supported play report.");
+            }
         }
 
         // title ID -> Play Report key & value formatter
