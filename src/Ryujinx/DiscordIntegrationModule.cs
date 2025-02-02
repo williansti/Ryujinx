@@ -5,6 +5,7 @@ using Ryujinx.Ava.Utilities;
 using Ryujinx.Ava.Utilities.AppLibrary;
 using Ryujinx.Ava.Utilities.Configuration;
 using Ryujinx.Common;
+using Ryujinx.Common.Helper;
 using Ryujinx.Common.Logging;
 using Ryujinx.HLE;
 using Ryujinx.HLE.Loaders.Processes;
@@ -23,12 +24,12 @@ namespace Ryujinx.Ava
         public static Timestamps GuestAppStartedAt { get; set; }
 
         private static string VersionString
-            => (ReleaseInformation.IsCanaryBuild ? "Canary " : string.Empty) + $"v{ReleaseInformation.Version}"; 
+            => (ReleaseInformation.IsCanaryBuild ? "Canary " : string.Empty) + $"v{ReleaseInformation.Version}";
 
-        private static readonly string _description = 
-            ReleaseInformation.IsValid 
-                    ? $"{VersionString} {ReleaseInformation.ReleaseChannelOwner}/{ReleaseInformation.ReleaseChannelSourceRepo}@{ReleaseInformation.BuildGitHash}" 
-                    : "dev build";
+        private static readonly string _description =
+            ReleaseInformation.IsValid
+                ? $"{VersionString} {ReleaseInformation.ReleaseChannelOwner}/{ReleaseInformation.ReleaseChannelSourceRepo}@{ReleaseInformation.BuildGitHash}"
+                : "dev build";
 
         private const string ApplicationId = "1293250299716173864";
 
@@ -45,8 +46,7 @@ namespace Ryujinx.Ava
             {
                 Assets = new Assets
                 {
-                    LargeImageKey = "ryujinx",
-                    LargeImageText = TruncateToByteLength(_description)
+                    LargeImageKey = "ryujinx", LargeImageText = TruncateToByteLength(_description)
                 },
                 Details = "Main Menu",
                 State = "Idling",
@@ -86,10 +86,10 @@ namespace Ryujinx.Ava
         {
             if (titleId.TryGet(out string tid))
                 SwitchToPlayingState(
-                    ApplicationLibrary.LoadAndSaveMetaData(tid), 
+                    ApplicationLibrary.LoadAndSaveMetaData(tid),
                     Switch.Shared.Processes.ActiveApplication
                 );
-            else 
+            else
                 SwitchToMainState();
         }
 
@@ -114,7 +114,7 @@ namespace Ryujinx.Ava
         {
             _discordClient?.SetPresence(_discordPresencePlaying ??= CreatePlayingState(appMeta, procRes));
         }
-        
+
         private static void UpdatePlayingState()
         {
             _discordClient?.SetPresence(_discordPresencePlaying);
@@ -126,36 +126,26 @@ namespace Ryujinx.Ava
             _discordPresencePlaying = null;
         }
         
+        private static readonly PlayReportAnalyzer _playReportAnalyzer = new PlayReportAnalyzer()
+            .AddSpec( // Breath of the Wild
+                "01007ef00011e000",
+                gameSpec =>
+                    gameSpec.AddValueFormatter("IsHardMode", val => val is 1 ? "Playing Master Mode" : "Playing Normal Mode")
+            );
+
         private static void HandlePlayReport(MessagePackObject playReport)
         {
             if (!TitleIDs.CurrentApplication.Value.HasValue) return;
             if (_discordPresencePlaying is null) return;
-            if (!playReport.IsDictionary) return;
 
-            foreach ((string titleId, (string reportKey, Func<object, string> formatter)) in _playReportValues)
-            {
-                if (!TitleIDs.CurrentApplication.Value.Value.EqualsIgnoreCase(titleId))
-                    continue;
-                
-                if (!playReport.AsDictionary().TryGetValue(reportKey, out MessagePackObject valuePackObject))
-                    return;
+            Optional<string> details = _playReportAnalyzer.Run(TitleIDs.CurrentApplication.Value, playReport);
 
-                _discordPresencePlaying.Details = formatter(valuePackObject.ToObject());
-                UpdatePlayingState();
-                Logger.Info?.Print(LogClass.UI, "Updated Discord RPC based on a supported play report.");
-            }
+            if (!details.HasValue) return;
+            
+            _discordPresencePlaying.Details = details;
+            UpdatePlayingState();
+            Logger.Info?.Print(LogClass.UI, "Updated Discord RPC based on a supported play report.");
         }
-
-        // title ID -> Play Report key & value formatter
-        private static readonly ReadOnlyDictionary<string, (string ReportKey, Func<object, string> Formatter)> 
-            _playReportValues = new(new Dictionary<string, (string ReportKey, Func<object, string> Formatter)>
-            {
-                {
-                    // Breath of the Wild Master Mode display
-                    "01007ef00011e000", 
-                    ("IsHardMode", val => val is 1 ? "Playing Master Mode" : "Playing Normal Mode")
-                }
-            });
 
         private static string TruncateToByteLength(string input)
         {
