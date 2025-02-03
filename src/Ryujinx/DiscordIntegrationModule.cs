@@ -131,6 +131,7 @@ namespace Ryujinx.Ava
 
         private static void HandlePlayReport(MessagePackObject playReport)
         {
+            if (_discordClient is null) return;
             if (!TitleIDs.CurrentApplication.Value.HasValue) return;
             if (_discordPresencePlaying is null) return;
 
