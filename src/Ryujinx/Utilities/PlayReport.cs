@@ -40,22 +40,13 @@ namespace Ryujinx.Ava.Utilities
         private static PlayReportFormattedValue BreathOfTheWild_MasterMode(ref PlayReportValue value)
             => value.BoxedValue is 1 ? "Playing Master Mode" : PlayReportFormattedValue.ForceReset;
 
-        private static PlayReportFormattedValue TearsOfTheKingdom_CurrentField(ref PlayReportValue value)
-        {
-            try
+        private static PlayReportFormattedValue TearsOfTheKingdom_CurrentField(ref PlayReportValue value) =>
+            value.PackedValue.AsDouble() switch
             {
-                return (double)value.BoxedValue switch
-                {
-                    > 800d => "Exploring the Sky Islands",
-                    < -201d => "Exploring the Depths",
-                    _ => "Roaming Hyrule"
-                };
-            }
-            catch
-            {
-                return PlayReportFormattedValue.ForceReset;
-            }
-        }
+                > 800d => "Exploring the Sky Islands",
+                < -201d => "Exploring the Depths",
+                _ => "Roaming Hyrule"
+            };
 
         private static PlayReportFormattedValue SuperMarioOdyssey_AssistMode(ref PlayReportValue value)
             => value.BoxedValue is 1 ? "Playing in Assist Mode" : "Playing in Regular Mode";
@@ -141,7 +132,7 @@ namespace Ryujinx.Ava.Utilities
                 PlayReportValue value = new()
                 {
                     Application = appMeta, 
-                    BoxedValue = valuePackObject.ToObject()
+                    PackedValue = valuePackObject
                 };
 
                 return formatSpec.ValueFormatter(ref value);
@@ -180,10 +171,13 @@ namespace Ryujinx.Ava.Utilities
         }
     }
 
-    public struct PlayReportValue
+    public readonly struct PlayReportValue
     {
         public ApplicationMetadata Application { get; init; }
-        public object BoxedValue { get; init; }
+        
+        public MessagePackObject PackedValue { get; init; }
+
+        public object BoxedValue => PackedValue.ToObject();
     }
 
     public struct PlayReportFormattedValue
