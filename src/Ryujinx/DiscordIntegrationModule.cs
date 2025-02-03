@@ -82,6 +82,36 @@ namespace Ryujinx.Ava
             }
         }
 
+        public static string MarioKart8(object obj)
+        {
+            return obj switch
+            {
+                // Single Player
+                "Single" => "Single Player",
+                // Multiplayer
+                "Multi-2players" => "Multiplayer 2 Players",
+                "Multi-3players" => "Multiplayer 3 Players",
+                "Multi-4players" => "Multiplayer 4 Players",
+                // Wireless/LAN Play
+                "Local-Single" => "Wireless/LAN Play",
+                "Local-2players" => "Wireless/LAN Play 2 Players",
+                // CC Classes
+                "50cc" => "50cc",
+                "100cc" => "100cc",
+                "150cc" => "150cc",
+                "Mirror" => "Mirror (150cc)",
+                "200cc" => "200cc",
+                // Modes
+                "GrandPrix" => "Grand Prix",
+                "TimeAttack" => "Time Trials",
+                "VS" => "VS Races",
+                "Battle" => "Battle Mode",
+                "RaceStart" => "Selecting a Course",
+                "Race" => "Racing",
+                _ => "Playing Mario Kart 8 Deluxe"
+            };
+        }
+
         public static void Use(Optional<string> titleId)
         {
             if (titleId.TryGet(out string tid))
@@ -131,6 +161,31 @@ namespace Ryujinx.Ava
                 "01007ef00011e000",
                 gameSpec =>
                     gameSpec.AddValueFormatter("IsHardMode", val => val is 1 ? "Playing Master Mode" : "Playing Normal Mode")
+            )
+            .AddSpec( // Super Mario Odyssey
+                "0100000000010000",
+                gameSpec =>
+                    gameSpec.AddValueFormatter("is_kids_mode", val => val is 1 ? "Playing in Assist Mode" : "Playing in Regular Mode")
+            )
+            .AddSpec( // Super Mario Odyssey (China)
+                "010075000ECBE000",
+                gameSpec =>
+                    gameSpec.AddValueFormatter("is_kids_mode", val => val is 1 ? "Playing in 帮助模式" : "Playing in 普通模式")
+            )
+            .AddSpec( // Super Mario 3D World + Bowser's Fury
+                "010028600EBDA000",
+                gameSpec =>
+                    gameSpec.AddValueFormatter("mode", val => val is 0 ? "Playing Super Mario 3D World" : "Playing Bowser's Fury")
+            )
+            .AddSpec( // Mario Kart 8 Deluxe
+                "0100152000022000",
+                gameSpec =>
+                    gameSpec.AddValueFormatter("To", MarioKart8)
+            )
+            .AddSpec( // Mario Kart 8 Deluxe (China)
+                "010075100E8EC000",
+                gameSpec =>
+                    gameSpec.AddValueFormatter("To", MarioKart8)
             );
 
         private static void HandlePlayReport(MessagePackObject playReport)
