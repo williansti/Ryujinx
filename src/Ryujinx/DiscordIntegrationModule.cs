@@ -39,6 +39,7 @@ namespace Ryujinx.Ava
         private static DiscordRpcClient _discordClient;
         private static RichPresence _discordPresenceMain;
         private static RichPresence _discordPresencePlaying;
+        private static ApplicationMetadata _currentApp;
 
         public static void Initialize()
         {
@@ -113,6 +114,7 @@ namespace Ryujinx.Ava
         private static void SwitchToPlayingState(ApplicationMetadata appMeta, ProcessResult procRes)
         {
             _discordClient?.SetPresence(_discordPresencePlaying ??= CreatePlayingState(appMeta, procRes));
+            _currentApp = appMeta;
         }
 
         private static void UpdatePlayingState()
@@ -124,6 +126,7 @@ namespace Ryujinx.Ava
         {
             _discordClient?.SetPresence(_discordPresenceMain);
             _discordPresencePlaying = null;
+            _currentApp = null;
         }
 
         private static void HandlePlayReport(MessagePackObject playReport)
@@ -131,7 +134,7 @@ namespace Ryujinx.Ava
             if (!TitleIDs.CurrentApplication.Value.HasValue) return;
             if (_discordPresencePlaying is null) return;
 
-            Optional<string> details = PlayReport.Analyzer.Run(TitleIDs.CurrentApplication.Value, playReport);
+            Optional<string> details = PlayReport.Analyzer.Run(TitleIDs.CurrentApplication.Value, _currentApp, playReport);
 
             if (!details.HasValue) return;
             
