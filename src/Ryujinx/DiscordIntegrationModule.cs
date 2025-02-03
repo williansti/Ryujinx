@@ -134,13 +134,21 @@ namespace Ryujinx.Ava
             if (!TitleIDs.CurrentApplication.Value.HasValue) return;
             if (_discordPresencePlaying is null) return;
 
-            Optional<string> details = PlayReport.Analyzer.Run(TitleIDs.CurrentApplication.Value, _currentApp, playReport);
+            PlayReportFormattedValue value = PlayReport.Analyzer.Run(TitleIDs.CurrentApplication.Value, _currentApp, playReport);
 
-            if (!details.HasValue) return;
-            
-            _discordPresencePlaying.Details = details;
+            if (!value.Handled) return;
+
+            if (value.Reset)
+            {
+                _discordPresencePlaying.Details = $"Playing {_currentApp.Title}";
+                Logger.Info?.Print(LogClass.UI, "Reset Discord RPC based on a supported play report value formatter.");
+            }
+            else
+            {
+                _discordPresencePlaying.Details = value.FormattedString;
+                Logger.Info?.Print(LogClass.UI, "Updated Discord RPC based on a supported play report.");
+            }
             UpdatePlayingState();
-            Logger.Info?.Print(LogClass.UI, "Updated Discord RPC based on a supported play report.");
         }
 
         private static string TruncateToByteLength(string input)

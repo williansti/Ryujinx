@@ -29,28 +29,24 @@ namespace Ryujinx.Ava.Utilities
                 "010028600EBDA000",
                 spec => spec.AddValueFormatter("mode", SuperMario3DWorldOrBowsersFury)
             )
-            .AddSpec( // Mario Kart 8 Deluxe
-                "0100152000022000",
-                spec => spec.AddValueFormatter("To", MarioKart8Deluxe_Mode)
-            )
-            .AddSpec( // Mario Kart 8 Deluxe (China)
-                "010075100E8EC000",
+            .AddSpec( // Mario Kart 8 Deluxe, Mario Kart 8 Deluxe (China)
+                ["0100152000022000", "010075100E8EC000"],
                 spec => spec.AddValueFormatter("To", MarioKart8Deluxe_Mode)
             );
 
-        private static string BreathOfTheWild_MasterMode(ref PlayReportValue value)
-            => value.BoxedValue is 1 ? "Playing Master Mode" : "Playing Normal Mode";
+        private static PlayReportFormattedValue BreathOfTheWild_MasterMode(ref PlayReportValue value)
+            => value.BoxedValue is 1 ? "Playing Master Mode" : PlayReportFormattedValue.ForceReset;
 
-        private static string SuperMarioOdyssey_AssistMode(ref PlayReportValue value)
+        private static PlayReportFormattedValue SuperMarioOdyssey_AssistMode(ref PlayReportValue value)
             => value.BoxedValue is 1 ? "Playing in Assist Mode" : "Playing in Regular Mode";
 
-        private static string SuperMarioOdysseyChina_AssistMode(ref PlayReportValue value)
+        private static PlayReportFormattedValue SuperMarioOdysseyChina_AssistMode(ref PlayReportValue value)
             => value.BoxedValue is 1 ? "Playing in 帮助模式" : "Playing in 普通模式";
 
-        private static string SuperMario3DWorldOrBowsersFury(ref PlayReportValue value)
+        private static PlayReportFormattedValue SuperMario3DWorldOrBowsersFury(ref PlayReportValue value)
             => value.BoxedValue is 0 ? "Playing Super Mario 3D World" : "Playing Bowser's Fury";
         
-        private static string MarioKart8Deluxe_Mode(ref PlayReportValue value) 
+        private static PlayReportFormattedValue MarioKart8Deluxe_Mode(ref PlayReportValue value) 
             => value.BoxedValue switch
             {
                 // Single Player
@@ -75,7 +71,7 @@ namespace Ryujinx.Ava.Utilities
                 "Battle" => "Battle Mode",
                 "RaceStart" => "Selecting a Course",
                 "Race" => "Racing",
-                _ => $"Playing {value.Application.Title}"
+                _ => PlayReportFormattedValue.ForceReset
             };
     }
 
@@ -87,23 +83,35 @@ namespace Ryujinx.Ava.Utilities
 
         public PlayReportAnalyzer AddSpec(string titleId, Func<PlayReportGameSpec, PlayReportGameSpec> transform)
         {
-            _specs.Add(transform(new PlayReportGameSpec { TitleIdStr = titleId }));
+            _specs.Add(transform(new PlayReportGameSpec { TitleIds = [titleId] }));
             return this;
         }
         
         public PlayReportAnalyzer AddSpec(string titleId, Action<PlayReportGameSpec> transform)
         {
-            _specs.Add(new PlayReportGameSpec { TitleIdStr = titleId }.Apply(transform));
+            _specs.Add(new PlayReportGameSpec { TitleIds = [titleId] }.Apply(transform));
+            return this;
+        }
+        
+        public PlayReportAnalyzer AddSpec(IEnumerable<string> titleIds, Func<PlayReportGameSpec, PlayReportGameSpec> transform)
+        {
+            _specs.Add(transform(new PlayReportGameSpec { TitleIds = [..titleIds] }));
+            return this;
+        }
+        
+        public PlayReportAnalyzer AddSpec(IEnumerable<string> titleIds, Action<PlayReportGameSpec> transform)
+        {
+            _specs.Add(new PlayReportGameSpec { TitleIds = [..titleIds] }.Apply(transform));
             return this;
         }
 
-        public Optional<string> Run(string runningGameId, ApplicationMetadata appMeta, MessagePackObject playReport)
+        public PlayReportFormattedValue Run(string runningGameId, ApplicationMetadata appMeta, MessagePackObject playReport)
         {
             if (!playReport.IsDictionary) 
-                return Optional<string>.None;
+                return PlayReportFormattedValue.Unhandled;
 
-            if (!_specs.TryGetFirst(s => s.TitleIdStr.EqualsIgnoreCase(runningGameId), out PlayReportGameSpec spec))
-                return Optional<string>.None;
+            if (!_specs.TryGetFirst(s => runningGameId.EqualsAnyIgnoreCase(s.TitleIds), out PlayReportGameSpec spec))
+                return PlayReportFormattedValue.Unhandled;
 
             foreach (PlayReportValueFormatterSpec formatSpec in spec.Analyses.OrderBy(x => x.Priority))
             {
@@ -119,14 +127,14 @@ namespace Ryujinx.Ava.Utilities
                 return formatSpec.ValueFormatter(ref value);
             }
             
-            return Optional<string>.None;
+            return PlayReportFormattedValue.Unhandled;
         }
         
     }
 
     public class PlayReportGameSpec
     {
-        public required string TitleIdStr { get; init; }
+        public required string[] TitleIds { get; init; }
         public List<PlayReportValueFormatterSpec> Analyses { get; } = [];
 
         public PlayReportGameSpec AddValueFormatter(string reportKey, PlayReportValueFormatter valueFormatter)
@@ -158,14 +166,33 @@ namespace Ryujinx.Ava.Utilities
         public object BoxedValue { get; init; }
     }
 
+    public struct PlayReportFormattedValue
+    {
+        public bool Handled { get; private init; }
+        
+        public bool Reset { get; private init; }
+        
+        public string FormattedString { get; private init; }
+
+        public static implicit operator PlayReportFormattedValue(string formattedValue)
+            => new() { Handled = true, FormattedString = formattedValue };
+
+        public static PlayReportFormattedValue Unhandled => default;
+        public static PlayReportFormattedValue ForceReset => new() { Handled = true, Reset = true };
+
+        public static PlayReportValueFormatter AlwaysResets = AlwaysResetsImpl;
+        
+        private static PlayReportFormattedValue AlwaysResetsImpl(ref PlayReportValue _) => ForceReset;
+    }
+
     public struct PlayReportValueFormatterSpec
     {
         public required int Priority { get; init; }
         public required string ReportKey { get; init; }
-        public required PlayReportValueFormatter ValueFormatter { get; init; }
+        public PlayReportValueFormatter ValueFormatter { get; init; }
     }
 
-    public delegate string PlayReportValueFormatter(ref PlayReportValue value);
-    
+    public delegate PlayReportFormattedValue PlayReportValueFormatter(ref PlayReportValue value);
+
     #endregion
 }
