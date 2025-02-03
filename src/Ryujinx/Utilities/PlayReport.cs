@@ -44,10 +44,10 @@ namespace Ryujinx.Ava.Utilities
         {
             try
             {
-                return (long)value.BoxedValue switch
+                return (double)value.BoxedValue switch
                 {
-                    > 800 => "Exploring the Sky Islands",
-                    < -201 => "Exploring the Depths",
+                    > 800d => "Exploring the Sky Islands",
+                    < -201d => "Exploring the Depths",
                     _ => "Roaming Hyrule"
                 };
             }
