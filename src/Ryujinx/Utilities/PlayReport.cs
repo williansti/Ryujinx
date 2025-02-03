@@ -15,27 +15,47 @@ namespace Ryujinx.Ava.Utilities
                 "01007ef00011e000",
                 spec => spec.AddValueFormatter("IsHardMode", BreathOfTheWild_MasterMode)
             )
-            .AddSpec( // Super Mario Odyssey
+            .AddSpec(
+                "0100f2c0115b6000",
+                spec => spec.AddValueFormatter("PlayerPosY", TearsOfTheKingdom_CurrentField))
+            .AddSpec(
                 "0100000000010000",
                 spec =>
                     spec.AddValueFormatter("is_kids_mode", SuperMarioOdyssey_AssistMode)
             )
-            .AddSpec( // Super Mario Odyssey (China)
+            .AddSpec(
                 "010075000ECBE000",
                 spec =>
                     spec.AddValueFormatter("is_kids_mode", SuperMarioOdysseyChina_AssistMode)
             )
-            .AddSpec( // Super Mario 3D World + Bowser's Fury
+            .AddSpec(
                 "010028600EBDA000",
                 spec => spec.AddValueFormatter("mode", SuperMario3DWorldOrBowsersFury)
             )
-            .AddSpec( // Mario Kart 8 Deluxe, Mario Kart 8 Deluxe (China)
+            .AddSpec( // Global & China IDs
                 ["0100152000022000", "010075100E8EC000"],
                 spec => spec.AddValueFormatter("To", MarioKart8Deluxe_Mode)
             );
 
         private static PlayReportFormattedValue BreathOfTheWild_MasterMode(ref PlayReportValue value)
             => value.BoxedValue is 1 ? "Playing Master Mode" : PlayReportFormattedValue.ForceReset;
+
+        private static PlayReportFormattedValue TearsOfTheKingdom_CurrentField(ref PlayReportValue value)
+        {
+            try
+            {
+                return (long)value.BoxedValue switch
+                {
+                    > 800 => "Exploring the Sky Islands",
+                    < -201 => "Exploring the Depths",
+                    _ => "Roaming Hyrule"
+                };
+            }
+            catch
+            {
+                return PlayReportFormattedValue.ForceReset;
+            }
+        }
 
         private static PlayReportFormattedValue SuperMarioOdyssey_AssistMode(ref PlayReportValue value)
             => value.BoxedValue is 1 ? "Playing in Assist Mode" : "Playing in Regular Mode";
