@@ -2,14 +2,21 @@ using MsgPack;
 using Ryujinx.Horizon.Common;
 using Ryujinx.Memory;
 using System;
+using System.Threading;
 
 namespace Ryujinx.Horizon
 {
     public static class HorizonStatic
     {
-        internal static void HandlePlayReport(MessagePackObject report) => PlayReportPrinted?.Invoke(report);
+        internal static void HandlePlayReport(MessagePackObject report) => 
+            new Thread(() => PlayReport?.Invoke(report))
+            {
+                Name = "HLE.PlayReportEvent", 
+                IsBackground = true,
+                Priority = ThreadPriority.AboveNormal
+            }.Start();
         
-        public static event Action<MessagePackObject> PlayReportPrinted;
+        public static event Action<MessagePackObject> PlayReport;
         
         [ThreadStatic]
         private static HorizonOptions _options;

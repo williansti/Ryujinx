@@ -56,7 +56,7 @@ namespace Ryujinx.Ava
 
             ConfigurationState.Instance.EnableDiscordIntegration.Event += Update;
             TitleIDs.CurrentApplication.Event += (_, e) => Use(e.NewValue);
-            HorizonStatic.PlayReportPrinted += HandlePlayReport;
+            HorizonStatic.PlayReport += HandlePlayReport;
         }
 
         private static void Update(object sender, ReactiveEventArgs<bool> evnt)
