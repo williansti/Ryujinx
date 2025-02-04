@@ -7,7 +7,10 @@ namespace Ryujinx.Ava.Utilities
         public static PlayReportAnalyzer Analyzer { get; } = new PlayReportAnalyzer()
             .AddSpec(
                 "01007ef00011e000",
-                spec => spec.AddValueFormatter("IsHardMode", BreathOfTheWild_MasterMode)
+                spec => spec
+                    .AddValueFormatter("IsHardMode", BreathOfTheWild_MasterMode)
+                    // reset to normal status when switching between normal & master mode in title screen
+                    .AddValueFormatter("AoCVer", PlayReportFormattedValue.AlwaysResets)
             )
             .AddSpec(
                 "0100f2c0115b6000",
