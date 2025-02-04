@@ -360,6 +360,8 @@ namespace Ryujinx.Ava.UI.ViewModels
             }
         }
 
+        public bool HasDlc => ApplicationLibrary.HasDlcs(SelectedApplication.Id);
+
         public bool OpenUserSaveDirectoryEnabled => SelectedApplication.HasControlHolder && SelectedApplication.ControlHolder.Value.UserAccountSaveDataSize > 0;
 
         public bool OpenDeviceSaveDirectoryEnabled => SelectedApplication.HasControlHolder && SelectedApplication.ControlHolder.Value.DeviceSaveDataSize > 0;
