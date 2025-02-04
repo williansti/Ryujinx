@@ -180,8 +180,8 @@ namespace Ryujinx.Ava.Utilities
             /// <summary>
             /// A delegate factory you can use to always return the specified
             /// <paramref name="formattedValue"/> in a <see cref="PlayReportValueFormatter"/>.
-            /// <param name="formattedValue">The string to always return for this delegate instance.</param>
             /// </summary>
+            /// <param name="formattedValue">The string to always return for this delegate instance.</param>
             public static PlayReportValueFormatter AlwaysReturns(string formattedValue) => _ => formattedValue;
         }
     }
