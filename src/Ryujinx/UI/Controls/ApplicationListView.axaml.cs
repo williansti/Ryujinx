@@ -39,13 +39,7 @@ namespace Ryujinx.Ava.UI.Controls
             if (sender is not Button { Content: TextBlock playabilityLabel })
                 return;
 
-            if (!ulong.TryParse((string)playabilityLabel.Tag, NumberStyles.HexNumber, null, out ulong titleId))
-                return;
-
-            if (!mwvm.ApplicationLibrary.FindApplication(titleId, out ApplicationData appData))
-                return;
-
-            await CompatibilityList.Show(appData.IdString);
+            await CompatibilityList.Show((string)playabilityLabel.Tag);
         }
 
         private async void IdString_OnClick(object sender, RoutedEventArgs e)
