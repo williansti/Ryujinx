@@ -135,6 +135,14 @@ namespace Ryujinx.Ava.Utilities.AppLibrary
             return id.ToString("X16");
         }
 
+        public bool FindApplication(ulong id, out ApplicationData foundData)
+        {
+            DynamicData.Kernel.Optional<ApplicationData> appData = Applications.Lookup(id);
+            foundData = appData.HasValue ? appData.Value : null;
+
+            return appData.HasValue;
+        }
+
         /// <exception cref="LibHac.Common.Keys.MissingKeyException">The configured key set is missing a key.</exception>
         /// <exception cref="InvalidDataException">The NCA header could not be decrypted.</exception>
         /// <exception cref="NotSupportedException">The NCA version is not supported.</exception>
