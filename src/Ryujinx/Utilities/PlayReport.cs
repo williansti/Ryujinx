@@ -1,10 +1,4 @@
-﻿using Gommon;
-using MsgPack;
-using Ryujinx.Ava.Utilities.AppLibrary;
-using Ryujinx.Common.Helper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using PlayReportFormattedValue = Ryujinx.Ava.Utilities.PlayReportAnalyzer.FormattedValue;
 
 namespace Ryujinx.Ava.Utilities
 {
@@ -24,23 +18,23 @@ namespace Ryujinx.Ava.Utilities
                     spec.AddValueFormatter("is_kids_mode", SuperMarioOdyssey_AssistMode)
             )
             .AddSpec(
-                "010075000ECBE000",
+                "010075000ecbe000",
                 spec =>
                     spec.AddValueFormatter("is_kids_mode", SuperMarioOdysseyChina_AssistMode)
             )
             .AddSpec(
-                "010028600EBDA000",
+                "010028600ebda000",
                 spec => spec.AddValueFormatter("mode", SuperMario3DWorldOrBowsersFury)
             )
             .AddSpec( // Global & China IDs
-                ["0100152000022000", "010075100E8EC000"],
+                ["0100152000022000", "010075100e8ec000"],
                 spec => spec.AddValueFormatter("To", MarioKart8Deluxe_Mode)
             );
 
-        private static PlayReportFormattedValue BreathOfTheWild_MasterMode(ref PlayReportValue value)
+        private static PlayReportFormattedValue BreathOfTheWild_MasterMode(PlayReportValue value)
             => value.BoxedValue is 1 ? "Playing Master Mode" : PlayReportFormattedValue.ForceReset;
 
-        private static PlayReportFormattedValue TearsOfTheKingdom_CurrentField(ref PlayReportValue value) =>
+        private static PlayReportFormattedValue TearsOfTheKingdom_CurrentField(PlayReportValue value) =>
             value.PackedValue.AsDouble() switch
             {
                 > 800d => "Exploring the Sky Islands",
@@ -48,16 +42,16 @@ namespace Ryujinx.Ava.Utilities
                 _ => "Roaming Hyrule"
             };
 
-        private static PlayReportFormattedValue SuperMarioOdyssey_AssistMode(ref PlayReportValue value)
+        private static PlayReportFormattedValue SuperMarioOdyssey_AssistMode(PlayReportValue value)
             => value.BoxedValue is 1 ? "Playing in Assist Mode" : "Playing in Regular Mode";
 
-        private static PlayReportFormattedValue SuperMarioOdysseyChina_AssistMode(ref PlayReportValue value)
+        private static PlayReportFormattedValue SuperMarioOdysseyChina_AssistMode(PlayReportValue value)
             => value.BoxedValue is 1 ? "Playing in 帮助模式" : "Playing in 普通模式";
 
-        private static PlayReportFormattedValue SuperMario3DWorldOrBowsersFury(ref PlayReportValue value)
+        private static PlayReportFormattedValue SuperMario3DWorldOrBowsersFury(PlayReportValue value)
             => value.BoxedValue is 0 ? "Playing Super Mario 3D World" : "Playing Bowser's Fury";
         
-        private static PlayReportFormattedValue MarioKart8Deluxe_Mode(ref PlayReportValue value) 
+        private static PlayReportFormattedValue MarioKart8Deluxe_Mode(PlayReportValue value) 
             => value.BoxedValue switch
             {
                 // Single Player

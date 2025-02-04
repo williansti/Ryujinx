@@ -135,7 +135,7 @@ namespace Ryujinx.Ava
             if (!TitleIDs.CurrentApplication.Value.HasValue) return;
             if (_discordPresencePlaying is null) return;
 
-            PlayReportFormattedValue value = PlayReport.Analyzer.Run(TitleIDs.CurrentApplication.Value, _currentApp, playReport);
+            PlayReportAnalyzer.FormattedValue value = PlayReport.Analyzer.FormatPlayReportValue(TitleIDs.CurrentApplication.Value, _currentApp, playReport);
 
             if (!value.Handled) return;
 
