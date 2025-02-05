@@ -23,6 +23,7 @@ namespace Ryujinx.Ava.UI.Controls
         {
             ContentDialog contentDialog = new()
             {
+                Title = appData.Name,
                 PrimaryButtonText = string.Empty,
                 SecondaryButtonText = string.Empty,
                 CloseButtonText = LocaleManager.Instance[LocaleKeys.SettingsButtonClose],
