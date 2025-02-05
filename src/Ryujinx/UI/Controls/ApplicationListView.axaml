@@ -140,6 +140,7 @@
                                         TextWrapping="Wrap" />
                                     <TextBlock
                                         HorizontalAlignment="Stretch"
+                                        IsVisible="{Binding HasLdnGames}"
                                         Text="{Binding Converter={helpers:MultiplayerInfoConverter}}"
                                         TextAlignment="Start"
                                         TextWrapping="Wrap"/>

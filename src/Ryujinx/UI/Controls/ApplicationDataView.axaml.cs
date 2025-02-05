@@ -26,7 +26,8 @@ namespace Ryujinx.Ava.UI.Controls
                 PrimaryButtonText = string.Empty,
                 SecondaryButtonText = string.Empty,
                 CloseButtonText = LocaleManager.Instance[LocaleKeys.SettingsButtonClose],
-                Content = new ApplicationDataView { DataContext = appData }
+                MinWidth = 256,
+                Content = new ApplicationDataView { DataContext = new ApplicationDataViewModel(appData) }
             };
 
             Style closeButton = new(x => x.Name("CloseButton"));

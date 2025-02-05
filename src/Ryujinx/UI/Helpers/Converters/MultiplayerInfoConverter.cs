@@ -12,12 +12,9 @@ namespace Ryujinx.Ava.UI.Helpers
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is ApplicationData applicationData)
+            if (value is ApplicationData { HasLdnGames: true } applicationData)
             {
-                if (applicationData.PlayerCount != 0 && applicationData.GameCount != 0)
-                {
-                    return $"Hosted Games: {applicationData.GameCount}\nOnline Players: {applicationData.PlayerCount}";
-                }
+                return $"Hosted Games: {applicationData.GameCount}\nOnline Players: {applicationData.PlayerCount}";
             }
             
             return "";
