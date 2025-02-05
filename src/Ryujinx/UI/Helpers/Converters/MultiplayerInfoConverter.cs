@@ -11,7 +11,7 @@ namespace Ryujinx.Ava.UI.Helpers
 {
     internal class MultiplayerInfoConverter : MarkupExtension, IValueConverter
     {
-        private static readonly MultiplayerInfoConverter _instance = new();
+        public static readonly MultiplayerInfoConverter Instance = new();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -35,7 +35,7 @@ namespace Ryujinx.Ava.UI.Helpers
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return _instance;
+            return Instance;
         }
     }
 }

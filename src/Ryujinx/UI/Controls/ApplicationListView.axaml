@@ -141,7 +141,7 @@
                                     <TextBlock
                                         HorizontalAlignment="Stretch"
                                         IsVisible="{Binding HasLdnGames}"
-                                        Text="{Binding Converter={helpers:MultiplayerInfoConverter}}"
+                                        Text="{Binding Converter={x:Static helpers:MultiplayerInfoConverter.Instance}}"
                                         TextAlignment="Start"
                                         TextWrapping="Wrap"/>
                                 </StackPanel>
