@@ -7,6 +7,7 @@ using Ryujinx.Common.Configuration.Hid;
 using Ryujinx.Common.Configuration.Multiplayer;
 using Ryujinx.Common.Helper;
 using Ryujinx.Common.Logging;
+using Ryujinx.Common.Utilities;
 using Ryujinx.HLE;
 using System.Collections.Generic;
 using System.Linq;
@@ -311,6 +312,11 @@ namespace Ryujinx.Ava.Utilities.Configuration
             /// System Time Offset in Seconds
             /// </summary>
             public ReactiveObject<long> SystemTimeOffset { get; private set; }
+            
+            /// <summary>
+            /// Instead of setting the time via configuration, use the values provided by the system.
+            /// </summary>
+            public ReactiveObject<bool> MatchSystemTime { get; private set; }
 
             /// <summary>
             /// Enables or disables Docked Mode
@@ -387,6 +393,8 @@ namespace Ryujinx.Ava.Utilities.Configuration
                 TimeZone.LogChangesToValue(nameof(TimeZone));
                 SystemTimeOffset = new ReactiveObject<long>();
                 SystemTimeOffset.LogChangesToValue(nameof(SystemTimeOffset));
+                MatchSystemTime = new ReactiveObject<bool>();
+                MatchSystemTime.LogChangesToValue(nameof(MatchSystemTime));
                 EnableDockedMode = new ReactiveObject<bool>();
                 EnableDockedMode.LogChangesToValue(nameof(EnableDockedMode));
                 EnablePtc = new ReactiveObject<bool>();
@@ -444,6 +452,11 @@ namespace Ryujinx.Ava.Utilities.Configuration
             /// TODO: Implement a ReactiveList class.
             /// </summary>
             public ReactiveObject<List<InputConfig>> InputConfig { get; private set; }
+            
+            /// <summary>
+            /// The speed of spectrum cycling for the Rainbow LED feature.
+            /// </summary>
+            public ReactiveObject<float> RainbowSpeed { get; }
 
             public HidSection()
             {
@@ -451,6 +464,8 @@ namespace Ryujinx.Ava.Utilities.Configuration
                 EnableMouse = new ReactiveObject<bool>();
                 Hotkeys = new ReactiveObject<KeyboardHotkeys>();
                 InputConfig = new ReactiveObject<List<InputConfig>>();
+                RainbowSpeed = new ReactiveObject<float>();
+                RainbowSpeed.Event += (_, args) => Rainbow.Speed = args.NewValue;
             }
         }
 
