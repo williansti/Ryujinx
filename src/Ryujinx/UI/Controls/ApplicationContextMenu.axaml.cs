@@ -392,6 +392,12 @@ namespace Ryujinx.Ava.UI.Controls
             if (sender is MenuItem { DataContext: MainWindowViewModel { SelectedApplication: not null } viewModel })
                 await CompatibilityList.Show(viewModel.SelectedApplication.IdString);
         }
+        
+        public async void OpenApplicationData_Click(object sender, RoutedEventArgs args)
+        {
+            if (sender is MenuItem { DataContext: MainWindowViewModel { SelectedApplication: not null } viewModel })
+                await ApplicationDataView.Show(viewModel.SelectedApplication);
+        }
 
         public async void RunApplication_Click(object sender, RoutedEventArgs args)
         {
@@ -401,12 +407,8 @@ namespace Ryujinx.Ava.UI.Controls
 
         public async void TrimXCI_Click(object sender, RoutedEventArgs args)
         {
-            MainWindowViewModel viewModel = (sender as MenuItem)?.DataContext as MainWindowViewModel;
-
-            if (viewModel?.SelectedApplication != null)
-            {
+            if (sender is MenuItem { DataContext: MainWindowViewModel { SelectedApplication: not null } viewModel })
                 await viewModel.TrimXCIFile(viewModel.SelectedApplication.Path);
-            }
         }
     }
 }
