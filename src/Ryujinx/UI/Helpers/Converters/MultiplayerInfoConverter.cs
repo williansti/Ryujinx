@@ -1,8 +1,11 @@
 using Avalonia.Data.Converters;
 using Avalonia.Markup.Xaml;
+using Gommon;
+using Ryujinx.Ava.Common.Locale;
 using Ryujinx.Ava.Utilities.AppLibrary;
 using System;
 using System.Globalization;
+using System.Text;
 
 namespace Ryujinx.Ava.UI.Helpers
 {
@@ -12,13 +15,17 @@ namespace Ryujinx.Ava.UI.Helpers
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is ApplicationData { HasLdnGames: true } applicationData)
-            {
-                return $"Hosted Games: {applicationData.GameCount}\nOnline Players: {applicationData.PlayerCount}";
-            }
+            if (value is not ApplicationData { HasLdnGames: true } applicationData)
+                return "";
             
-            return "";
-            
+            return new StringBuilder()
+                .AppendLine(
+                    LocaleManager.Instance[LocaleKeys.GameListHeaderHostedGames]
+                        .Format(applicationData.GameCount))
+                .Append(
+                    LocaleManager.Instance[LocaleKeys.GameListHeaderPlayerCount]
+                        .Format(applicationData.PlayerCount))
+                .ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
