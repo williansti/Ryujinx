@@ -108,6 +108,25 @@ namespace Ryujinx.Ava.Utilities.PlayReport
                     Application = appMeta, PackedValue = valuePackObject
                 });
             }
+            
+            foreach (GameSpec.MultiFormatterSpec formatSpec in spec.MultiValueFormatters.OrderBy(x => x.Priority))
+            {
+                List<MessagePackObject> packedObjects = [];
+                foreach (var reportKey in formatSpec.ReportKeys)
+                {
+                    if (!playReport.AsDictionary().TryGetValue(reportKey, out MessagePackObject valuePackObject))
+                        continue;
+                    
+                    packedObjects.Add(valuePackObject);
+                }
+                
+                if (packedObjects.Count != formatSpec.ReportKeys.Length)
+                    return FormattedValue.Unhandled;
+                
+                return formatSpec.ValueFormatter(packedObjects
+                    .Select(packObject => new Value { Application = appMeta, PackedValue = packObject })
+                    .ToArray());
+            }
 
             return FormattedValue.Unhandled;
         }
@@ -178,6 +197,7 @@ namespace Ryujinx.Ava.Utilities.PlayReport
     {
         public required string[] TitleIds { get; init; }
         public List<FormatterSpec> SimpleValueFormatters { get; } = [];
+        public List<MultiFormatterSpec> MultiValueFormatters { get; } = [];
 
         /// <summary>
         /// Add a value formatter to the current <see cref="GameSpec"/>
@@ -212,6 +232,25 @@ namespace Ryujinx.Ava.Utilities.PlayReport
             });
             return this;
         }
+        
+        public GameSpec AddMultiValueFormatter(string[] reportKeys, PlayReportMultiValueFormatter valueFormatter)
+        {
+            MultiValueFormatters.Add(new MultiFormatterSpec
+            {
+                Priority = SimpleValueFormatters.Count, ReportKeys = reportKeys, ValueFormatter = valueFormatter
+            });
+            return this;
+        }
+        
+        public GameSpec AddMultiValueFormatter(int priority, string[] reportKeys,
+            PlayReportMultiValueFormatter valueFormatter)
+        {
+            MultiValueFormatters.Add(new MultiFormatterSpec
+            {
+                Priority = priority, ReportKeys = reportKeys, ValueFormatter = valueFormatter
+            });
+            return this;
+        }
 
         /// <summary>
         /// A struct containing the data for a mapping of a key in a Play Report to a formatter for its potential value.
@@ -221,6 +260,16 @@ namespace Ryujinx.Ava.Utilities.PlayReport
             public required int Priority { get; init; }
             public required string ReportKey { get; init; }
             public PlayReportValueFormatter ValueFormatter { get; init; }
+        }
+        
+        /// <summary>
+        /// A struct containing the data for a mapping of an arbitrary key set in a Play Report to a formatter for their potential values.
+        /// </summary>
+        public struct MultiFormatterSpec
+        {
+            public required int Priority { get; init; }
+            public required string[] ReportKeys { get; init; }
+            public PlayReportMultiValueFormatter ValueFormatter { get; init; }
         }
     }
 
@@ -269,7 +318,7 @@ namespace Ryujinx.Ava.Utilities.PlayReport
     }
 
     /// <summary>
-    /// The delegate type that powers the entire analysis system (as it currently is).<br/>
+    /// The delegate type that powers single value formatters.<br/>
     /// Takes in the result value from the Play Report, and outputs:
     /// <br/>
     /// a formatted string,
@@ -279,4 +328,16 @@ namespace Ryujinx.Ava.Utilities.PlayReport
     /// OR a signal to reset the value that the caller is using the <see cref="Analyzer"/> for. 
     /// </summary>
     public delegate Analyzer.FormattedValue PlayReportValueFormatter(Value value);
+    
+    /// <summary>
+    /// The delegate type that powers multiple value formatters.<br/>
+    /// Takes in the result value from the Play Report, and outputs:
+    /// <br/>
+    /// a formatted string,
+    /// <br/>
+    /// a signal that nothing was available to handle it,
+    /// <br/>
+    /// OR a signal to reset the value that the caller is using the <see cref="Analyzer"/> for. 
+    /// </summary>
+    public delegate Analyzer.FormattedValue PlayReportMultiValueFormatter(Value[] value);
 }

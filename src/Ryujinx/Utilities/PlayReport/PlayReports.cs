@@ -14,7 +14,8 @@ namespace Ryujinx.Ava.Utilities.PlayReport
             )
             .AddSpec(
                 "0100f2c0115b6000",
-                spec => spec.AddValueFormatter("PlayerPosY", TearsOfTheKingdom_CurrentField))
+                spec => spec
+                    .AddValueFormatter("PlayerPosY", TearsOfTheKingdom_CurrentField))
             .AddSpec(
                 "0100000000010000",
                 spec =>
@@ -39,6 +40,11 @@ namespace Ryujinx.Ava.Utilities.PlayReport
                     .AddValueFormatter("area_no", PokemonSVArea)
                     .AddValueFormatter("team_circle", PokemonSVUnionCircle)
             );
+
+        private static FormattedValue Botw(Value[] values)
+        {
+            return $"{values[0].BoxedValue}, {values[1].BoxedValue}";
+        }
 
         private static FormattedValue BreathOfTheWild_MasterMode(Value value)
             => value.BoxedValue is 1 ? "Playing Master Mode" : FormattedValue.ForceReset;
