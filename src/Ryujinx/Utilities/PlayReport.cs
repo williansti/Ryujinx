@@ -32,6 +32,12 @@ namespace Ryujinx.Ava.Utilities
             .AddSpec( // Global & China IDs
                 ["0100152000022000", "010075100e8ec000"],
                 spec => spec.AddValueFormatter("To", MarioKart8Deluxe_Mode)
+            )
+            .AddSpec(
+                ["0100a3d008c5c000", "01008f6008c5e000"],
+                spec => spec
+                    .AddValueFormatter("area_no", PokemonSVArea)
+                    .AddValueFormatter("team_circle", PokemonSVUnionCircle)
             );
 
         private static PlayReportFormattedValue BreathOfTheWild_MasterMode(PlayReportValue value)
@@ -79,6 +85,43 @@ namespace Ryujinx.Ava.Utilities
                 "Battle" => "Battle Mode",
                 "RaceStart" => "Selecting a Course",
                 "Race" => "Racing",
+                _ => PlayReportFormattedValue.ForceReset
+            };
+
+        private static PlayReportFormattedValue PokemonSVUnionCircle(PlayReportValue value)
+            => value.BoxedValue is 0 ? "Playing Alone" : "Playing in a group";
+
+        private static PlayReportFormattedValue PokemonSVArea(PlayReportValue value) 
+            => value.StringValue switch
+            {
+                // Base Game Locations
+                "a_w01" => "South Area One",
+                "a_w02" => "Mesagoza",
+                "a_w03" => "The Pokemon League",
+                "a_w04" => "South Area Two",
+                "a_w05" => "South Area Four",
+                "a_w06" => "South Area Six",
+                "a_w07" => "South Area Five",
+                "a_w08" => "South Area Three",
+                "a_w09" => "West Area One",
+                "a_w10" => "Asado Desert",
+                "a_w11" => "West Area Two",
+                "a_w12" => "Medali",
+                "a_w13" => "Tagtree Thicket",
+                "a_w14" => "East Area Three",
+                "a_w15" => "Artazon",
+                "a_w16" => "East Area Two",
+                "a_w18" => "Casseroya Lake",
+                "a_w19" => "Glaseado Mountain",
+                "a_w20" => "North Area Three",
+                "a_w21" => "North Area One",
+                "a_w22" => "North Area Two",
+                "a_w23" => "The Great Crater of Paldea",
+                "a_w24" => "South Paldean Sea",
+                "a_w25" => "West Paldean Sea",
+                "a_w26" => "East Paldean Sea",
+                "a_w27" => "Nouth Paldean Sea",
+                //TODO DLC Locations
                 _ => PlayReportFormattedValue.ForceReset
             };
     }
