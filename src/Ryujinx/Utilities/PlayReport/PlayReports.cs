@@ -1,16 +1,16 @@
-﻿using PlayReportFormattedValue = Ryujinx.Ava.Utilities.PlayReportAnalyzer.FormattedValue;
+﻿using static Ryujinx.Ava.Utilities.PlayReport.Analyzer;
 
-namespace Ryujinx.Ava.Utilities
+namespace Ryujinx.Ava.Utilities.PlayReport
 {
-    public static class PlayReport
+    public static class PlayReports
     {
-        public static PlayReportAnalyzer Analyzer { get; } = new PlayReportAnalyzer()
+        public static Analyzer Analyzer { get; } = new Analyzer()
             .AddSpec(
                 "01007ef00011e000",
                 spec => spec
                     .AddValueFormatter("IsHardMode", BreathOfTheWild_MasterMode)
                     // reset to normal status when switching between normal & master mode in title screen
-                    .AddValueFormatter("AoCVer", PlayReportFormattedValue.AlwaysResets)
+                    .AddValueFormatter("AoCVer", FormattedValue.AlwaysResets)
             )
             .AddSpec(
                 "0100f2c0115b6000",
@@ -40,10 +40,10 @@ namespace Ryujinx.Ava.Utilities
                     .AddValueFormatter("team_circle", PokemonSVUnionCircle)
             );
 
-        private static PlayReportFormattedValue BreathOfTheWild_MasterMode(PlayReportValue value)
-            => value.BoxedValue is 1 ? "Playing Master Mode" : PlayReportFormattedValue.ForceReset;
+        private static FormattedValue BreathOfTheWild_MasterMode(Value value)
+            => value.BoxedValue is 1 ? "Playing Master Mode" : FormattedValue.ForceReset;
 
-        private static PlayReportFormattedValue TearsOfTheKingdom_CurrentField(PlayReportValue value) =>
+        private static FormattedValue TearsOfTheKingdom_CurrentField(Value value) =>
             value.DoubleValue switch
             {
                 > 800d => "Exploring the Sky Islands",
@@ -51,16 +51,16 @@ namespace Ryujinx.Ava.Utilities
                 _ => "Roaming Hyrule"
             };
 
-        private static PlayReportFormattedValue SuperMarioOdyssey_AssistMode(PlayReportValue value)
+        private static FormattedValue SuperMarioOdyssey_AssistMode(Value value)
             => value.BoxedValue is 1 ? "Playing in Assist Mode" : "Playing in Regular Mode";
 
-        private static PlayReportFormattedValue SuperMarioOdysseyChina_AssistMode(PlayReportValue value)
+        private static FormattedValue SuperMarioOdysseyChina_AssistMode(Value value)
             => value.BoxedValue is 1 ? "Playing in 帮助模式" : "Playing in 普通模式";
 
-        private static PlayReportFormattedValue SuperMario3DWorldOrBowsersFury(PlayReportValue value)
+        private static FormattedValue SuperMario3DWorldOrBowsersFury(Value value)
             => value.BoxedValue is 0 ? "Playing Super Mario 3D World" : "Playing Bowser's Fury";
         
-        private static PlayReportFormattedValue MarioKart8Deluxe_Mode(PlayReportValue value) 
+        private static FormattedValue MarioKart8Deluxe_Mode(Value value) 
             => value.StringValue switch
             {
                 // Single Player
@@ -85,13 +85,13 @@ namespace Ryujinx.Ava.Utilities
                 "Battle" => "Battle Mode",
                 "RaceStart" => "Selecting a Course",
                 "Race" => "Racing",
-                _ => PlayReportFormattedValue.ForceReset
+                _ => FormattedValue.ForceReset
             };
 
-        private static PlayReportFormattedValue PokemonSVUnionCircle(PlayReportValue value)
+        private static FormattedValue PokemonSVUnionCircle(Value value)
             => value.BoxedValue is 0 ? "Playing Alone" : "Playing in a group";
 
-        private static PlayReportFormattedValue PokemonSVArea(PlayReportValue value) 
+        private static FormattedValue PokemonSVArea(Value value) 
             => value.StringValue switch
             {
                 // Base Game Locations
@@ -122,7 +122,7 @@ namespace Ryujinx.Ava.Utilities
                 "a_w26" => "East Paldean Sea",
                 "a_w27" => "Nouth Paldean Sea",
                 //TODO DLC Locations
-                _ => PlayReportFormattedValue.ForceReset
+                _ => FormattedValue.ForceReset
             };
     }
 }
