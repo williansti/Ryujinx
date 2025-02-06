@@ -41,11 +41,6 @@ namespace Ryujinx.Ava.Utilities.PlayReport
                     .AddValueFormatter("team_circle", PokemonSVUnionCircle)
             );
 
-        private static FormattedValue Botw(Value[] values)
-        {
-            return $"{values[0].BoxedValue}, {values[1].BoxedValue}";
-        }
-
         private static FormattedValue BreathOfTheWild_MasterMode(Value value)
             => value.BoxedValue is 1 ? "Playing Master Mode" : FormattedValue.ForceReset;
 
