@@ -132,7 +132,7 @@ namespace Ryujinx.Ava.Utilities.PlayReport
         }
 
         /// <summary>
-        /// A potential formatted value returned by a <see cref="PlayReportValueFormatter"/>.
+        /// A potential formatted value returned by a <see cref="ValueFormatter"/>.
         /// </summary>
         public readonly struct FormattedValue
         {
@@ -175,16 +175,16 @@ namespace Ryujinx.Ava.Utilities.PlayReport
             public static FormattedValue ForceReset => new() { Handled = true, Reset = true };
 
             /// <summary>
-            /// A delegate singleton you can use to always return <see cref="ForceReset"/> in a <see cref="PlayReportValueFormatter"/>.
+            /// A delegate singleton you can use to always return <see cref="ForceReset"/> in a <see cref="ValueFormatter"/>.
             /// </summary>
-            public static readonly PlayReportValueFormatter AlwaysResets = _ => ForceReset;
+            public static readonly ValueFormatter AlwaysResets = _ => ForceReset;
 
             /// <summary>
             /// A delegate factory you can use to always return the specified
-            /// <paramref name="formattedValue"/> in a <see cref="PlayReportValueFormatter"/>.
+            /// <paramref name="formattedValue"/> in a <see cref="ValueFormatter"/>.
             /// </summary>
             /// <param name="formattedValue">The string to always return for this delegate instance.</param>
-            public static PlayReportValueFormatter AlwaysReturns(string formattedValue) => _ => formattedValue;
+            public static ValueFormatter AlwaysReturns(string formattedValue) => _ => formattedValue;
         }
     }
 
@@ -206,7 +206,7 @@ namespace Ryujinx.Ava.Utilities.PlayReport
         /// <param name="reportKey">The key name to match.</param>
         /// <param name="valueFormatter">The function which can return a potential formatted value.</param>
         /// <returns>The current <see cref="GameSpec"/>, for chaining convenience.</returns>
-        public GameSpec AddValueFormatter(string reportKey, PlayReportValueFormatter valueFormatter)
+        public GameSpec AddValueFormatter(string reportKey, ValueFormatter valueFormatter)
         {
             SimpleValueFormatters.Add(new FormatterSpec
             {
@@ -224,7 +224,7 @@ namespace Ryujinx.Ava.Utilities.PlayReport
         /// <param name="valueFormatter">The function which can return a potential formatted value.</param>
         /// <returns>The current <see cref="GameSpec"/>, for chaining convenience.</returns>
         public GameSpec AddValueFormatter(int priority, string reportKey,
-            PlayReportValueFormatter valueFormatter)
+            ValueFormatter valueFormatter)
         {
             SimpleValueFormatters.Add(new FormatterSpec
             {
@@ -233,7 +233,14 @@ namespace Ryujinx.Ava.Utilities.PlayReport
             return this;
         }
         
-        public GameSpec AddMultiValueFormatter(string[] reportKeys, PlayReportMultiValueFormatter valueFormatter)
+        /// <summary>
+        /// Add a multi-value formatter to the current <see cref="GameSpec"/>
+        /// matching a specific set of keys that could exist in a Play Report for the previously specified title IDs.
+        /// </summary>
+        /// <param name="reportKeys">The key names to match.</param>
+        /// <param name="valueFormatter">The function which can format the values.</param>
+        /// <returns>The current <see cref="GameSpec"/>, for chaining convenience.</returns>
+        public GameSpec AddMultiValueFormatter(string[] reportKeys, MultiValueFormatter valueFormatter)
         {
             MultiValueFormatters.Add(new MultiFormatterSpec
             {
@@ -242,8 +249,16 @@ namespace Ryujinx.Ava.Utilities.PlayReport
             return this;
         }
         
+        /// <summary>
+        /// Add a multi-value formatter at a specific priority to the current <see cref="GameSpec"/>
+        /// matching a specific set of keys that could exist in a Play Report for the previously specified title IDs.
+        /// </summary>
+        /// <param name="priority">The resolution priority of this value formatter. Higher resolves sooner.</param>
+        /// <param name="reportKeys">The key names to match.</param>
+        /// <param name="valueFormatter">The function which can format the values.</param>
+        /// <returns>The current <see cref="GameSpec"/>, for chaining convenience.</returns>
         public GameSpec AddMultiValueFormatter(int priority, string[] reportKeys,
-            PlayReportMultiValueFormatter valueFormatter)
+            MultiValueFormatter valueFormatter)
         {
             MultiValueFormatters.Add(new MultiFormatterSpec
             {
@@ -259,7 +274,7 @@ namespace Ryujinx.Ava.Utilities.PlayReport
         {
             public required int Priority { get; init; }
             public required string ReportKey { get; init; }
-            public PlayReportValueFormatter ValueFormatter { get; init; }
+            public ValueFormatter ValueFormatter { get; init; }
         }
         
         /// <summary>
@@ -269,12 +284,12 @@ namespace Ryujinx.Ava.Utilities.PlayReport
         {
             public required int Priority { get; init; }
             public required string[] ReportKeys { get; init; }
-            public PlayReportMultiValueFormatter ValueFormatter { get; init; }
+            public MultiValueFormatter ValueFormatter { get; init; }
         }
     }
 
     /// <summary>
-    /// The input data to a <see cref="PlayReportValueFormatter"/>,
+    /// The input data to a <see cref="ValueFormatter"/>,
     /// containing the currently running application's <see cref="ApplicationMetadata"/>,
     /// and the matched <see cref="MessagePackObject"/> from the Play Report.
     /// </summary>
@@ -294,7 +309,7 @@ namespace Ryujinx.Ava.Utilities.PlayReport
         /// Access the <see cref="PackedValue"/> as its underlying .NET type.<br/>
         /// 
         /// Does not seem to work well with comparing numeric types,
-        /// so use <see cref="PackedValue"/> and the AsX (where X is a numerical type name i.e. Int32) methods for that.
+        /// so use XValue properties for that.
         /// </summary>
         public object BoxedValue => PackedValue.ToObject();
 
@@ -327,7 +342,7 @@ namespace Ryujinx.Ava.Utilities.PlayReport
     /// <br/>
     /// OR a signal to reset the value that the caller is using the <see cref="Analyzer"/> for. 
     /// </summary>
-    public delegate Analyzer.FormattedValue PlayReportValueFormatter(Value value);
+    public delegate Analyzer.FormattedValue ValueFormatter(Value value);
     
     /// <summary>
     /// The delegate type that powers multiple value formatters.<br/>
@@ -339,5 +354,5 @@ namespace Ryujinx.Ava.Utilities.PlayReport
     /// <br/>
     /// OR a signal to reset the value that the caller is using the <see cref="Analyzer"/> for. 
     /// </summary>
-    public delegate Analyzer.FormattedValue PlayReportMultiValueFormatter(Value[] value);
+    public delegate Analyzer.FormattedValue MultiValueFormatter(Value[] value);
 }
