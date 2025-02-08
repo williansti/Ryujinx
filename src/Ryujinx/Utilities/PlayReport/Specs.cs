@@ -28,7 +28,7 @@ namespace Ryujinx.Ava.Utilities.PlayReport
         /// <param name="reportKey">The key name to match.</param>
         /// <param name="valueFormatter">The function which can return a potential formatted value.</param>
         /// <returns>The current <see cref="GameSpec"/>, for chaining convenience.</returns>
-        public GameSpec AddValueFormatter(string reportKey, ValueFormatter valueFormatter)
+        public GameSpec AddValueFormatter(string reportKey, SingleValueFormatter valueFormatter)
             => AddValueFormatter(_lastPriority++, reportKey, valueFormatter);
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Ryujinx.Ava.Utilities.PlayReport
         /// <param name="valueFormatter">The function which can return a potential formatted value.</param>
         /// <returns>The current <see cref="GameSpec"/>, for chaining convenience.</returns>
         public GameSpec AddValueFormatter(int priority, string reportKey,
-            ValueFormatter valueFormatter)
+            SingleValueFormatter valueFormatter)
         {
             ValueFormatters.Add(new FormatterSpec
             {
@@ -195,26 +195,21 @@ namespace Ryujinx.Ava.Utilities.PlayReport
                 return true;
             }
 
-            if (Formatter is ValueFormatter vf && data is MessagePackObject mpo)
+            switch (Formatter)
             {
-                formattedValue = vf(new SingleValue(mpo) { Application = appMeta, PlayReport = playReport });
-                return true;
+                case SingleValueFormatter svf when data is MessagePackObject mpo:
+                    formattedValue = svf(new SingleValue(mpo) { Application = appMeta, PlayReport = playReport });
+                    return true;
+                case MultiValueFormatter mvf when data is List<MessagePackObject> messagePackObjects:
+                    formattedValue = mvf(new MultiValue(messagePackObjects) { Application = appMeta, PlayReport = playReport });
+                    return true;
+                case SparseMultiValueFormatter smvf when
+                    data is Dictionary<string, MessagePackObject> sparseMessagePackObjects:
+                    formattedValue = smvf(new SparseMultiValue(sparseMessagePackObjects) { Application = appMeta, PlayReport = playReport });
+                    return true;
+                default:
+                    throw new InvalidOperationException("Formatter delegate is not of a known type!");
             }
-
-            if (Formatter is MultiValueFormatter mvf && data is List<MessagePackObject> messagePackObjects)
-            {
-                formattedValue = mvf(new MultiValue(messagePackObjects) { Application = appMeta, PlayReport = playReport });
-                return true;
-            }
-
-            if (Formatter is SparseMultiValueFormatter smvf &&
-                data is Dictionary<string, MessagePackObject> sparseMessagePackObjects)
-            {
-                formattedValue = smvf(new SparseMultiValue(sparseMessagePackObjects) { Application = appMeta, PlayReport = playReport });
-                return true;
-            }
-
-            throw new InvalidOperationException("Formatter delegate is not of a known type!");
         }
     }
 }
