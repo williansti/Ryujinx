@@ -14,6 +14,12 @@ namespace Ryujinx.Ava.Utilities.PlayReport
     /// </summary>
     public class GameSpec
     {
+        public static GameSpec Create(string requiredTitleId, params IEnumerable<string> otherTitleIds)
+            => new() { TitleIds = otherTitleIds.Prepend(requiredTitleId).ToArray() };
+        
+        public static GameSpec Create(IEnumerable<string> titleIds)
+            => new() { TitleIds = titleIds.ToArray() };
+        
         private int _lastPriority;
         
         public required string[] TitleIds { get; init; }
