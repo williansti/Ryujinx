@@ -52,7 +52,7 @@ namespace ARMeilleure.Translation.Cache
                     return;
                 }
 
-                var firstRegion = new ReservedRegion(allocator, CacheSize);
+                ReservedRegion firstRegion = new(allocator, CacheSize);
                 _jitRegions.Add(firstRegion);
                 _activeRegionIndex = 0;
 
@@ -124,7 +124,7 @@ namespace ARMeilleure.Translation.Cache
             {
                 Debug.Assert(_initialized);
 
-                foreach (var region in _jitRegions)
+                foreach (ReservedRegion region in _jitRegions)
                 {
                     if (pointer.ToInt64() < region.Pointer.ToInt64() ||
                         pointer.ToInt64() >= (region.Pointer + CacheSize).ToInt64())
@@ -224,7 +224,7 @@ namespace ARMeilleure.Translation.Cache
         {
             lock (_lock)
             {
-                foreach (var region in _jitRegions)
+                foreach (ReservedRegion _ in _jitRegions)
                 {
                     int index = _cacheEntries.BinarySearch(new CacheEntry(offset, 0, default));
 
