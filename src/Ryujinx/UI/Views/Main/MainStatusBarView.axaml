@@ -23,7 +23,7 @@
         Background="{DynamicResource ThemeContentBackgroundColor}"
         DockPanel.Dock="Bottom"
         IsVisible="{Binding ShowMenuAndStatusBar}"
-        ColumnDefinitions="Auto,Auto,*,Auto,Auto">
+        ColumnDefinitions="Auto,Auto,*,Auto,Auto,Auto">
         <StackPanel
             Grid.Column="0"
             Margin="5"
@@ -280,8 +280,23 @@
                 Text="{Binding GpuNameText}"
                 TextAlignment="Start" />
         </StackPanel>
-        <StackPanel
+        <StackPanel 
             Grid.Column="4"
+            Margin="0,0,5,0"
+            IsVisible="{Binding EnableNonGameRunningControls}"
+            Orientation="Horizontal">
+            <Button Margin="0, 0, 5, 0"
+                    Command="{Binding UpdateCommand}">
+                <TextBlock
+                    Margin="-5"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Text="{ext:Locale UpdaterBackgroundStatusBarButtonText}" />
+            </Button>
+            <controls:MiniVerticalSeparator IsVisible="{Binding UpdateAvailable}" />
+        </StackPanel>
+        <StackPanel
+            Grid.Column="5"
             Margin="0,0,5,0"
             VerticalAlignment="Center"
             IsVisible="{Binding ShowFirmwareStatus}"

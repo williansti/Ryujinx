@@ -413,15 +413,8 @@ namespace Ryujinx.Ava.UI.Windows
                 case UpdaterType.CheckInBackground:
                     if ((await Updater.CheckVersionAsync()).TryGet(out (Version Current, Version Incoming) versions))
                     {
-                        string newVersionString = ReleaseInformation.IsCanaryBuild
-                            ? $"Canary {versions.Current} -> Canary {versions.Incoming}"
-                            : $"{versions.Current} -> {versions.Incoming}";
-                    
                         if (versions.Current < versions.Incoming)
-                            NotificationHelper.ShowInformation(
-                                title: "Update Available",
-                                text: newVersionString,
-                                onClick: () => _ = Updater.BeginUpdateAsync());
+                            Dispatcher.UIThread.Post(() => RyujinxApp.MainWindow.ViewModel.UpdateAvailable = true);
                     }
                     break;
             }
