@@ -286,6 +286,7 @@
             IsVisible="{Binding EnableNonGameRunningControls}"
             Orientation="Horizontal">
             <Button Margin="0, 0, 5, 0"
+                    IsVisible="{Binding UpdateAvailable}"
                     Command="{Binding UpdateCommand}">
                 <TextBlock
                     Margin="-5"
