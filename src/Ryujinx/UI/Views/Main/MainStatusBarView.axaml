@@ -283,10 +283,14 @@
         <StackPanel 
             Grid.Column="4"
             Margin="0,0,5,0"
-            IsVisible="{Binding EnableNonGameRunningControls}"
             Orientation="Horizontal">
+            <StackPanel.IsVisible>
+                <MultiBinding Converter="{x:Static BoolConverters.And}">
+                    <Binding Path="EnableNonGameRunningControls" />
+                    <Binding Path="UpdateAvailable" />
+                </MultiBinding>
+            </StackPanel.IsVisible>
             <Button Margin="0, 0, 5, 0"
-                    IsVisible="{Binding UpdateAvailable}"
                     Command="{Binding UpdateCommand}">
                 <TextBlock
                     Margin="-5"
@@ -294,7 +298,7 @@
                     VerticalAlignment="Center"
                     Text="{ext:Locale UpdaterBackgroundStatusBarButtonText}" />
             </Button>
-            <controls:MiniVerticalSeparator IsVisible="{Binding UpdateAvailable}" />
+            <controls:MiniVerticalSeparator Margin="5,0,0,0"/>
         </StackPanel>
         <StackPanel
             Grid.Column="5"

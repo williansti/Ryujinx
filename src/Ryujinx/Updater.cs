@@ -163,7 +163,7 @@ namespace Ryujinx.Ava
 
                 _running = false;
 
-                return (currentVersion, null);
+                return default;
             }
 
             return (currentVersion, newVersion);
@@ -178,7 +178,11 @@ namespace Ryujinx.Ava
 
             _running = true;
 
-            (Version currentVersion, Version newVersion) = (await CheckVersionAsync(showVersionUpToDate)).OrDefault();
+            Optional<(Version, Version)> versionTuple = await CheckVersionAsync(showVersionUpToDate);
+
+            if (_running is false || !versionTuple.HasValue) return;
+
+            (Version currentVersion, Version newVersion) = versionTuple.Value;
 
             if (newVersion <= currentVersion)
             {

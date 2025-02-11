@@ -413,8 +413,7 @@ namespace Ryujinx.Ava.UI.Windows
                 case UpdaterType.CheckInBackground:
                     if ((await Updater.CheckVersionAsync()).TryGet(out (Version Current, Version Incoming) versions))
                     {
-                        if (versions.Current < versions.Incoming)
-                            Dispatcher.UIThread.Post(() => RyujinxApp.MainWindow.ViewModel.UpdateAvailable = true);
+                        Dispatcher.UIThread.Post(() => RyujinxApp.MainWindow.ViewModel.UpdateAvailable = versions.Current < versions.Incoming);
                     }
                     break;
             }
