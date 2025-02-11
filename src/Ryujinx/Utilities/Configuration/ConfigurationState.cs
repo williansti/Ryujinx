@@ -56,6 +56,7 @@ namespace Ryujinx.Ava.Utilities.Configuration
                 DockedMode = System.EnableDockedMode,
                 EnableDiscordIntegration = EnableDiscordIntegration,
                 CheckUpdatesOnStart = CheckUpdatesOnStart,
+                UpdateCheckerType = UpdateCheckerType,
                 ShowConfirmExit = ShowConfirmExit,
                 RememberWindowState = RememberWindowState,
                 ShowTitleBar = ShowTitleBar,
