@@ -175,7 +175,7 @@ namespace Ryujinx.Ava.Utilities.Configuration
             System.SystemTimeOffset.Value = 0;
             System.EnableDockedMode.Value = true;
             EnableDiscordIntegration.Value = true;
-            CheckUpdatesOnStart.Value = true;
+            UpdateCheckerType.Value = UpdaterType.PromptAtStartup;
             ShowConfirmExit.Value = true;
             RememberWindowState.Value = true;
             ShowTitleBar.Value = !OperatingSystem.IsWindows();

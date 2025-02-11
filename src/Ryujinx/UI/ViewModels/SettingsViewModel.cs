@@ -13,6 +13,7 @@ using Ryujinx.Ava.UI.Models.Input;
 using Ryujinx.Ava.UI.Windows;
 using Ryujinx.Ava.Utilities.Configuration;
 using Ryujinx.Ava.Utilities.Configuration.System;
+using Ryujinx.Ava.Utilities.Configuration.UI;
 using Ryujinx.Common.Configuration;
 using Ryujinx.Common.Configuration.Multiplayer;
 using Ryujinx.Common.GraphicsDriver;
@@ -121,6 +122,7 @@ namespace Ryujinx.Ava.UI.ViewModels
         public bool RememberWindowState { get; set; }
         public bool ShowTitleBar { get; set; }
         public int HideCursor { get; set; }
+        public int UpdateCheckerType { get; set; }
         public bool EnableDockedMode { get; set; }
         public bool EnableKeyboard { get; set; }
         public bool EnableMouse { get; set; }
@@ -476,6 +478,7 @@ namespace Ryujinx.Ava.UI.ViewModels
             RememberWindowState = config.RememberWindowState;
             ShowTitleBar = config.ShowTitleBar;
             HideCursor = (int)config.HideCursor.Value;
+            UpdateCheckerType = (int)config.UpdateCheckerType.Value;
 
             GameDirectories.Clear();
             GameDirectories.AddRange(config.UI.GameDirs.Value);
@@ -582,6 +585,7 @@ namespace Ryujinx.Ava.UI.ViewModels
             config.RememberWindowState.Value = RememberWindowState;
             config.ShowTitleBar.Value = ShowTitleBar;
             config.HideCursor.Value = (HideCursorMode)HideCursor;
+            config.UpdateCheckerType.Value = (UpdaterType)UpdateCheckerType;
 
             if (GameDirectoryChanged)
             {
