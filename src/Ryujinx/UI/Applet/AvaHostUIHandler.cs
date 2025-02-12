@@ -283,8 +283,7 @@ namespace Ryujinx.Ava.UI.Applet
                     Profiles = profiles, 
                     SelectedUserId = _parent.AccountManager.LastOpenedUser.UserId
                 };
-                UserSelectorDialog content = new(viewModel);
-                (selected, _) = await UserSelectorDialog.ShowInputDialog(content);
+                (selected, _) = await UserSelectorDialog.ShowInputDialog(viewModel);
         
                 dialogCloseEvent.Set();
             });

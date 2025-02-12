@@ -79,7 +79,7 @@ namespace Ryujinx.Ava.UI.Applet
             }
         }
 
-        public static async Task<(UserId Id, bool Result)> ShowInputDialog(UserSelectorDialog content)
+        public static async Task<(UserId Id, bool Result)> ShowInputDialog(UserSelectorDialogViewModel viewModel)
         {
             ContentDialog contentDialog = new()
             {
@@ -87,22 +87,25 @@ namespace Ryujinx.Ava.UI.Applet
                 PrimaryButtonText = LocaleManager.Instance[LocaleKeys.Continue],
                 SecondaryButtonText = string.Empty,
                 CloseButtonText = LocaleManager.Instance[LocaleKeys.Cancel],
-                Content = content,
+                Content = new UserSelectorDialog(viewModel),
                 Padding = new Thickness(0)
             };
 
             UserId result = UserId.Null;
             bool input = false;
+            
+            contentDialog.Closed += Handler;
 
+            await ContentDialogHelper.ShowAsync(contentDialog);
+
+            return (result, input);
+            
             void Handler(ContentDialog sender, ContentDialogClosedEventArgs eventArgs)
             {
                 if (eventArgs.Result == ContentDialogResult.Primary)
                 {
-                    if (contentDialog.Content is UserSelectorDialog view)
-                    {
-                        result = view.ViewModel.SelectedUserId;
-                        input = true;
-                    }
+                    result = viewModel.SelectedUserId;
+                    input = true;
                 }
                 else
                 {
@@ -110,12 +113,6 @@ namespace Ryujinx.Ava.UI.Applet
                     input = false;
                 }
             }
-
-            contentDialog.Closed += Handler;
-
-            await ContentDialogHelper.ShowAsync(contentDialog);
-
-            return (result, input);
         }
     }
 }
