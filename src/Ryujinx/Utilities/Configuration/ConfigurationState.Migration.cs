@@ -88,6 +88,7 @@ namespace Ryujinx.Ava.Utilities.Configuration
             System.Region.Value = cff.SystemRegion;
             System.TimeZone.Value = cff.SystemTimeZone;
             System.SystemTimeOffset.Value = cff.SystemTimeOffset;
+            System.MatchSystemTime.Value = cff.MatchSystemTime;
             System.EnableDockedMode.Value = cff.DockedMode;
             System.EnablePtc.Value = cff.EnablePtc;
             System.EnableLowPowerPtc.Value = cff.EnableLowPowerPtc;
