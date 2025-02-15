@@ -526,7 +526,7 @@ namespace Ryujinx.Ava.UI.ViewModels
             EnableFsIntegrityChecks = config.System.EnableFsIntegrityChecks;
             DramSize = config.System.DramSize;
             IgnoreMissingServices = config.System.IgnoreMissingServices;
-            IgnoreApplet = config.System.IgnoreApplet;
+            IgnoreApplet = config.System.IgnoreControllerApplet;
 
             // CPU
             EnablePptc = config.System.EnablePtc;
@@ -629,7 +629,7 @@ namespace Ryujinx.Ava.UI.ViewModels
             config.System.EnableFsIntegrityChecks.Value = EnableFsIntegrityChecks;
             config.System.DramSize.Value = DramSize;
             config.System.IgnoreMissingServices.Value = IgnoreMissingServices;
-            config.System.IgnoreApplet.Value = IgnoreApplet;
+            config.System.IgnoreControllerApplet.Value = IgnoreApplet;
 
             // CPU
             config.System.EnablePtc.Value = EnablePptc;

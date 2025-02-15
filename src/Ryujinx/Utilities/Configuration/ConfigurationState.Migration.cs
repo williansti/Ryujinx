@@ -100,7 +100,7 @@ namespace Ryujinx.Ava.Utilities.Configuration
             System.MemoryManagerMode.Value = cff.MemoryManagerMode;
             System.DramSize.Value = cff.DramSize;
             System.IgnoreMissingServices.Value = cff.IgnoreMissingServices;
-            System.IgnoreApplet.Value = cff.IgnoreApplet;
+            System.IgnoreControllerApplet.Value = cff.IgnoreApplet;
             System.UseHypervisor.Value = cff.UseHypervisor;
             
             UI.GuiColumns.FavColumn.Value = cff.GuiColumns.FavColumn;
