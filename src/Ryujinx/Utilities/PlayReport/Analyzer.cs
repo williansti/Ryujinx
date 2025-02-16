@@ -20,6 +20,11 @@ namespace Ryujinx.Ava.Utilities.PlayReport
 
         public IReadOnlyList<GameSpec> Specs => new ReadOnlyCollection<GameSpec>(_specs);
 
+        public GameSpec GetSpec(string titleId) => _specs.First(x => x.TitleIds.ContainsIgnoreCase(titleId));
+
+        public bool TryGetSpec(string titleId, out GameSpec gameSpec)
+            => (gameSpec = _specs.FirstOrDefault(x => x.TitleIds.ContainsIgnoreCase(titleId))) != null;
+
         /// <summary>
         /// Add an analysis spec matching a specific game by title ID, with the provided spec configuration.
         /// </summary>
@@ -128,13 +133,13 @@ namespace Ryujinx.Ava.Utilities.PlayReport
         {
             if (!playReport.ReportData.IsDictionary)
                 return FormattedValue.Unhandled;
-
-            if (!_specs.TryGetFirst(s => runningGameId.EqualsAnyIgnoreCase(s.TitleIds), out GameSpec spec))
+            
+            if (!TryGetSpec(runningGameId, out GameSpec spec))
                 return FormattedValue.Unhandled;
 
             foreach (FormatterSpecBase formatSpec in spec.ValueFormatters.OrderBy(x => x.Priority))
             {
-                if (!formatSpec.Format(appMeta, playReport, out FormattedValue value))
+                if (!formatSpec.TryFormat(appMeta, playReport, out FormattedValue value))
                     continue;
 
                 return value;
