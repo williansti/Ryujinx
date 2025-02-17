@@ -2839,7 +2839,7 @@
 01009B90006DC000,"Super Mario Maker™ 2",online-broken;ldn-broken,playable,2024-08-25 11:05:19
 0100000000010000,"Super Mario Odyssey™",nvdec;intel-vendor-bug;mac-bug,playable,2024-08-25 01:32:34
 010036B0034E4000,"Super Mario Party™",gpu;Needs Update;ldn-works,ingame,2024-06-21 05:10:16
-0100965017338000,"Super Mario Party Jamboree",gpu,ingame,2025-02-17 02:09:20
+0100965017338000,"Super Mario Party Jamboree",mac-bug;gpu,ingame,2025-02-17 02:09:20
 0100BC0018138000,"Super Mario RPG™",gpu;audio;nvdec,ingame,2024-06-19 17:43:42
 ,"Super Mario World",homebrew,boots,2024-06-13 01:40:31
 010049900F546000,"Super Mario™ 3D All-Stars",services-horizon;slow;vulkan;amd-vendor-bug,ingame,2024-05-07 02:38:16
