@@ -4648,56 +4648,6 @@
       }
     },
     {
-      "ID": "SettingsTabSystemSystemLanguageSwedish",
-      "Translations": {
-        "ar_SA": "",
-        "de_DE": "",
-        "el_GR": "",
-        "en_US": "Swedish",
-        "es_ES": "",
-        "fr_FR": "",
-        "he_IL": "",
-        "it_IT": "",
-        "ja_JP": "",
-        "ko_KR": "스웨덴어",
-        "no_NO": "Svensk",
-        "pl_PL": "",
-        "pt_BR": "Sueco",
-        "ru_RU": "",
-        "sv_SE": "Svenska",
-        "th_TH": "",
-        "tr_TR": "",
-        "uk_UA": "",
-        "zh_CN": "瑞典语",
-        "zh_TW": ""
-      }
-    },
-    {
-      "ID": "SettingsTabSystemSystemLanguageNorwegian",
-      "Translations": {
-        "ar_SA": "",
-        "de_DE": "",
-        "el_GR": "",
-        "en_US": "Norwegian",
-        "es_ES": "",
-        "fr_FR": "",
-        "he_IL": "",
-        "it_IT": "",
-        "ja_JP": "",
-        "ko_KR": "노르웨이어",
-        "no_NO": "Norsk",
-        "pl_PL": "",
-        "pt_BR": "Norueguês",
-        "ru_RU": "",
-        "sv_SE": "Norska",
-        "th_TH": "",
-        "tr_TR": "",
-        "uk_UA": "",
-        "zh_CN": "挪威语",
-        "zh_TW": ""
-      }
-    },
-    {
       "ID": "SettingsTabSystemSystemTimeZone",
       "Translations": {
         "ar_SA": "النطاق الزمني للنظام:",
