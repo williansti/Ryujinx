@@ -148,8 +148,11 @@ namespace Ryujinx.Ava.UI.Windows
                 {
                     if ((firmwarePath.ExistsAsFile && firmwarePath.Extension is "xci" or "zip") ||
                         firmwarePath.ExistsAsDirectory)
+                    {
                         await Dispatcher.UIThread.InvokeAsync(() => 
                             ViewModel.HandleFirmwareInstallation(firmwarePath));
+                        CommandLineState.FirmwareToInstallPathArg = null;
+                    }
                     else
                         Logger.Notice.Print(LogClass.UI, "Invalid firmware type provided. Path must be a directory, or a .zip or .xci file.");
                 }
